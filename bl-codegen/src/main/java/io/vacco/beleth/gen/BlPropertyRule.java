@@ -6,11 +6,9 @@ import org.jsonschema2pojo.Schema;
 import org.jsonschema2pojo.SourceType;
 import org.jsonschema2pojo.rules.*;
 
-import java.util.LinkedHashMap;
-
 public class BlPropertyRule extends PropertyRule {
 
-  private final RuleFactory ruleFactory;
+  private final BlRuleFactory ruleFactory;
 
   public BlPropertyRule(BlRuleFactory ruleFactory) {
     super(ruleFactory);
@@ -26,11 +24,7 @@ public class BlPropertyRule extends PropertyRule {
       pathToProperty = "#" + schema.getId().getFragment() + "/properties/" + nodeName;
     }
     if (pathToProperty.contains(".") && ruleFactory.getGenerationConfig().getSourceType() == SourceType.JSON) { // most likely Map<String, String>.
-      var lhType = jclass.owner().ref(LinkedHashMap.class);
-      var stringClassRef = jclass.owner().ref(String.class);
-      lhType = lhType.narrow(stringClassRef, stringClassRef);
-      jclass._extends(lhType);
-      return jclass;
+      return ruleFactory.extendLinkedHashMap(jclass, String.class, String.class);
     }
     try {
       return super.apply(nodeName, node, parent, jclass, schema);

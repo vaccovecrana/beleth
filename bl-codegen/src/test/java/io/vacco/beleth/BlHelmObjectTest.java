@@ -1,12 +1,11 @@
 package io.vacco.beleth;
 /*
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
 import prometheus_operator.kube_prometheus.*;
-
-import java.util.List;
-
 import static j8spec.J8Spec.*;
 import static io.vacco.beleth.util.BlMaps.*;
 
@@ -18,14 +17,26 @@ public class BlHelmObjectTest {
       var vals = new Values()
         .withGrafana(
           new Grafana()
-            .withEnabled(true)
+            .withEnabled(false)
         ).withPrometheus(
           new Prometheus__2()
             .withPrometheusSpec(
               new PrometheusSpec()
-
+                .withStorageSpec(
+                  map(new StorageSpec(),
+                    kv("emptyDir",
+                      obj(kv("medium", "Memory"))
+                    )
+                  )
+                )
             )
         );
+      System.out.println(
+        new ObjectMapper()
+          .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+          .writerWithDefaultPrettyPrinter()
+          .writeValueAsString(vals)
+      );
     });
   }
 }

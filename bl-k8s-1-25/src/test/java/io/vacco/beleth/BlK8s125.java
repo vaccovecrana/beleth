@@ -1,5 +1,6 @@
 package io.vacco.beleth;
 
+import io.vacco.beleth.gen.BlTestLogger;
 import io.vacco.beleth.k8s.BlK8sGen;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
@@ -19,7 +20,8 @@ public class BlK8s125 {
       } else {
         BlK8sGen.apply(
           BlK8s125.class.getResource("/k8s-swagger.json"),
-          new File("./src/main/java")
+          new File("./src/main/java"),
+          new BlTestLogger()
         );
       }
     });

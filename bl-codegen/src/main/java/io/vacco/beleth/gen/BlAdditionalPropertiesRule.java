@@ -8,14 +8,15 @@ import java.util.*;
 
 public class BlAdditionalPropertiesRule implements Rule<JDefinedClass, JDefinedClass> {
 
-  private final RuleFactory ruleFactory;
+  private final BlRuleFactory ruleFactory;
 
   public BlAdditionalPropertiesRule(BlRuleFactory ruleFactory) {
     this.ruleFactory = Objects.requireNonNull(ruleFactory);
   }
 
-  @Override
-  public JDefinedClass apply(String nodeName, JsonNode node, JsonNode parent, JDefinedClass jclass, Schema schema) {
+  @Override public JDefinedClass apply(String nodeName,
+                                       JsonNode node, JsonNode parent,
+                                       JDefinedClass jclass, Schema schema) {
     if (node != null && node.isBoolean() && !node.asBoolean()) {
       return jclass;
     }
@@ -26,13 +27,16 @@ public class BlAdditionalPropertiesRule implements Rule<JDefinedClass, JDefinedC
       } else {
         pathToAdditionalProperties = "#" + schema.getId().getFragment() + "/additionalProperties";
       }
-      var additionalPropertiesSchema = ruleFactory.getSchemaStore().create(schema, pathToAdditionalProperties, ruleFactory.getGenerationConfig().getRefFragmentPathDelimiters());
-      var propertyType = ruleFactory.getSchemaRule().apply(nodeName + "Property", node, parent, jclass, additionalPropertiesSchema);
+      var additionalPropertiesSchema = ruleFactory.getSchemaStore().create(
+        schema, pathToAdditionalProperties,
+        ruleFactory.getGenerationConfig().getRefFragmentPathDelimiters()
+      );
+      var propertyType = ruleFactory.getSchemaRule().apply(
+        nodeName + "Property", node, parent, jclass, additionalPropertiesSchema
+      );
       additionalPropertiesSchema.setJavaTypeIfEmpty(propertyType);
 
-      var lhType = jclass.owner().ref(LinkedHashMap.class);
-      lhType = lhType.narrow(jclass.owner().ref(String.class), propertyType.boxify());
-      jclass._extends(lhType);
+      return ruleFactory.extendLinkedHashMap(jclass, String.class, propertyType.boxify().getClass());
     }
 
     return jclass;

@@ -1,12 +1,10 @@
 package io.vacco.beleth;
 
-import io.vacco.beleth.gen.BlGenConfig;
 import io.vacco.beleth.gen.BlTestLogger;
 import io.vacco.beleth.helm.BlHelmGen;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
-
 import java.awt.*;
 import java.io.File;
 
@@ -20,12 +18,10 @@ public class BlHelmGenTest {
       if (GraphicsEnvironment.isHeadless()) {
         System.out.println("CI mode, not doing anything.");
       } else {
-        var helmGen = new BlHelmGen();
-        var natsUrl = BlHelmGenTest.class.getResource("/kube-prometheus-stack-40.5.0.tgz");
+        var helmUrl = BlHelmGenTest.class.getResource("/metallb-4.1.12.tgz");
         var targetDir = new File("./build");
-        var helmRoot = helmGen.unpack(natsUrl, targetDir);
-        var schemasRoot = helmGen.scan(helmRoot);
-        var javaSources = helmGen.generate(schemasRoot, new BlGenConfig(), new BlTestLogger());
+        var javaSrc = new BlHelmGen().apply(helmUrl, targetDir, new BlTestLogger());
+        System.out.println("Sources generated at " + javaSrc.getAbsolutePath());
       }
     });
   }

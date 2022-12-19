@@ -2,11 +2,9 @@ package io.vacco.beleth.helm;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
-import io.vacco.beleth.gen.BlGenConfig;
+import io.vacco.beleth.gen.*;
 import io.vacco.cpiohell.*;
-import org.jsonschema2pojo.Jsonschema2Pojo;
-import org.jsonschema2pojo.RuleLogger;
-import org.jsonschema2pojo.SourceType;
+import org.jsonschema2pojo.*;
 import org.yaml.snakeyaml.Yaml;
 import java.io.*;
 import java.net.URL;
@@ -174,6 +172,19 @@ public class BlHelmGen {
     Jsonschema2Pojo.generate(cfg, logger);
 
     return javaSources;
+  }
+
+  public File apply(URL helmUrl, File stageDir, RuleLogger logger) {
+    try {
+      var helmRoot = unpack(helmUrl, stageDir);
+      var schemasRoot = scan(helmRoot);
+      return generate(schemasRoot, new BlGenConfig(), logger);
+    } catch (Exception e) {
+      throw new IllegalStateException(
+        String.format("Unable to process Helm definitions. [%s, %s]", helmUrl, stageDir),
+        e
+      );
+    }
   }
 
 }

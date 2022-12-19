@@ -32,6 +32,11 @@ public class BlPropertyRule extends PropertyRule {
       jclass._extends(lhType);
       return jclass;
     }
-    return super.apply(nodeName, node, parent, jclass, schema);
+    try {
+      return super.apply(nodeName, node, parent, jclass, schema);
+    } catch (Exception e) {
+      ruleFactory.getLogger().warn("Schema property processing error.", e);
+      return jclass;
+    }
   }
 }

@@ -21,7 +21,7 @@ public class BlHelmGenTest {
         System.out.println("CI mode, not doing anything.");
       } else {
         var helmGen = new BlHelmGen();
-        var natsUrl = BlHelmGenTest.class.getResource("/nats-7.5.4.tgz");
+        var natsUrl = BlHelmGenTest.class.getResource("/kube-prometheus-stack-40.5.0.tgz");
         var targetDir = new File("./build");
         var helmRoot = helmGen.unpack(natsUrl, targetDir);
         var schemasRoot = helmGen.scan(helmRoot);

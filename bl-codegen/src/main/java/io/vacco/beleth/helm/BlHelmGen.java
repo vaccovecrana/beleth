@@ -83,14 +83,14 @@ public class BlHelmGen {
       var chartYaml = yaml.load(new FileReader(chartFile));
       var chartTree = om.valueToTree(chartYaml);
       var home = chartTree.get("home").textValue().split("/");
-      var javaClass = String.format("%s.%s.Values", home[home.length - 2], home[home.length - 1]);
+      var javaPkg = String.format("%s.%s", home[home.length - 2], home[home.length - 1]);
       if (valuesSchemaFile.exists()) {
         var valuesSchemaTree = (ObjectNode) om.readTree(valuesSchemaFile);
-        valuesSchemaTree.set(javaType, new TextNode(javaClass));
+        valuesSchemaTree.set(javaType, new TextNode(String.format("%s.Values", javaPkg)));
         return valuesSchemaTree;
       } else {
         var valuesTree = (ObjectNode) om.valueToTree(yaml.load(new FileReader(valuesFile)));
-        valuesTree.set(javaType, new TextNode(javaClass));
+        valuesTree.set(javaType, new TextNode(javaPkg));
         valuesTree.set("generateRaw", BooleanNode.getTrue());
         return valuesTree;
       }
@@ -120,7 +120,7 @@ public class BlHelmGen {
         var schemaFile = new File(schemasRoot,
           String.format("%s.json",
             isRaw
-              ? String.format("raw-%s", schemaHash)
+              ? "Values"
               : schemaHash
             )
         );
@@ -145,7 +145,7 @@ public class BlHelmGen {
 
     for (File f : Objects.requireNonNull(schemasRoot.listFiles())) {
       var u = f.toURI().toURL();
-      if (!f.getName().startsWith("raw-")) {
+      if (!f.getName().startsWith("Values")) {
         schemaUrls.add(u);
       } else {
         rawFiles.add(f);
@@ -154,14 +154,14 @@ public class BlHelmGen {
 
     for (File f : rawFiles) {
       var tree = (ObjectNode) om.readTree(f);
-      var javaClass = tree.remove(javaType).textValue();
+      var javaPkg = tree.remove(javaType).textValue().replace("-", "_");
       tree.remove(generateRaw);
       om.writeValue(f, tree);
       cfg
         .withSources(f.toURI().toURL())
         .withSourceType(SourceType.JSON)
         .withTargetDirectory(javaSources)
-        .withTargetPackage(javaClass);
+        .withTargetPackage(javaPkg);
       Jsonschema2Pojo.generate(cfg, logger);
     }
 

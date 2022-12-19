@@ -140,6 +140,9 @@ public class BlHelmGen {
   public File generate(File schemasRoot, BlGenConfig cfg, RuleLogger logger) throws IOException {
     var schemaUrls = new ArrayList<URL>();
     var rawFiles = new ArrayList<File>();
+    var javaSources = new File(schemasRoot.getParentFile(), "java");
+    javaSources.mkdirs();
+
     for (File f : Objects.requireNonNull(schemasRoot.listFiles())) {
       var u = f.toURI().toURL();
       if (!f.getName().startsWith("raw-")) {
@@ -148,15 +151,6 @@ public class BlHelmGen {
         rawFiles.add(f);
       }
     }
-    var javaSources = new File(schemasRoot.getParentFile(), "java");
-    javaSources.mkdirs();
-
-    cfg
-      .withSources(schemaUrls.toArray(URL[]::new))
-      .withSourceType(SourceType.JSONSCHEMA)
-      .withTargetDirectory(javaSources)
-      .withTargetPackage("");
-    Jsonschema2Pojo.generate(cfg, logger);
 
     for (File f : rawFiles) {
       var tree = (ObjectNode) om.readTree(f);
@@ -166,10 +160,17 @@ public class BlHelmGen {
       cfg
         .withSources(f.toURI().toURL())
         .withSourceType(SourceType.JSON)
-        .withTargetPackage(javaClass)
-      ;
+        .withTargetDirectory(javaSources)
+        .withTargetPackage(javaClass);
       Jsonschema2Pojo.generate(cfg, logger);
     }
+
+    cfg
+      .withSources(schemaUrls.toArray(URL[]::new))
+      .withSourceType(SourceType.JSONSCHEMA)
+      .withTargetDirectory(javaSources)
+      .withTargetPackage("");
+    Jsonschema2Pojo.generate(cfg, logger);
 
     return javaSources;
   }

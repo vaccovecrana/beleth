@@ -169,7 +169,8 @@ public class BlHelmGen {
       .withSources(schemaUrls.toArray(URL[]::new))
       .withSourceType(SourceType.JSONSCHEMA)
       .withTargetDirectory(javaSources)
-      .withTargetPackage("");
+      .withTargetPackage("")
+      .withRemoveOldOutput(false);
     Jsonschema2Pojo.generate(cfg, logger);
 
     return javaSources;

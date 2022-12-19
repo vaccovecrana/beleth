@@ -8,4 +8,8 @@ public class BlRuleFactory extends RuleFactory {
   @Override public Rule<JDefinedClass, JDefinedClass> getAdditionalPropertiesRule() {
     return new BlAdditionalPropertiesRule(this);
   }
+
+  @Override public Rule<JDefinedClass, JDefinedClass> getPropertyRule() {
+    return new BlPropertyRule(this);
+  }
 }

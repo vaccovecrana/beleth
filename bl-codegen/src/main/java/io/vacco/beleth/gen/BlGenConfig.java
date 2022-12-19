@@ -15,6 +15,7 @@ public class BlGenConfig implements GenerationConfig {
   private String targetPackage;
   private SourceType sourceType;
   private String refFragmentPathDelimiters = "#/.";
+  private boolean removeOldOutput = true;
 
   @Override public boolean isGenerateBuilders() { return true; }
   @Override public boolean isIncludeTypeInfo() { return false; }
@@ -66,7 +67,12 @@ public class BlGenConfig implements GenerationConfig {
     return this;
   }
 
-  @Override public boolean isRemoveOldOutput() { return true; }
+  @Override public boolean isRemoveOldOutput() { return removeOldOutput; }
+  public BlGenConfig withRemoveOldOutput(boolean removeOldOutput) {
+    this.removeOldOutput = removeOldOutput;
+    return this;
+  }
+
   @Override public boolean isUseJodaDates() { return false; }
   @Override public boolean isUseJodaLocalDates() { return false; }
   @Override public boolean isUseJodaLocalTimes() { return false; }

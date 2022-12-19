@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import static io.vacco.beleth.BlMaps.*;
+import static io.vacco.beleth.util.BlMaps.*;
 import static j8spec.J8Spec.*;
 
 @RunWith(J8SpecRunner.class)
@@ -110,6 +110,7 @@ public class BlSpecTest {
         .withData(map(new Data(),
           kv("start-master.sh", "SOME_STRING_FROM_FILE")
         ));
+
 
       System.out.println(ow.writeValueAsString(List.of(
         ns, dep, pod, cm

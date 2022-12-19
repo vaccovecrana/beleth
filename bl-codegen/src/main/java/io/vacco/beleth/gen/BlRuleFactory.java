@@ -1,4 +1,4 @@
-package io.vacco.beleth;
+package io.vacco.beleth.gen;
 
 import com.sun.codemodel.JDefinedClass;
 import org.jsonschema2pojo.rules.Rule;

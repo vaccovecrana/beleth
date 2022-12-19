@@ -1,5 +1,6 @@
 package io.vacco.beleth;
 
+import io.vacco.beleth.k8s.BlK8sGen;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;

@@ -4,6 +4,7 @@ val api by configurations
 
 dependencies {
   api("org.jsonschema2pojo:jsonschema2pojo-core:1.1.2")
+  api("io.vacco.cpiohell:cpio-hell:0.1.2")
 }
 
 tasks.withType<Test> {

@@ -3,7 +3,7 @@ configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, f
 version = "1.25.3"
 
 dependencies {
-  testImplementation(project(":bl-schemagen"))
+  testImplementation(project(":bl-codegen"))
 }
 
 tasks.withType<Test> {

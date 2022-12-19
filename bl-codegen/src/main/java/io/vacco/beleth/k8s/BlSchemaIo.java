@@ -1,4 +1,4 @@
-package io.vacco.beleth;
+package io.vacco.beleth.k8s;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
@@ -7,8 +7,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static io.vacco.beleth.BlMaps.*;
-import static io.vacco.beleth.BlIterators.*;
+import static io.vacco.beleth.util.BlMaps.*;
+import static io.vacco.beleth.util.BlIterators.*;
 
 public class BlSchemaIo {
 

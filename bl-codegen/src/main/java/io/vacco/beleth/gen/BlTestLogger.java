@@ -1,8 +1,8 @@
-package io.vacco.beleth;
+package io.vacco.beleth.gen;
 
 import org.jsonschema2pojo.AbstractRuleLogger;
 
-public class BlDummyLogger extends AbstractRuleLogger {
+public class BlTestLogger extends AbstractRuleLogger {
   @Override public boolean isDebugEnabled() { return false; }
   @Override public boolean isErrorEnabled() { return false; }
   @Override public boolean isInfoEnabled() { return true; }

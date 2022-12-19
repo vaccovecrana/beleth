@@ -1,5 +1,7 @@
-package io.vacco.beleth;
+package io.vacco.beleth.k8s;
 
+import io.vacco.beleth.gen.BlTestLogger;
+import io.vacco.beleth.gen.BlGenConfig;
 import org.jsonschema2pojo.*;
 import java.io.File;
 import java.net.URL;
@@ -15,7 +17,7 @@ public class BlK8sGen {
         .withTargetDirectory(javaScrOutDir)
         .withTargetPackage("io.k8s");
       new BlSchemaIo().prepareSchema(k8sSwaggerUrl, preprocessedSchema);
-      Jsonschema2Pojo.generate(cfg, new BlDummyLogger());
+      Jsonschema2Pojo.generate(cfg, new BlTestLogger());
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }

@@ -1,17 +1,20 @@
-package io.vacco.beleth;
+package io.vacco.beleth.gen;
 
 import org.jsonschema2pojo.*;
 import org.jsonschema2pojo.rules.RuleFactory;
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class BlGenConfig implements GenerationConfig {
 
   private final List<URL> sources = new ArrayList<>();
+
   private File targetDir;
   private String targetPackage;
   private SourceType sourceType;
+  private String refFragmentPathDelimiters = "#/.";
 
   @Override public boolean isGenerateBuilders() { return true; }
   @Override public boolean isIncludeTypeInfo() { return false; }
@@ -37,7 +40,7 @@ public class BlGenConfig implements GenerationConfig {
     return this;
   }
 
-  @Override public char[] getPropertyWordDelimiters() { return new char[0]; }
+  @Override public char[] getPropertyWordDelimiters() { return new char[] { '-', ' ', '_' }; }
   @Override public boolean isUseLongIntegers() { return false; }
   @Override public boolean isUseBigIntegers() { return false; }
   @Override public boolean isUseDoubleNumbers() { return false; }
@@ -51,7 +54,7 @@ public class BlGenConfig implements GenerationConfig {
   @Override public InclusionLevel getInclusionLevel() { return InclusionLevel.NON_NULL; }
   @Override public Class<? extends Annotator> getCustomAnnotator() { return NoopAnnotator.class; }
   @Override public Class<? extends RuleFactory> getCustomRuleFactory() { return BlRuleFactory.class; }
-  @Override public String getOutputEncoding() { return "UTF-8"; }
+  @Override public String getOutputEncoding() {return StandardCharsets.UTF_8.toString(); }
 
   @Override public boolean isIncludeJsr303Annotations() { return false; }
   @Override public boolean isIncludeJsr305Annotations() { return false; }
@@ -103,9 +106,14 @@ public class BlGenConfig implements GenerationConfig {
   @Override public String getCustomDatePattern() { return null; }
   @Override public String getCustomTimePattern() { return null; }
   @Override public String getCustomDateTimePattern() { return null; }
-  @Override public String getRefFragmentPathDelimiters() { return "#/."; }
 
-  @Override public SourceSortOrder getSourceSortOrder() { return null; }
+  @Override public String getRefFragmentPathDelimiters() { return refFragmentPathDelimiters; }
+  public BlGenConfig withRefFragmentPathDelimiters(String refFragmentPathDelimiters) {
+    this.refFragmentPathDelimiters = Objects.requireNonNull(refFragmentPathDelimiters);
+    return this;
+  }
+
+  @Override public SourceSortOrder getSourceSortOrder() { return SourceSortOrder.OS; }
   @Override public Map<String, String> getFormatTypeMapping() { return Collections.emptyMap(); }
 
   @Override public boolean isIncludeGeneratedAnnotation() { return false; }

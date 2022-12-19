@@ -1,4 +1,4 @@
-package io.vacco.beleth;
+package io.vacco.beleth.gen;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.codemodel.*;

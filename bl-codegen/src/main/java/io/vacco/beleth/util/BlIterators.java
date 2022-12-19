@@ -1,4 +1,4 @@
-package io.vacco.beleth;
+package io.vacco.beleth.util;
 
 import java.util.*;
 

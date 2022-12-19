@@ -1,7 +1,7 @@
 pluginManagement { repositories { mavenCentral(); gradlePluginPortal() } }
 
 include(
-  "bl-schemagen",
+  "bl-codegen",
   "bl-k8s-1-25"
   // , "bl-gradle-plugin"
 )

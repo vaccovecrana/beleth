@@ -1,8 +1,6 @@
 package io.vacco.ronove;
 
-import io.github.classgraph.*;
 import io.vacco.oruzka.core.OFnBlock;
-import io.vacco.ronove.core.RvContext;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Task;
 import org.gradle.api.tasks.TaskAction;
@@ -13,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 
-public class RvTask extends DefaultTask {
+public class BlTask extends DefaultTask {
 
   private List<URL> getFilesFromConfiguration(String configuration) throws IOException {
     List<URL> urls = new ArrayList<>();
@@ -24,7 +22,7 @@ public class RvTask extends DefaultTask {
   }
 
   private void doGenerate(Set<URL> urls) throws IOException {
-    RvPluginExtension ext = getProject().getExtensions().getByType(RvPluginExtension.class);
+    BlPluginExtension ext = getProject().getExtensions().getByType(BlPluginExtension.class);
     ClassLoader gradleCl = this.getClass().getClassLoader();
     try (URLClassLoader ucl = new URLClassLoader(urls.toArray(new URL[0]), gradleCl)) {
       ClassGraph cg = new ClassGraph().verbose().enableAllInfo()

@@ -17,7 +17,7 @@ public abstract class BlTask extends DefaultTask {
   public BlTask() {
     var prj = getProject();
     var jxt = prj.getExtensions().getByType(JavaPluginExtension.class);
-    var ssMain = jxt.getSourceSets().findByName("main");
+    var ssMain = jxt.getSourceSets().getByName("main");
     var helmSrc = getTargetHelmSourcesDir();
     ssMain.getJava().srcDir(helmSrc);
     getOutputs().dir(helmSrc);

@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  * 
  */
 public class Capacity
-    extends LinkedHashMap<String, String>
+    extends LinkedHashMap<String, Object>
 {
 
 

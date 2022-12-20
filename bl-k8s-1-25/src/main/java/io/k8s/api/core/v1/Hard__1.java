@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  * 
  */
 public class Hard__1
-    extends LinkedHashMap<String, String>
+    extends LinkedHashMap<String, Object>
 {
 
 

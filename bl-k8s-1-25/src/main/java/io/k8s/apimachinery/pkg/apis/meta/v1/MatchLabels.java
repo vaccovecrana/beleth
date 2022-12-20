@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  * 
  */
 public class MatchLabels
-    extends LinkedHashMap<String, String>
+    extends LinkedHashMap<String, Object>
 {
 
 

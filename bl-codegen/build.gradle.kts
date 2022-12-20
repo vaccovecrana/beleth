@@ -7,6 +7,13 @@ dependencies {
   api("io.vacco.cpiohell:cpio-hell:0.1.2")
 }
 
+configurations.all {
+  exclude("joda-time", "joda-time")
+  exclude("com.google.code.findbugs", "annotations")
+  exclude("com.google.code.findbugs", "jsr305")
+  exclude("com.google.code.gson", "gson")
+}
+
 tasks.withType<Test> {
   minHeapSize = "512m"
   maxHeapSize = "8192m"

@@ -2,7 +2,6 @@
 package io.k8s.api.authorization.v1;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  * 
  */
 public class Extra
-    extends LinkedHashMap<String, List<String>>
+    extends LinkedHashMap<String, Object>
 {
 
 

@@ -1,6 +1,7 @@
 
 package io.k8s.apimachinery.pkg.apis.meta.v1;
 
+import java.util.LinkedHashMap;
 
 
 /**
@@ -11,7 +12,9 @@ package io.k8s.apimachinery.pkg.apis.meta.v1;
  * The exact format is defined in sigs.k8s.io/structured-merge-diff
  * 
  */
-public class FieldsV1 {
+public class FieldsV1
+    extends LinkedHashMap<String, Object>
+{
 
 
 }

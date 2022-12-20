@@ -21,7 +21,7 @@ public class BlHelmGen {
   private final Yaml yaml = new Yaml();
 
   public File unpack(URL helmUrl, File downloadDir) {
-    var urlHash = Integer.toHexString(Objects.requireNonNull(helmUrl).hashCode());
+    var urlHash = Integer.toHexString(Objects.requireNonNull(helmUrl).toString().hashCode());
     var archiveDir = new File(downloadDir, urlHash);
     var archiveFile = new File(archiveDir, String.format("%s.tar.gz", urlHash));
     archiveDir.mkdirs();
@@ -80,8 +80,9 @@ public class BlHelmGen {
     try {
       var chartYaml = yaml.load(new FileReader(chartFile));
       var chartTree = om.valueToTree(chartYaml);
-      var home = chartTree.get("home").textValue().split("/");
-      var javaPkg = String.format("%s.%s", home[home.length - 2], home[home.length - 1]);
+      var home = chartTree.get("home").textValue();
+      var name = chartTree.get("name").textValue();
+      var javaPkg = String.format("h%s.%s", Integer.toHexString(home.hashCode()), name);
       if (valuesSchemaFile.exists()) {
         var valuesSchemaTree = (ObjectNode) om.readTree(valuesSchemaFile);
         valuesSchemaTree.set(javaType, new TextNode(String.format("%s.Values", javaPkg)));

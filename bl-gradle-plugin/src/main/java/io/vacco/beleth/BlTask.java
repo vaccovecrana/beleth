@@ -2,6 +2,7 @@ package io.vacco.beleth;
 
 import io.vacco.beleth.helm.BlHelmGen;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.logging.*;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.*;
@@ -11,6 +12,8 @@ import java.nio.file.*;
 import java.util.*;
 
 public abstract class BlTask extends DefaultTask {
+
+  private static final Logger log = Logging.getLogger(BlTask.class);
 
   @Input public abstract Property<URI[]> getHelmPackages();
 
@@ -53,6 +56,7 @@ public abstract class BlTask extends DefaultTask {
     delete(helmSrc);
     helmSrc.mkdirs();
     for (URI u : getHelmPackages().get()) {
+      log.warn("Generating Helm resources for package [{}]", u.toString());
       var javaSrc = new BlHelmGen().apply(u.toURL(), getTargetBuildDir(), new BlLogger());
       for (File f : Objects.requireNonNull(javaSrc.listFiles())) {
         if (f.isDirectory()) {

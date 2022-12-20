@@ -56,7 +56,6 @@ public class BlHelmGen {
   public List<JsonNode> crdScanDocument(File yamlIn) {
     var out = new ArrayList<JsonNode>();
     try {
-      System.out.println(yamlIn);
       var yTrees = yaml.loadAll(new FileReader(yamlIn));
       yTrees.forEach(yt -> {
         if (yt != null) {
@@ -68,7 +67,7 @@ public class BlHelmGen {
         }
       });
     } catch (Exception e) {
-      System.out.println("Can't read yaml: " + e);
+      // Relatively safe to ignore.
     }
     return out;
   }

@@ -13,4 +13,8 @@ subprojects {
   configure<io.vacco.cphell.ChPluginExtension> {
     resourceExclusions.add("module-info.class")
   }
+
+  tasks.withType<Javadoc> {
+    isFailOnError = false
+  }
 }

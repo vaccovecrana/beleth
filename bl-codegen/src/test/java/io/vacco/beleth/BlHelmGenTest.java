@@ -26,7 +26,7 @@ public class BlHelmGenTest {
       var urlLatest = helmCache.urlFor("bitnami", "kibana", null);
       var urlVer = helmCache.urlFor("bitnami", "kibana", "10.1.14");
     }));
-    it("Generates Helm sources from local repo definitions.", () -> {
+    it("Generates Helm sources from local repo definitions.", () -> BlHeadless.runOnDesktop(() -> {
       var helmSrc = new BlHelmSrc();
       helmSrc.repoAlias = "bitnami";
       helmSrc.chart = "metallb";
@@ -37,6 +37,6 @@ public class BlHelmGenTest {
         List.of(helmSrc),
         new BlTestLogger()
       );
-    });
+    }));
   }
 }

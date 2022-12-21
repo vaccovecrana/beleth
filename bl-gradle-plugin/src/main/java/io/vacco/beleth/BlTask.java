@@ -1,40 +1,37 @@
 package io.vacco.beleth;
 
-import io.vacco.beleth.helm.BlHelmGen;
+import io.vacco.beleth.helm.*;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.logging.*;
 import org.gradle.api.plugins.JavaPluginExtension;
-import org.gradle.api.provider.Property;
+import org.gradle.api.provider.ListProperty;
 import org.gradle.api.tasks.*;
 import java.io.*;
-import java.net.*;
-import java.nio.file.*;
-import java.util.*;
 
 public abstract class BlTask extends DefaultTask {
 
-  private static final Logger log = Logging.getLogger(BlTask.class);
-
-  @Input public abstract Property<URI[]> getHelmPackages();
+  @Input
+  public abstract ListProperty<BlHelmSrc> getSources();
+  private final BlHelmCache helmCache = new BlHelmCache();
 
   public BlTask() {
     var prj = getProject();
     var jxt = prj.getExtensions().getByType(JavaPluginExtension.class);
     var ssMain = jxt.getSourceSets().getByName("main");
-    var helmSrc = getTargetHelmSourcesDir();
+    var helmSrc = getHelmSourcesDir();
     ssMain.getJava().srcDir(helmSrc);
     getOutputs().dir(helmSrc);
   }
 
-  private void delete(File dir) throws IOException {
-    if (dir.exists()) {
-      var fs = Files.walk(dir.toPath());
-      try (fs) {
-        fs.sorted(Comparator.reverseOrder())
-          .map(Path::toFile)
-          .forEach(File::delete);
-      }
-    }
+  public void helmSrc(String repoAlias, String chart, String version) {
+    var hs = new BlHelmSrc();
+    hs.repoAlias = repoAlias;
+    hs.chart = chart;
+    hs.version = version;
+    getSources().add(hs);
+  }
+
+  public void helmSrc(String repoAlias, String chart) {
+    helmSrc(repoAlias, chart, null);
   }
 
   private File getBuildDir() {
@@ -42,28 +39,19 @@ public abstract class BlTask extends DefaultTask {
     return prj.getLayout().getBuildDirectory().getAsFile().get();
   }
 
-  private File getTargetHelmSourcesDir() {
+  private File getHelmSourcesDir() {
     var generated = new File(getBuildDir(), "generated");
     return new File(generated, "helm");
   }
 
-  private File getTargetBuildDir() {
+  private File getHelmStagingDir() {
     return new File(getBuildDir(), "helm");
   }
 
   @TaskAction public void action() throws IOException {
-    var helmSrc = getTargetHelmSourcesDir();
-    delete(helmSrc);
-    helmSrc.mkdirs();
-    for (URI u : getHelmPackages().get()) {
-      log.warn("Generating Helm resources for package [{}]", u.toString());
-      var javaSrc = new BlHelmGen().apply(u.toURL(), getTargetBuildDir(), new BlLogger());
-      for (File f : Objects.requireNonNull(javaSrc.listFiles())) {
-        if (f.isDirectory()) {
-          var tgt = new File(helmSrc, f.getName());
-          Files.move(f.toPath(), tgt.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        }
-      }
-    }
+    new BlHelmGen().apply(
+      getHelmSourcesDir(), getHelmStagingDir(),
+      helmCache, getSources().get(), new BlLogger()
+    );
   }
 }

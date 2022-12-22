@@ -3,6 +3,7 @@ configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, f
 val api by configurations
 
 dependencies {
+  api(project(":bl-util"))
   api("org.jsonschema2pojo:jsonschema2pojo-core:1.1.2")
   api("io.vacco.cpiohell:cpio-hell:0.1.2")
 }

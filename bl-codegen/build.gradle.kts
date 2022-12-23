@@ -9,7 +9,6 @@ dependencies {
 }
 
 configurations.all {
-  exclude("joda-time", "joda-time")
   exclude("com.google.code.findbugs", "annotations")
   exclude("com.google.code.findbugs", "jsr305")
   exclude("com.google.code.gson", "gson")

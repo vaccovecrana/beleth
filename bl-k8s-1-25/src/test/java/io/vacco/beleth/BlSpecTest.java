@@ -22,11 +22,6 @@ public class BlSpecTest {
 
   static {
     it("Instantiates/serializes core K8s objects",  () -> {
-      var ns = new Namespace()
-        .withApiVersion("v1")
-        .withKind("Namespace")
-        .withMetadata(new ObjectMeta().withName("vacco-infra"));
-
       var dep = new Deployment()
         .withApiVersion("apps/v1")
         .withKind("Deployment")
@@ -111,9 +106,43 @@ public class BlSpecTest {
           kv("start-master.sh", "SOME_STRING_FROM_FILE")
         ));
 
+      var ns = new Namespace()
+        .withApiVersion("v1")
+        .withKind("Namespace")
+        .withMetadata(
+          new ObjectMeta().withName("gopher-infra")
+        );
+
+      var cfgMap = new ConfigMap()
+        .withApiVersion("v1")
+        .withKind("ConfigMap")
+        .withMetadata(
+          new ObjectMeta()
+            .withCreationTimestamp("2016-02-18T18:52:05Z")
+            .withName("game-config")
+            .withName("default")
+            .withResourceVersion("516")
+            .withUid("b4952dc3-d670-11e5-8cd0-68f728db1985")
+        ).withData(
+          map(new Data(),
+            kv("game.properties", String.join("\n",
+              "enemies=aliens",
+              "lives=3",
+              "enemies.cheat=true",
+              "enemies.cheat.level=noGoodRotten",
+              "secret.code.passphrase=UUDDLRLRBABAS"
+            )),
+            kv("ui.properties", String.join("\n",
+              "color.good=purple",
+              "color.bad=yellow",
+              "allow.textmode=true",
+              "how.nice.to.look=fairlyNice"
+            ))
+          )
+        );
 
       System.out.println(ow.writeValueAsString(List.of(
-        ns, dep, pod, cm
+        ns, dep, pod, cm, cfgMap
       )));
     });
   }

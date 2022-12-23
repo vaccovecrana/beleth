@@ -30,6 +30,13 @@ public class BlKubeCtl {
     return diff.trim().length() == 0;
   }
 
+  public BlKubeCtl sync(Object manifest) {
+    if (!isSynced(manifest)) {
+      apply(manifest);
+    }
+    return this;
+  }
+
   public ProcResult delete(Object manifest) {
     var yaml = y.dump(manifest);
     var pb = new ProcBuilder(kubectl, "delete", "-f", "-")

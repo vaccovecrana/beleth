@@ -19,7 +19,7 @@ public class BlHelmCtlTest {
     ShOption.setSysProp(ShOption.IO_VACCO_SHAX_PRETTYPRINT, "true");
   }
 
-  private static final BlHelmCtl k = new BlHelmCtl();
+  private static final BlHelmCtl h = new BlHelmCtl();
 
   static {
     var release = "kube-prometheus-stack";
@@ -37,23 +37,23 @@ public class BlHelmCtlTest {
     );
 
     it("Uninstalls a Helm package, if present", () -> BlHeadless.runOnDesktop(() -> {
-      if (k.isDeployed(release, null, null)) {
-        k.uninstall(release, null, true);
+      if (h.isDeployed(release, null, null)) {
+        h.uninstall(release, null, true);
       }
     }));
     it("Installs a Helm package", () -> BlHeadless.runOnDesktop(() -> {
-      k.pause(10000).install(
+      h.pause(10000).install(
         "kube-prometheus-stack",
         "prometheus-community/kube-prometheus-stack",
         null, null, values
       );
     }));
     it("Retrieves a Helm package status", () -> BlHeadless.runOnDesktop(() -> {
-      System.out.println(k.render(k.status(release, null)));
+      System.out.println(h.render(h.status(release, null)));
     }));
     it("Uninstalls a Helm package", () -> BlHeadless.runOnDesktop(() -> {
-      if (k.isDeployed(release, null, null)) {
-        k.uninstall(release, null, false);
+      if (h.isDeployed(release, null, null)) {
+        h.uninstall(release, null, false);
       }
     }));
   }

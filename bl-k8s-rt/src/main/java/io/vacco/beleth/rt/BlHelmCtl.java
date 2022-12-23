@@ -1,23 +1,15 @@
 package io.vacco.beleth.rt;
 
 import org.buildobjects.process.*;
-import org.slf4j.*;
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+
+import static io.vacco.beleth.rt.BlCmd.*;
 
 public class BlHelmCtl {
 
   public static final String helm = "helm";
-  private static final Logger log = LoggerFactory.getLogger(BlHelmCtl.class);
   private final BlYaml y = new BlYaml();
-
-  private ProcResult runCmd(ProcBuilder p) {
-    p.withNoTimeout();
-    log.info("Running [{}]", p.getCommandLine());
-    var res = p.run();
-    log.info("[{}] {} {}", res.getExitValue(), res.getOutputString(), res.getErrorString());
-    return res;
-  }
 
   public ProcResult install(String release, String chart,
                             String namespace, String version,
@@ -68,12 +60,7 @@ public class BlHelmCtl {
   }
 
   public BlHelmCtl pause(long ms) {
-    try {
-      Thread.sleep(ms);
-      return this;
-    } catch (Exception e) {
-      throw new IllegalStateException(e);
-    }
+    return BlCmd.pause(this, ms);
   }
 
   public String render(Object manifest) {

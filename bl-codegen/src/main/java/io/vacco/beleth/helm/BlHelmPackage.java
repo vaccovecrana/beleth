@@ -12,7 +12,8 @@ import static io.vacco.beleth.helm.BlHelmGen.*;
 
 public class BlHelmPackage {
 
-  public static File generate(File schemasRoot, BlGenConfig cfg, RuleLogger logger, ObjectMapper om) throws IOException {
+  public static File generate(File schemasRoot, BlGenConfig cfg,
+                              RuleLogger logger, ObjectMapper om) throws IOException {
     var schemaUrls = new ArrayList<URL>();
     var rawFiles = new ArrayList<File>();
     var javaSources = new File(schemasRoot.getParentFile(), "java");

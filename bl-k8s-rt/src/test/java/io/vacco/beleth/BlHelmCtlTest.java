@@ -36,20 +36,23 @@ public class BlHelmCtlTest {
       ))
     );
 
+    it("Syncs a Helm repository", () -> BlHeadless.runOnDesktop(() -> {
+      h.repoSync("radar-base", "https://radar-base.github.io/radar-helm-charts");
+    }));
     it("Uninstalls a Helm package, if present", () -> BlHeadless.runOnDesktop(() -> {
       if (h.isDeployed(release, null, null)) {
         h.uninstall(release, null, true);
       }
     }));
     it("Installs a Helm package", () -> BlHeadless.runOnDesktop(() -> {
-      h.pause(10000).install(
+      h.pause(10000).sync(
         "kube-prometheus-stack",
         "prometheus-community/kube-prometheus-stack",
         null, null, values
       );
     }));
-    it("Retrieves a Helm package status", () -> BlHeadless.runOnDesktop(() -> {
-      System.out.println(h.render(h.status(release, null)));
+    it("Retrieves Helm package statuses", () -> BlHeadless.runOnDesktop(() -> {
+      System.out.println(h.render(h.listAll(null)));
     }));
     it("Uninstalls a Helm package", () -> BlHeadless.runOnDesktop(() -> {
       if (h.isDeployed(release, null, null)) {

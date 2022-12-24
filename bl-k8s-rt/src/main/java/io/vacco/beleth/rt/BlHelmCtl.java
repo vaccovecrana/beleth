@@ -11,6 +11,25 @@ public class BlHelmCtl {
   public static final String helm = "helm";
   private final BlYaml y = new BlYaml();
 
+  public BlHelmRepoListResponse[] repoList() {
+    var pb = new ProcBuilder(helm, "repo", "list", "-o", "yaml");
+    var out = runCmd(pb).getOutputString();
+    return y.loadAs(out, BlHelmRepoListResponse[].class);
+  }
+
+  public boolean isDefined(String repoUrl) {
+    return Arrays.stream(repoList())
+      .anyMatch(r -> r.url.equalsIgnoreCase(repoUrl));
+  }
+
+  public void repoSync(String name, String url) {
+    // TODO should this include more options (i.e. more flags)?
+    if (!isDefined(url)) {
+      var pb = new ProcBuilder(helm, "repo", "add", name, url);
+      runCmd(pb);
+    }
+  }
+
   public ProcResult install(String release, String chart,
                             String namespace, String version,
                             Object values) {
@@ -40,7 +59,7 @@ public class BlHelmCtl {
     return runCmd(pb);
   }
 
-  public BlHelmStatusResponse[] status(String release, String namespace) {
+  public BlHelmStatusResponse[] listAll(String namespace) {
     var pb = new ProcBuilder(helm, "list", "--all", "--output", "json");
     if (namespace != null) {
       pb.withArgs("--namespace", namespace);
@@ -49,7 +68,7 @@ public class BlHelmCtl {
   }
 
   public boolean isDeployed(String release, String namespace, String version) {
-    var status = status(release, namespace);
+    var status = listAll(namespace);
     var dep = Arrays.stream(status)
       .filter(st -> st.name.equals(release))
       .filter(st -> st.status.equals("deployed"));
@@ -57,6 +76,14 @@ public class BlHelmCtl {
       dep = dep.filter(st -> st.app_version.contains(version));
     }
     return dep.findFirst().isPresent();
+  }
+
+  public void sync(String release, String chart,
+                   String namespace, String version,
+                   Object values) {
+    if (!isDeployed(release, namespace, version)) {
+      install(release, chart, namespace, version, values);
+    }
   }
 
   public BlHelmCtl pause(long ms) {

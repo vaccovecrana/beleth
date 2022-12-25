@@ -77,7 +77,7 @@ public class BlHelmCtl {
       .filter(st -> st.name.equals(release))
       .filter(st -> st.status.equals("deployed"));
     if (version != null) {
-      dep = dep.filter(st -> st.app_version.contains(version));
+      dep = dep.filter(st -> st.chart.contains(version));
     }
     return dep.findFirst().isPresent();
   }

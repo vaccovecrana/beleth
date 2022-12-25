@@ -2,6 +2,7 @@ package io.vacco.beleth.rt;
 
 import org.buildobjects.process.*;
 import java.io.ByteArrayInputStream;
+import java.util.Optional;
 
 import static io.vacco.beleth.rt.BlCmd.*;
 
@@ -22,7 +23,13 @@ public class BlKubeCtl {
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
       .withInputStream(new ByteArrayInputStream(yaml.getBytes()))
       .ignoreExitStatus();
-    return runCmd(pb).getOutputString();
+    var pr = runCmd(pb);
+    int sc = pr.getExitValue();
+    if (sc > 1) {
+      var msg = String.join("\n", pr.getOutputString(), pr.getErrorString());
+      throw new IllegalStateException(msg);
+    }
+    return pr.getOutputString();
   }
 
   public boolean isSynced(Object manifest) {
@@ -30,11 +37,11 @@ public class BlKubeCtl {
     return diff.trim().length() == 0;
   }
 
-  public BlKubeCtl sync(Object manifest) {
+  public Optional<ProcResult> sync(Object manifest) {
     if (!isSynced(manifest)) {
-      apply(manifest);
+      return Optional.of(apply(manifest));
     }
-    return this;
+    return Optional.empty();
   }
 
   public ProcResult delete(Object manifest) {

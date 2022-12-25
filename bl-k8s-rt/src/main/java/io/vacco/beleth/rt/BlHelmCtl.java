@@ -2,7 +2,7 @@ package io.vacco.beleth.rt;
 
 import org.buildobjects.process.*;
 import java.io.ByteArrayInputStream;
-import java.util.Arrays;
+import java.util.*;
 
 import static io.vacco.beleth.rt.BlCmd.*;
 
@@ -82,12 +82,13 @@ public class BlHelmCtl {
     return dep.findFirst().isPresent();
   }
 
-  public void sync(String release, String chart,
-                   String namespace, String version,
-                   Object values) {
+  public Optional<ProcResult> sync(String release, String chart,
+                       String namespace, String version,
+                       Object values) {
     if (!isDeployed(release, namespace, version)) {
-      install(release, chart, namespace, version, values);
+      return Optional.of(install(release, chart, namespace, version, values));
     }
+    return Optional.empty();
   }
 
   public BlHelmCtl pause(long ms) {

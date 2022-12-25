@@ -8,6 +8,6 @@ dependencies {
   api("org.yaml:snakeyaml:1.33")
   api("org.slf4j:slf4j-api:2.0.6")
 
-  implementation(project(":bl-k8s-1-25"))
+  compileOnly(project(":bl-k8s-1-25"))
   testImplementation("io.vacco.shax:shax:2.0.6.0.1.0")
 }

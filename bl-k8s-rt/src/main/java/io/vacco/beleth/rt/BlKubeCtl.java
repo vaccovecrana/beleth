@@ -40,7 +40,8 @@ public class BlKubeCtl {
   public ProcResult delete(Object manifest) {
     var yaml = y.dump(manifest);
     var pb = new ProcBuilder(kubectl, "delete", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(yaml.getBytes()));
+      .withInputStream(new ByteArrayInputStream(yaml.getBytes()))
+      .ignoreExitStatus();
     return runCmd(pb);
   }
 

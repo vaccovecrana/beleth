@@ -11,6 +11,10 @@ public class BlHelmCtl {
   public static final String helm = "helm";
   private final BlYaml y = new BlYaml();
 
+  public ProcResult repoUpdate() {
+    return runCmd(new ProcBuilder(helm, "repo", "update"));
+  }
+
   public BlHelmRepoListResponse[] repoList() {
     var pb = new ProcBuilder(helm, "repo", "list", "-o", "yaml");
     var out = runCmd(pb).getOutputString();

@@ -48,7 +48,7 @@ public class BlHelmCtlTest {
       h.pause(10000).sync(
         "kube-prometheus-stack",
         "prometheus-community/kube-prometheus-stack",
-        null, null, values
+        null, "43.1.4", values
       );
     }));
     it("Retrieves Helm package statuses", () -> BlHeadless.runOnDesktop(() -> {

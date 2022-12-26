@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static io.vacco.beleth.util.BlMaps.*;
 import static io.vacco.beleth.util.BlIterators.*;
 
-public class BlSchemaIo {
+public class BlK8sSchemaIo {
 
   public static final String $ref = "$ref";
 

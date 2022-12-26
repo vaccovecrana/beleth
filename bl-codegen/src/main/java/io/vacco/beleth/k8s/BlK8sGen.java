@@ -15,7 +15,7 @@ public class BlK8sGen {
         .withSourceType(SourceType.JSONSCHEMA)
         .withTargetDirectory(javaScrOutDir)
         .withTargetPackage("io.k8s");
-      new BlSchemaIo().prepareSchema(k8sSwaggerUrl, preprocessedSchema);
+      new BlK8sSchemaIo().prepareSchema(k8sSwaggerUrl, preprocessedSchema);
       Jsonschema2Pojo.generate(cfg, logger);
     } catch (Exception e) {
       throw new IllegalStateException(e);

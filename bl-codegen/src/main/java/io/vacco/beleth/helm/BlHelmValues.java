@@ -1,18 +1,16 @@
 package io.vacco.beleth.helm;
 
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.*;
-import org.yaml.snakeyaml.Yaml;
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.nio.file.Files;
-import java.util.ArrayList;
 
 import static io.vacco.beleth.helm.BlHelmGen.*;
 import static io.vacco.beleth.helm.BlHelmCrd.*;
 
 public class BlHelmValues {
 
-  public static JsonNode scanNode(File helmRoot, Yaml yaml, ObjectMapper om, String repoAlias) {
+  public static JsonNode scanNode(File helmRoot, Gson om, String repoAlias) {
     var chartFile = new File(helmRoot, "Chart.yaml");
     var valuesFile = new File(helmRoot, "values.yaml");
     var valuesSchemaFile = new File(helmRoot, "values.schema.json");

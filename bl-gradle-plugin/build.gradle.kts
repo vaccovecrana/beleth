@@ -4,7 +4,3 @@ dependencies {
   implementation(gradleApi())
   implementation(project(":bl-codegen"))
 }
-
-configurations.all {
-  // exclude("javax.xml.bind", "jaxb-api")
-}

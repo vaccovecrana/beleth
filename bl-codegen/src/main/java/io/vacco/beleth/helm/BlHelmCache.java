@@ -13,12 +13,16 @@ public class BlHelmCache {
   private final Yaml yaml = new Yaml();
   private final ObjectMapper om = new ObjectMapper();
 
+  public BlHelmCache(String helmHomeDir) {
+    this.cacheRepoRoot = new File(helmHomeDir, "repository");
+  }
+
   public BlHelmCache() {
-    var hch = System.getenv("HELM_CACHE_HOME");
-    if (hch == null) {
-      hch = String.format("%s/.cache/helm", System.getProperty("user.home"));
-    }
-    this.cacheRepoRoot = new File(hch, "repository");
+    this(
+      System.getenv("HELM_CACHE_HOME") == null
+        ? String.format("%s/.cache/helm", System.getProperty("user.home"))
+        : System.getenv("HELM_CACHE_HOME")
+    );
   }
 
   public URL urlFor(String repoAlias, String chart, String version) {

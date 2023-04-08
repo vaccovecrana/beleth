@@ -17,6 +17,7 @@ public class BlHelmPackage {
     var schemaUrls = new ArrayList<URL>();
     var rawFiles = new ArrayList<File>();
     var javaSources = new File(schemasRoot.getParentFile(), "java");
+
     javaSources.mkdirs();
 
     for (File f : Objects.requireNonNull(schemasRoot.listFiles())) {

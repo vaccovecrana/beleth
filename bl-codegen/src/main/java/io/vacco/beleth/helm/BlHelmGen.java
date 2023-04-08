@@ -1,10 +1,8 @@
 package io.vacco.beleth.helm;
 
-import com.fasterxml.jackson.databind.*;
+import com.google.gson.Gson;
 import io.vacco.beleth.gen.*;
 import io.vacco.cpiohell.*;
-import org.jsonschema2pojo.*;
-import org.yaml.snakeyaml.Yaml;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.*;
@@ -17,9 +15,7 @@ public class BlHelmGen {
   public static final String javaType = "javaType";
   public static final String generateRaw = "generateRaw";
 
-  private final ObjectMapper om = new ObjectMapper();
-  private final ObjectWriter ow = om.writerWithDefaultPrettyPrinter();
-  private final Yaml yaml = new Yaml();
+  private final Gson json = new Gson();
 
   public static String stripDash(String in) {
     return in.replace("-", "_");
@@ -35,7 +31,7 @@ public class BlHelmGen {
     return archiveDir;
   }
 
-  public File apply(URL helmUrl, File stageDir, RuleLogger logger, String repoAlias) {
+  public File apply(URL helmUrl, File stageDir, String repoAlias) {
     try {
       var helmRoot = unpack(helmUrl, stageDir);
       var schemasRoot = scanDocument(helmRoot, yaml, om, ow, repoAlias);

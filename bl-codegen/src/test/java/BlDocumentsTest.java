@@ -1,6 +1,4 @@
-import io.vacco.beleth.xform.BlDocuments;
-import io.vacco.beleth.xform.BlSchemaContext;
-import io.vacco.beleth.xform.BlTypeContext;
+import io.vacco.beleth.xform.*;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
@@ -28,12 +26,11 @@ public class BlDocumentsTest {
       var k8sSchemas = dio.schemasOfSwagger(jt0);
 
       var ctx = new BlSchemaContext();
-      var idx0 = ctx.build(crdSchemas);
-      var idx1 = ctx.build(k8sSchemas);
+      ctx.update(crdSchemas);
+      ctx.update(k8sSchemas);
 
       var tCtx = new BlTypeContext();
-
-      tCtx.map(idx0);
+      tCtx.map(ctx.schemaIdx.values());
 
       System.out.println();
     });

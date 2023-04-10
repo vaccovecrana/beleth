@@ -1,45 +1,38 @@
 package io.vacco.beleth.xform;
 
-import jakarta.json.JsonObject;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class BlSchema {
+public class BlSchema extends BlType {
 
-  public String packageName, name;
-  public JsonObject document;
-  public BlSchema parent;
-  public Map<String, String> fieldRefs = new TreeMap<>();
+  public Map<String, BlType> propTypes = new TreeMap<>();
+  public BlType additionalPropType;
+  public BlType primitiveType;
 
-  public BlSchema withFqn(String name, String packageName) {
-    this.name = Objects.requireNonNull(name);
-    this.packageName = Objects.requireNonNull(packageName);
+  public boolean isOpen = false;
+  public boolean isEnum = false;
+
+  public void addPropType(String property, BlType type) {
+    propTypes.put(property, type);
+  }
+
+  public BlSchema withOpen(boolean isOpen) {
+    this.isOpen = isOpen;
     return this;
   }
 
-  public BlSchema withFqn(String raw) {
-    var fqn = Arrays.stream(raw.split("\\.")).collect(Collectors.toList());
-    var name = fqn.remove(fqn.size() - 1);
-    var pkg = String.join(".", fqn);
-    return withFqn(name, pkg);
-  }
-
-  public BlSchema withDocument(JsonObject document) {
-    this.document = Objects.requireNonNull(document);
+  public BlSchema withEnum(boolean isEnum) {
+    this.isEnum = isEnum;
     return this;
   }
 
-  public BlSchema withParent(BlSchema parent) {
-    this.parent = Objects.requireNonNull(parent);
+  public BlSchema withAdditionalPropType(BlType additionalPropType) {
+    this.additionalPropType = Objects.requireNonNull(additionalPropType);
     return this;
   }
 
-  public String getFqn() {
-    return String.format("%s.%s", packageName, name);
-  }
-
-  @Override public String toString() {
-    return getFqn();
+  public BlSchema withPrimitiveType(BlType primitiveType) {
+    this.primitiveType = Objects.requireNonNull(primitiveType);
+    return this;
   }
 
 }

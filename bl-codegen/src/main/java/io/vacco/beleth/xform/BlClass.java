@@ -15,4 +15,7 @@ public class BlClass {
     return this;
   }
 
+  @Override public String toString() {
+    return schema.toString();
+  }
 }

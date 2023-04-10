@@ -43,7 +43,7 @@ public class BlDocuments {
     }
   }
 
-  public List<BlSchema> schemasOfCrd(JsonObject crd) {
+  public List<BlSchema> schemasOfCrd(JsonObject crd) { // TODO change this to URL
     var out = new ArrayList<BlSchema>();
     var name = ((JsonString) crd.getValue(pSpecNamesKind)).getString();
     var rootPkg = ((JsonString) crd.getValue(pSpecGroup)).getString();
@@ -51,17 +51,17 @@ public class BlDocuments {
       var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
       var ver = jv.asJsonObject().getString("name");
       var pkg = String.format("%s.%s", rootPkg, ver);
-      out.add(new BlSchema().withFqn(name, pkg).withDocument(schema));
+      out.add(new BlSchema().withName(pkg, name).withDocument(schema));
     });
     return out;
   }
 
-  public List<BlSchema> schemasOfSwagger(JsonObject swagger) {
+  public List<BlSchema> schemasOfSwagger(JsonObject swagger) { // TODO change this to URL
     var out = new ArrayList<BlSchema>();
     var schemaObj = swagger.getValue(pDefinitions).asJsonObject();
     for (var e : schemaObj.entrySet()) {
       if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {
-        out.add(new BlSchema().withFqn(e.getKey()).withDocument(e.getValue().asJsonObject()));
+        out.add(new BlSchema().withName(e.getKey()).withDocument(e.getValue().asJsonObject()));
       }
     }
     return out;

@@ -4,9 +4,9 @@ val api by configurations
 
 dependencies {
   api(project(":bl-util"))
-  api("io.marioslab.basis:template:1.7")
-  api("com.esotericsoftware.yamlbeans:yamlbeans:1.15")
-  api("com.google.code.gson:gson:2.10.1")
+  api("com.squareup:javapoet:1.13.0")
+  api("org.yaml:snakeyaml:2.0")
+  api("org.glassfish:jakarta.json:2.0.1")
   api("io.vacco.cpiohell:cpio-hell:0.1.2")
 }
 

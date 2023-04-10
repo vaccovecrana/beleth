@@ -35,4 +35,9 @@ public class BlSchema extends BlType {
     return this;
   }
 
+  @Override public String toString() {
+    return String.format("(%s) %s",
+      isOpen ? "O" : isEnum ? "E" : "C",
+      super.toString());
+  }
 }

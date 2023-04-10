@@ -29,7 +29,7 @@ public class BlDocumentsTest {
       ctx.update(crdSchemas);
       ctx.update(k8sSchemas);
 
-      var tCtx = new BlTypeContext();
+      var tCtx = new BlJavaContext();
       tCtx.map(ctx.schemaIdx.values());
 
       System.out.println();

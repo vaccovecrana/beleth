@@ -37,7 +37,7 @@ public class BlSchema extends BlType {
 
   @Override public String toString() {
     return String.format("(%s) %s",
-      isOpen ? "O" : isEnum ? "E" : "C",
+      primitiveType != null ? "P" : isOpen ? "O" : isEnum ? "E" : "C",
       super.toString());
   }
 }

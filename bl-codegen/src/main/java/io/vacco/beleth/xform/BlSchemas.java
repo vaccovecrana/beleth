@@ -8,6 +8,7 @@ public class BlSchemas {
 
   public static final String
     kAdditionalProperties = "additionalProperties",
+    kDescription = "description",
     kEnum = "enum",
     kItems = "items",
     kProperties = "properties",
@@ -55,6 +56,10 @@ public class BlSchemas {
       return addProps instanceof JsonObject;
     }
     return false;
+  }
+
+  public static boolean hasDescription(JsonObject obj) {
+    return obj != null && obj.containsKey(kDescription);
   }
 
   public static boolean isPrimitive(JsonObject obj) {

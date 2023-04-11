@@ -4,7 +4,6 @@ import com.google.gson.*;
 import io.k8s.api.apps.v1.*;
 import io.k8s.api.core.v1.*;
 import io.k8s.api.core.v1.configmap.Data;
-import io.k8s.api.core.v1.container.ImagePullPolicy;
 import io.k8s.api.core.v1.resourcerequirements.*;
 import io.k8s.apimachinery.pkg.apis.meta.v1.*;
 import io.k8s.apimachinery.pkg.apis.meta.v1.labelselector.MatchLabels;
@@ -70,7 +69,7 @@ public class BlObjectTest {
             new Container()
               .name("app")
               .image("images.my-company.example/app:v4")
-              .imagePullPolicy(ImagePullPolicy.IfNotPresent)
+              .imagePullPolicy("IfNotPresent")
               .resources(
                 new ResourceRequirements()
                   .requests(reqs)

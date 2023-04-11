@@ -1,4 +1,5 @@
 import io.vacco.beleth.xform.*;
+import io.vacco.shax.logging.ShOption;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
@@ -10,29 +11,25 @@ import static j8spec.J8Spec.*;
 @RunWith(J8SpecRunner.class)
 public class BlDocumentsTest {
   static {
+    ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
+  }
+  static {
     it("Read JSON and YAML documents as trees", () -> {
       var dio = new BlDocuments();
-      var jt0 = dio.loadJson(BlDocumentsTest.class.getResource("/k8s-swagger.json"));
-      var jt1 = dio.loadJsonFromYaml(BlDocumentsTest.class.getResource("/crd-podmonitors.yaml"));
-      var jt2 = dio.loadJsonFromYaml(BlDocumentsTest.class.getResource("/values.yaml"));
+      var k8sSwagger = dio.schemasOfSwagger(BlDocumentsTest.class.getResource("/k8s-swagger.json"));
+      var crdList0 = dio.schemasOfCrd(BlDocumentsTest.class.getResource("/crd-podmonitors.yaml"));
 
-      assertNotNull(jt0);
-      assertFalse(jt1.isEmpty());
-      assertFalse(jt2.isEmpty());
-
-      var jt10 = jt1.get(0);
-
-      var crdSchemas = dio.schemasOfCrd(jt10);
-      var k8sSchemas = dio.schemasOfSwagger(jt0);
+      assertFalse(k8sSwagger.isEmpty());
+      assertFalse(crdList0.isEmpty());
 
       var ctx = new BlSchemaContext();
-      ctx.update(crdSchemas);
-      ctx.update(k8sSchemas);
+
+      ctx.update(crdList0);
+      ctx.update(k8sSwagger);
 
       var tCtx = new BlJavaContext();
-      tCtx.map(ctx.schemaIdx.values());
 
-      System.out.println();
+      tCtx.mapTypes(ctx.schemaIdx.values());
     });
   }
 }

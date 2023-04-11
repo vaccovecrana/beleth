@@ -43,21 +43,37 @@ public class BlDocuments {
     }
   }
 
-  public List<BlSchema> schemasOfCrd(JsonObject crd) { // TODO change this to URL
+  /**
+   * Scans a Yaml document with CustomResourceDefinition for JSON schemas.
+   *
+   * @param crdYamlUrl a Yaml document
+   * @return a list of JSON schemas contained within the document.
+   */
+  public List<BlSchema> schemasOfCrd(URL crdYamlUrl) {
     var out = new ArrayList<BlSchema>();
-    var name = ((JsonString) crd.getValue(pSpecNamesKind)).getString();
-    var rootPkg = ((JsonString) crd.getValue(pSpecGroup)).getString();
-    crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
-      var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
-      var ver = jv.asJsonObject().getString("name");
-      var pkg = String.format("%s.%s", rootPkg, ver);
-      out.add(new BlSchema().withName(pkg, name).withDocument(schema));
-    });
+    var crds = loadJsonFromYaml(crdYamlUrl);
+    for (var crd : crds) {
+      var name = ((JsonString) crd.getValue(pSpecNamesKind)).getString();
+      var rootPkg = ((JsonString) crd.getValue(pSpecGroup)).getString();
+      crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
+        var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
+        var ver = jv.asJsonObject().getString("name");
+        var pkg = String.format("%s.%s", rootPkg, ver);
+        out.add(new BlSchema().withName(pkg, name).withDocument(schema));
+      });
+    }
     return out;
   }
 
-  public List<BlSchema> schemasOfSwagger(JsonObject swagger) { // TODO change this to URL
+  /**
+   * Scans a Swagger document for JSON schemas
+   *
+   * @param swaggerJsonUrl a Swagger document
+   * @return a list of JSON schemas contained within the document.
+   */
+  public List<BlSchema> schemasOfSwagger(URL swaggerJsonUrl) {
     var out = new ArrayList<BlSchema>();
+    var swagger = loadJson(swaggerJsonUrl);
     var schemaObj = swagger.getValue(pDefinitions).asJsonObject();
     for (var e : schemaObj.entrySet()) {
       if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {

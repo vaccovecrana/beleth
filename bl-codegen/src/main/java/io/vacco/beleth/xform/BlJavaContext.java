@@ -2,6 +2,7 @@ package io.vacco.beleth.xform;
 
 import com.squareup.javapoet.*;
 import jakarta.json.*;
+import org.slf4j.*;
 import javax.lang.model.SourceVersion;
 import java.util.*;
 
@@ -9,8 +10,11 @@ import static io.vacco.beleth.xform.BlSchemas.*;
 import static com.squareup.javapoet.TypeSpec.*;
 import static com.squareup.javapoet.MethodSpec.*;
 import static javax.lang.model.element.Modifier.*;
+import static java.lang.String.format;
 
 public class BlJavaContext {
+
+  private static final Logger log = LoggerFactory.getLogger(BlJavaContext.class);
 
   private final Map<String, BlSchema> primitiveIdx = new TreeMap<>();
 
@@ -27,26 +31,45 @@ public class BlJavaContext {
       : Optional.empty();
   }
 
-  public void mapField(BlSchema schema, TypeSpec.Builder jcb, String field, BlType fieldType) {
-    if (!SourceVersion.isName(field)) {
-      // TODO add com.google.gson.annotations.SerializedName annotation to mangled field
-      System.out.println("This field can't be mapped, now what?? " + field);
-      return;
+  private void mapFieldDeclaration(TypeSpec.Builder jcb, String field, String alias, BlType fieldType) {
+    var fld = FieldSpec.builder(fieldType.name, alias == null ? field : alias, PUBLIC);
+    if (alias != null) {
+      fld.addAnnotation(
+        AnnotationSpec
+          .builder(ClassName.get("com.google.gson.annotations", "SerializedName"))
+          .addMember("value", "\"$L\"", field)
+          .build()
+      );
     }
-    var ft = swapPrimitive(fieldType);
-    var fld = FieldSpec.builder(ft.name, field, PUBLIC);
-
     jcb.addField(fld.build());
+  }
 
-    var fldChain = methodBuilder(field)
+  private void mapFieldChainMethod(BlSchema schema, TypeSpec.Builder jcb, String field, String alias, BlType fieldType) {
+    var fldName = alias == null ? field : alias;
+    var fldChain = methodBuilder(fldName)
       .addModifiers(PUBLIC)
       .returns(schema.name)
-      .addParameter(ft.name, field)
-      .addStatement("this.$L = $L", field, field)
+      .addParameter(fieldType.name, fldName)
+      .addStatement("this.$L = $L", fldName, fldName)
       .addStatement("return this");
-    getComment(ft.document).ifPresent(desc -> fldChain.addJavadoc("$L", desc));
-
+    getComment(fieldType.document).ifPresent(desc -> fldChain.addJavadoc("$L", desc));
     jcb.addMethod(fldChain.build());
+  }
+
+  public void mapField(BlSchema schema, TypeSpec.Builder jcb, String field, BlType fieldType) {
+    var ft = swapPrimitive(fieldType);
+    if (!SourceVersion.isName(field)) {
+      log.warn(
+        "Field [{}] of schema {} cannot be mapped verbatim. Serialization will work, but name will be mangled.",
+        field, schema
+      );
+      var fieldAlias = format("v%s", BlSchemaContext.upperCaseFirst(field));
+      mapFieldDeclaration(jcb, field, fieldAlias, ft);
+      mapFieldChainMethod(schema, jcb, field, fieldAlias, ft);
+    } else {
+      mapFieldDeclaration(jcb, field, null, ft);
+      mapFieldChainMethod(schema, jcb, field, null, ft);
+    }
   }
 
   private BlJavaType mapEnum(BlSchema schema) {
@@ -93,7 +116,7 @@ public class BlJavaContext {
     return new BlJavaType().with(schema, jClass);
   }
 
-  public BlJavaType map(BlSchema schema) {
+  public BlJavaType mapTypes(BlSchema schema) {
     if (schema.isEnum) {
       return mapEnum(schema);
     } else if (schema.isOpen) {
@@ -102,7 +125,7 @@ public class BlJavaContext {
     return mapClass(schema);
   }
 
-  public void map(Collection<BlSchema> schemas) {
+  public List<BlJavaType> mapTypes(Collection<BlSchema> schemas) {
     var typeList = new ArrayList<BlJavaType>();
     for (var schema : schemas) {
       if (schema.primitiveType != null) {
@@ -110,9 +133,9 @@ public class BlJavaContext {
       }
     }
     for (var schema : schemas) {
-      typeList.add(map(schema));
+      typeList.add(mapTypes(schema));
     }
-    System.out.println("lol");
+    return typeList;
   }
 
 }

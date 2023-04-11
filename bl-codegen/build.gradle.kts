@@ -3,14 +3,11 @@ configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, f
 val api by configurations
 
 dependencies {
-  api(project(":bl-util"))
   api("com.squareup:javapoet:1.13.0")
   api("org.yaml:snakeyaml:2.0")
   api("org.glassfish:jakarta.json:2.0.1")
   api("io.vacco.cpiohell:cpio-hell:0.1.2")
-}
+  api("org.slf4j:slf4j-api:2.0.6")
 
-tasks.withType<Test> {
-  minHeapSize = "512m"
-  maxHeapSize = "8192m"
+  testImplementation("io.vacco.shax:shax:2.0.6.0.1.0")
 }

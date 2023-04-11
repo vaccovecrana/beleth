@@ -2,6 +2,7 @@ package io.vacco.beleth.xform;
 
 import com.squareup.javapoet.*;
 import jakarta.json.*;
+import org.slf4j.*;
 import java.util.*;
 
 import static io.vacco.beleth.xform.BlSchemas.*;
@@ -9,11 +10,12 @@ import static java.lang.String.*;
 
 public class BlSchemaContext {
 
+  private static final Logger log = LoggerFactory.getLogger(BlSchemaContext.class);
   private static final ClassName javaList = ClassName.get(List.class);
 
   public final Map<String, BlSchema> schemaIdx = new TreeMap<>();
 
-  private String upperCaseFirst(String raw) {
+  public static String upperCaseFirst(String raw) {
     return format("%s%s", valueOf(raw.charAt(0)).toUpperCase(), raw.substring(1));
   }
 
@@ -53,7 +55,7 @@ public class BlSchemaContext {
         );
       }
     }
-    System.out.println("I don't know how to map " + obj);
+    log.warn("Schema {} contains unmappable declaration: {}", parent, obj);
     return Optional.empty();
   }
 

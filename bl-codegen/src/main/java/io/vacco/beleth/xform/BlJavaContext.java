@@ -4,8 +4,10 @@ import com.squareup.javapoet.*;
 import jakarta.json.*;
 import org.slf4j.*;
 import javax.lang.model.SourceVersion;
+import java.io.File;
 import java.util.*;
 
+import static io.vacco.beleth.util.BlFormat.escapeHTML;
 import static io.vacco.beleth.xform.BlSchemas.*;
 import static com.squareup.javapoet.TypeSpec.*;
 import static com.squareup.javapoet.MethodSpec.*;
@@ -17,6 +19,7 @@ public class BlJavaContext {
   private static final Logger log = LoggerFactory.getLogger(BlJavaContext.class);
 
   private final Map<String, BlSchema> primitiveIdx = new TreeMap<>();
+  private final Map<String, BlJavaType> typeIdx = new TreeMap<>();
 
   private BlType swapPrimitive(BlType t) {
     if (primitiveIdx.containsKey(t.name.toString())) {
@@ -27,7 +30,7 @@ public class BlJavaContext {
 
   private Optional<String> getComment(JsonObject obj) {
     return hasDescription(obj)
-      ? Optional.of(obj.getString(kDescription))
+      ? Optional.of(escapeHTML(obj.getString(kDescription)))
       : Optional.empty();
   }
 
@@ -75,10 +78,8 @@ public class BlJavaContext {
   private BlJavaType mapEnum(BlSchema schema) {
     var jeb = enumBuilder((ClassName) schema.name).addModifiers(PUBLIC);
     var enumVals = schema.document.getJsonArray(kEnum);
-
     enumVals.forEach(ev -> jeb.addEnumConstant(((JsonString) ev).getString())); // TODO catch invalid enum names too.
     getComment(schema.document).ifPresent(desc -> jeb.addJavadoc("$L", desc));
-
     var jEnum = jeb.build();
     return new BlJavaType().with(schema, jEnum);
   }
@@ -89,9 +90,15 @@ public class BlJavaContext {
       : new BlType().withName(ClassName.get(Object.class));
     vt = swapPrimitive(vt);
     var kt = ClassName.get(String.class);
-    var mapType = ParameterizedTypeName.get(ClassName.get(Map.class), kt, vt.name);
+    var mapType = ParameterizedTypeName.get(ClassName.get(LinkedHashMap.class), kt, vt.name);
     var jcb = classBuilder((ClassName) schema.name)
       .addModifiers(PUBLIC)
+      .addAnnotation(
+        AnnotationSpec
+          .builder(SuppressWarnings.class)
+          .addMember("value", "\"$L\"", "serial")
+          .build()
+      )
       .superclass(mapType);
 
     var kvChain = methodBuilder("kv")
@@ -116,7 +123,7 @@ public class BlJavaContext {
     return new BlJavaType().with(schema, jClass);
   }
 
-  public BlJavaType mapTypes(BlSchema schema) {
+  public BlJavaType mapType(BlSchema schema) {
     if (schema.isEnum) {
       return mapEnum(schema);
     } else if (schema.isOpen) {
@@ -125,17 +132,36 @@ public class BlJavaContext {
     return mapClass(schema);
   }
 
-  public List<BlJavaType> mapTypes(Collection<BlSchema> schemas) {
-    var typeList = new ArrayList<BlJavaType>();
+  public void update(Collection<BlSchema> schemas) {
     for (var schema : schemas) {
       if (schema.primitiveType != null) {
         primitiveIdx.put(schema.name.toString(), schema);
       }
     }
     for (var schema : schemas) {
-      typeList.add(mapTypes(schema));
+      if (typeIdx.containsKey(schema.name.toString())) {
+        log.warn("Schema already mapped: {}", schema);
+      } else {
+        typeIdx.put(schema.name.toString(), mapType(schema));
+      }
     }
-    return typeList;
+  }
+
+  public void export(File outDir) {
+    try {
+      log.info("Writing [{}] type definitions to {}", typeIdx.size(), outDir.getAbsolutePath());
+      for (var jt : typeIdx.values()) {
+        var pkg = ((ClassName) jt.schema.name).packageName();
+        var jf = JavaFile.builder(pkg, jt.typeSpec);
+        if (log.isDebugEnabled()) {
+          log.debug("Writing type [{}]", jt.schema.name);
+        }
+        jf.build().writeTo(outDir);
+      }
+    } catch (Exception e) {
+      log.error("Unable to write Java type definitions to {}", outDir, e);
+      throw new IllegalStateException(e);
+    }
   }
 
 }

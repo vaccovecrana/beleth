@@ -4,6 +4,8 @@ import com.squareup.javapoet.*;
 import jakarta.json.JsonObject;
 import java.util.*;
 
+import static io.vacco.beleth.util.BlFormat.javaPackageOf;
+
 public class BlSchemas {
 
   public static final String
@@ -89,7 +91,7 @@ public class BlSchemas {
   public static BlType getRefTypeOf(JsonObject obj) {
     var path = obj.getString(kRef);
     var parts = path.split("/");
-    return new BlType().withName(parts[parts.length - 1]);
+    return new BlType().withName(javaPackageOf(parts[parts.length - 1]));
   }
 
 }

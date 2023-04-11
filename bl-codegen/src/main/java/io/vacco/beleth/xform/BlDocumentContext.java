@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
-public class BlDocuments {
+import static io.vacco.beleth.util.BlFormat.javaPackageOf;
+public class BlDocumentContext {
 
   public static final String
     pDefinitions = "/definitions",
@@ -46,7 +47,7 @@ public class BlDocuments {
   /**
    * Scans a Yaml document with CustomResourceDefinition for JSON schemas.
    *
-   * @param crdYamlUrl a Yaml document
+   * @param crdYamlUrl an OpenAPI Yaml document.
    * @return a list of JSON schemas contained within the document.
    */
   public List<BlSchema> schemasOfCrd(URL crdYamlUrl) {
@@ -58,7 +59,7 @@ public class BlDocuments {
       crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
         var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
         var ver = jv.asJsonObject().getString("name");
-        var pkg = String.format("%s.%s", rootPkg, ver);
+        var pkg = javaPackageOf(String.format("%s.%s", rootPkg, ver));
         out.add(new BlSchema().withName(pkg, name).withDocument(schema));
       });
     }
@@ -68,7 +69,7 @@ public class BlDocuments {
   /**
    * Scans a Swagger document for JSON schemas
    *
-   * @param swaggerJsonUrl a Swagger document
+   * @param swaggerJsonUrl a Swagger document in JSON format.
    * @return a list of JSON schemas contained within the document.
    */
   public List<BlSchema> schemasOfSwagger(URL swaggerJsonUrl) {
@@ -77,7 +78,11 @@ public class BlDocuments {
     var schemaObj = swagger.getValue(pDefinitions).asJsonObject();
     for (var e : schemaObj.entrySet()) {
       if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {
-        out.add(new BlSchema().withName(e.getKey()).withDocument(e.getValue().asJsonObject()));
+        out.add(
+          new BlSchema()
+            .withName(javaPackageOf(e.getKey()))
+            .withDocument(e.getValue().asJsonObject())
+        );
       }
     }
     return out;

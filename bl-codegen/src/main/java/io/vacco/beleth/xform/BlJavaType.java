@@ -1,7 +1,6 @@
 package io.vacco.beleth.xform;
 
 import com.squareup.javapoet.TypeSpec;
-
 import java.util.Objects;
 
 public class BlJavaType {

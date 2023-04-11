@@ -5,6 +5,7 @@ import jakarta.json.*;
 import org.slf4j.*;
 import java.util.*;
 
+import static io.vacco.beleth.util.BlFormat.javaPackageOf;
 import static io.vacco.beleth.xform.BlSchemas.*;
 import static java.lang.String.*;
 
@@ -25,7 +26,7 @@ public class BlSchemaContext {
 
   private BlSchema initSchema(String packageName, String rawName, JsonObject doc) {
     BlSchema schema = new BlSchema()
-      .withName(packageName, upperCaseFirst(rawName))
+      .withName(javaPackageOf(packageName), upperCaseFirst(rawName))
       .withDocument(doc.asJsonObject());
     register(schema);
     build(schema);

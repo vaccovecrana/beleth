@@ -17,7 +17,6 @@ import static java.lang.String.format;
 public class BlJavaContext {
 
   public static final String vRaw = "raw", vValue = "value";
-
   private static final Logger log = LoggerFactory.getLogger(BlJavaContext.class);
 
   private final Map<String, BlSchema> primitiveIdx = new TreeMap<>();

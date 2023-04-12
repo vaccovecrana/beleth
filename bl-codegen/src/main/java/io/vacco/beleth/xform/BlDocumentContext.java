@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
-import static io.vacco.beleth.util.BlFormat.javaPackageOf;
+import static io.vacco.beleth.util.BlFormat.swapDash;
+
 public class BlDocumentContext {
 
   public static final String
@@ -59,7 +60,7 @@ public class BlDocumentContext {
       crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
         var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
         var ver = jv.asJsonObject().getString("name");
-        var pkg = javaPackageOf(String.format("%s.%s", rootPkg, ver));
+        var pkg = swapDash(String.format("%s.%s", rootPkg, ver));
         out.add(new BlSchema().withName(pkg, name).withDocument(schema));
       });
     }
@@ -80,7 +81,7 @@ public class BlDocumentContext {
       if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {
         out.add(
           new BlSchema()
-            .withName(javaPackageOf(e.getKey()))
+            .withName(swapDash(e.getKey()))
             .withDocument(e.getValue().asJsonObject())
         );
       }

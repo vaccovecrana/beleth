@@ -35,15 +35,17 @@ public class BlJavaContext {
       : Optional.empty();
   }
 
+  private AnnotationSpec serializedName(String value) {
+    return AnnotationSpec
+      .builder(ClassName.get("com.google.gson.annotations", "SerializedName"))
+      .addMember(vValue, "$S", value)
+      .build();
+  }
+
   private void mapFieldDeclaration(TypeSpec.Builder jcb, String field, String alias, BlType fieldType) {
     var fld = FieldSpec.builder(fieldType.name, alias == null ? field : alias, PUBLIC);
     if (alias != null) {
-      fld.addAnnotation(
-        AnnotationSpec
-          .builder(ClassName.get("com.google.gson.annotations", "SerializedName"))
-          .addMember(vValue, "$S", field)
-          .build()
-      );
+      fld.addAnnotation(serializedName(field));
     }
     jcb.addField(fld.build());
   }
@@ -80,28 +82,20 @@ public class BlJavaContext {
     var jeb = enumBuilder((ClassName) schema.name).addModifiers(PUBLIC);
     var enumVals = schema.document.getJsonArray(kEnum);
     var enumArr = enumVals.toArray(JsonValue[]::new);
-    jeb.addMethod(
-        constructorBuilder()
-          .addParameter(String.class, vRaw)
-          .addStatement("this.$N = $N", vRaw, vRaw)
-          .build()
-      )
-      .addField(String.class, vRaw, PRIVATE, FINAL)
-      .addMethod(methodBuilder("toString")
-        .addAnnotation(Override.class)
-        .addModifiers(PUBLIC)
-        .addStatement("return this.$L", vRaw)
-        .returns(String.class)
-        .build()
-      );
     for (int i = 0; i < enumArr.length; i++) {
       var raw = ((JsonString) enumArr[i]).getString();
-      var alias = raw;
       if (!SourceVersion.isName(raw)) {
-        log.warn("Schema {} declares unmappable num constant [{}]. Enum name will be mangled.", schema, raw);
-        alias = format("Val%03d", i);
+        log.warn("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
+        var alias = format("Val%03d", i);
+        jeb.addEnumConstant(
+          alias,
+          anonymousClassBuilder("")
+            .addAnnotation(serializedName(raw))
+            .build()
+        );
+      } else {
+        jeb.addEnumConstant(raw, anonymousClassBuilder("").build());
       }
-      jeb.addEnumConstant(alias, anonymousClassBuilder("$S", raw).build());
     }
     getComment(schema.document).ifPresent(desc -> jeb.addJavadoc("$L", desc));
     var jEnum = jeb.build();

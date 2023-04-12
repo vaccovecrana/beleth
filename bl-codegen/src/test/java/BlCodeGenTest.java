@@ -9,7 +9,7 @@ import static j8spec.J8Spec.*;
 
 @DefinedOrder
 @RunWith(J8SpecRunner.class)
-public class BlDocumentsTest {
+public class BlCodeGenTest {
   static {
     ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
   }
@@ -18,8 +18,8 @@ public class BlDocumentsTest {
       var cg = new BlCodeGen();
       var outDir = new File("./build/java-src");
       outDir.mkdirs();
-      cg.openApiCrdXForm(BlDocumentsTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
-      cg.swaggerXForm(BlDocumentsTest.class.getResource("/k8s-swagger.json"), outDir);
+      cg.openApiCrdXForm(BlCodeGenTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
+      cg.swaggerXForm(BlCodeGenTest.class.getResource("/k8s-swagger.json"), outDir);
     });
   }
 }

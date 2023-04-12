@@ -18,7 +18,7 @@ public class BlDocumentsTest {
       var cg = new BlCodeGen();
       var outDir = new File("./build/java-src");
       outDir.mkdirs();
-      cg.openApiCrdXForm(BlDocumentsTest.class.getResource("/crd-podmonitors.yaml"), outDir);
+      cg.openApiCrdXForm(BlDocumentsTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
       cg.swaggerXForm(BlDocumentsTest.class.getResource("/k8s-swagger.json"), outDir);
     });
   }

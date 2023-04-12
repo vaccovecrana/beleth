@@ -16,6 +16,8 @@ import static java.lang.String.format;
 
 public class BlJavaContext {
 
+  public static final String vRaw = "raw", vValue = "value";
+
   private static final Logger log = LoggerFactory.getLogger(BlJavaContext.class);
 
   private final Map<String, BlSchema> primitiveIdx = new TreeMap<>();
@@ -40,7 +42,7 @@ public class BlJavaContext {
       fld.addAnnotation(
         AnnotationSpec
           .builder(ClassName.get("com.google.gson.annotations", "SerializedName"))
-          .addMember("value", "\"$L\"", field)
+          .addMember(vValue, "$S", field)
           .build()
       );
     }
@@ -78,7 +80,30 @@ public class BlJavaContext {
   private BlJavaType mapEnum(BlSchema schema) {
     var jeb = enumBuilder((ClassName) schema.name).addModifiers(PUBLIC);
     var enumVals = schema.document.getJsonArray(kEnum);
-    enumVals.forEach(ev -> jeb.addEnumConstant(((JsonString) ev).getString())); // TODO catch invalid enum names too.
+    var enumArr = enumVals.toArray(JsonValue[]::new);
+    jeb.addMethod(
+        constructorBuilder()
+          .addParameter(String.class, vRaw)
+          .addStatement("this.$N = $N", vRaw, vRaw)
+          .build()
+      )
+      .addField(String.class, vRaw, PRIVATE, FINAL)
+      .addMethod(methodBuilder("toString")
+        .addAnnotation(Override.class)
+        .addModifiers(PUBLIC)
+        .addStatement("return this.$L", vRaw)
+        .returns(String.class)
+        .build()
+      );
+    for (int i = 0; i < enumArr.length; i++) {
+      var raw = ((JsonString) enumArr[i]).getString();
+      var alias = raw;
+      if (!SourceVersion.isName(raw)) {
+        log.warn("Schema {} declares unmappable num constant [{}]. Enum name will be mangled.", schema, raw);
+        alias = format("Val%03d", i);
+      }
+      jeb.addEnumConstant(alias, anonymousClassBuilder("$S", raw).build());
+    }
     getComment(schema.document).ifPresent(desc -> jeb.addJavadoc("$L", desc));
     var jEnum = jeb.build();
     return new BlJavaType().with(schema, jEnum);
@@ -96,7 +121,7 @@ public class BlJavaContext {
       .addAnnotation(
         AnnotationSpec
           .builder(SuppressWarnings.class)
-          .addMember("value", "\"$L\"", "serial")
+          .addMember(vValue, "$S", "serial")
           .build()
       )
       .superclass(mapType);
@@ -105,7 +130,7 @@ public class BlJavaContext {
       .addModifiers(PUBLIC)
       .returns(schema.name)
       .addParameter(kt, "key")
-      .addParameter(vt.name, "value")
+      .addParameter(vt.name, vValue)
       .addStatement("put(key, value)")
       .addStatement("return this");
     jcb.addMethod(kvChain.build());

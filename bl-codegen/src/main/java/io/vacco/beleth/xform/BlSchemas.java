@@ -10,15 +10,18 @@ public class BlSchemas {
 
   public static final String
     kAdditionalProperties = "additionalProperties",
+    kDefinitions = "definitions",
     kDescription = "description",
     kEnum = "enum",
     kItems = "items",
+    kKind = "kind",
     kProperties = "properties",
     kType = "type",
     kRef = "$ref";
 
   public static final String
     vArray = "array",
+    vCustomResourceDefinition = "CustomResourceDefinition",
     vObject = "object";
 
   public static final String

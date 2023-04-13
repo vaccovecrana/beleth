@@ -15,7 +15,7 @@ public class BlArchiveTest {
 
   static {
     it("Downloads and expands an archive file", () -> {
-      var url = new URL("https://charts.bitnami.com/bitnami/zookeeper-9.2.1.tgz");
+      var url = new URL("https://charts.bitnami.com/bitnami/airflow-14.0.16.tgz");
       tarGzDir = BlArchive.unpackTarGz(url, build);
     });
     it("Walks a file tree", () -> {

@@ -17,12 +17,12 @@ public class BlCodeGen {
   }
 
   public void swaggerXForm(URL jsonUrl, File outDir) {
-    var schemas = docCtx.schemasOfSwagger(jsonUrl);
+    var schemas = docCtx.findJsonSchemas(jsonUrl);
     xForm(schemas, outDir);
   }
 
   public void openApiCrdXForm(URL openApiCrdYaml, File outDir) {
-    var schemas = docCtx.schemasOfCrd(openApiCrdYaml);
+    var schemas = docCtx.findCrdSchemas(openApiCrdYaml);
     xForm(schemas, outDir);
   }
 

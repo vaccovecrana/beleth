@@ -26,7 +26,9 @@ public class BlType {
   }
 
   public <T extends BlType> T withName(String raw) {
-    var fqn = Arrays.stream(raw.split("\\.")).collect(Collectors.toList());
+    var fqn = Arrays.stream(raw.split("\\."))
+      .filter(st -> st.length() > 0)
+      .collect(Collectors.toList());
     var name = fqn.remove(fqn.size() - 1);
     var pkg = String.join(".", fqn);
     return withName(pkg, name);

@@ -167,14 +167,16 @@ public class BlJavaContext {
 
   public void export(File outDir) {
     try {
-      log.info("Writing [{}] type definitions to {}", typeIdx.size(), outDir.getAbsolutePath());
-      for (var jt : typeIdx.values()) {
-        var pkg = ((ClassName) jt.schema.name).packageName();
-        var jf = JavaFile.builder(pkg, jt.typeSpec);
-        if (log.isDebugEnabled()) {
-          log.debug("Writing type [{}]", jt.schema.name);
+      if (!typeIdx.isEmpty()) {
+        log.info("Writing [{}] type definitions to {}", typeIdx.size(), outDir.getAbsolutePath());
+        for (var jt : typeIdx.values()) {
+          var pkg = ((ClassName) jt.schema.name).packageName();
+          var jf = JavaFile.builder(pkg, jt.typeSpec);
+          if (log.isDebugEnabled()) {
+            log.debug("Writing type [{}]", jt.schema.name);
+          }
+          jf.build().writeTo(outDir);
         }
-        jf.build().writeTo(outDir);
       }
     } catch (Exception e) {
       log.error("Unable to write Java type definitions to {}", outDir, e);

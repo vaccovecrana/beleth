@@ -16,8 +16,13 @@ public class BlCodeGen {
     javaCtx.export(outDir);
   }
 
+  public void swaggerXForm(URL jsonUrl, File outDir, String rootPackage) {
+    var schemas = docCtx.findJsonSchemas(jsonUrl, rootPackage);
+    xForm(schemas, outDir);
+  }
+
   public void swaggerXForm(URL jsonUrl, File outDir) {
-    var schemas = docCtx.findJsonSchemas(jsonUrl);
+    var schemas = docCtx.findJsonSchemas(jsonUrl, null);
     xForm(schemas, outDir);
   }
 

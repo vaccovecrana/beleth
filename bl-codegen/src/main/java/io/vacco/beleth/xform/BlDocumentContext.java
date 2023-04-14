@@ -23,7 +23,7 @@ public class BlDocumentContext {
 
   private final Yaml y = new Yaml();
 
-  public JsonObject loadJson(URL json) {
+  public JsonObject loadTreeFromJson(URL json) {
     try {
       try (var jrd = Json.createReader(new InputStreamReader(json.openStream()))) {
         return jrd.read().asJsonObject();
@@ -34,7 +34,7 @@ public class BlDocumentContext {
   }
 
   @SuppressWarnings("unchecked")
-  public List<JsonObject> loadJsonFromYaml(URL yaml) {
+  public List<JsonObject> loadTreeFromYaml(URL yaml) {
     var out = new ArrayList<JsonObject>();
     try {
       try (var isr = new InputStreamReader(yaml.openStream())) {
@@ -57,19 +57,27 @@ public class BlDocumentContext {
    */
   public List<BlSchema> findCrdSchemas(URL yamlUrl) {
     var out = new ArrayList<BlSchema>();
-    var crds = loadJsonFromYaml(yamlUrl);
-    for (var crd : crds) {
-      if (crd.containsKey(kKind) && crd.getString(kKind).equals(vCustomResourceDefinition)) {
-        var name = ((JsonString) crd.getValue(pSpecNamesKind)).getString();
-        var rootPkg = ((JsonString) crd.getValue(pSpecGroup)).getString();
-        crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
-          var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
-          var ver = jv.asJsonObject().getString("name");
-          var pkg = swapDash(String.format("%s.%s", rootPkg, ver));
-          out.add(new BlSchema().withName(pkg, name).withDocument(schema));
-        });
+    try {
+      var crds = loadTreeFromYaml(yamlUrl);
+      for (var crd : crds) {
+        if (crd.containsKey(kKind) && crd.getString(kKind).equals(vCustomResourceDefinition)) {
+          var name = ((JsonString) crd.getValue(pSpecNamesKind)).getString();
+          var rootPkg = ((JsonString) crd.getValue(pSpecGroup)).getString();
+          crd.getValue(pSpecVersions).asJsonArray().forEach(jv -> {
+            var schema = jv.asJsonObject().getValue(pSchemaOpenApiV3Schema).asJsonObject();
+            var ver = jv.asJsonObject().getString("name");
+            var pkg = swapDash(String.format("%s.%s", rootPkg, ver));
+            out.add(new BlSchema().withName(pkg, name).withDocument(schema));
+          });
+        } else {
+          log.info("No CRD definitions found on document {}", yamlUrl);
+        }
+      }
+    } catch (Exception e) {
+      if (log.isDebugEnabled()) {
+        log.debug("Unable to find CRD schemas in document {}", yamlUrl, e);
       } else {
-        log.info("No CRD definitions found on document {}", yamlUrl);
+        log.warn("Unable to find CRD schemas in document {}, {}", yamlUrl, e.getMessage());
       }
     }
     return out;
@@ -81,25 +89,32 @@ public class BlDocumentContext {
    * @param jsonUrl a JSON document.
    * @return a list of JSON schemas contained within the document.
    */
-  public List<BlSchema> findJsonSchemas(URL jsonUrl, String ... packageParts) {
+  public List<BlSchema> findJsonSchemas(URL jsonUrl, String rootPackage) {
     var out = new ArrayList<BlSchema>();
-    var json = loadJson(jsonUrl);
-    if (json.containsKey(kProperties)) {
-      var pkg = String.join(".", packageParts);
-      out.add(new BlSchema().withName(pkg, ""));
-    } else if (json.containsKey(kDefinitions)) {
-      var schemaObj = json.getValue(pDefinitions).asJsonObject();
-      for (var e : schemaObj.entrySet()) {
-        if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {
-          out.add(
-            new BlSchema()
-              .withName(swapDash(e.getKey()))
-              .withDocument(e.getValue().asJsonObject())
-          );
+    try {
+      var json = loadTreeFromJson(jsonUrl);
+      if (json.containsKey(kProperties)) {
+        out.add(new BlSchema().withName(rootPackage, "Schema"));
+      } else if (json.containsKey(kDefinitions)) {
+        var schemaObj = json.getValue(pDefinitions).asJsonObject();
+        for (var e : schemaObj.entrySet()) {
+          if (!e.getKey().startsWith("io.k8s.apiextensions-apiserver")) {
+            out.add(
+              new BlSchema()
+                .withName(swapDash(e.getKey()))
+                .withDocument(e.getValue().asJsonObject())
+            );
+          }
         }
+      } else {
+        log.info("No JSON schemas found in document {}", jsonUrl);
       }
-    } else {
-      log.info("No JSON schemas found in document {}", jsonUrl);
+    } catch (Exception e) {
+      if (log.isDebugEnabled()) {
+        log.debug("Unable to find JSON schemas in document {}", jsonUrl, e);
+      } else {
+        log.warn("Unable to find JSON schemas in document {}", jsonUrl);
+      }
     }
     return out;
   }

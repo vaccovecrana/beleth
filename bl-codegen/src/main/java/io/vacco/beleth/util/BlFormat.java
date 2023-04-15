@@ -17,8 +17,4 @@ public class BlFormat {
     return out.toString().replace("*", "<code>*</code>");
   }
 
-  public static String swapDash(String raw) {
-    return raw.replace("-", "_");
-  }
-
 }

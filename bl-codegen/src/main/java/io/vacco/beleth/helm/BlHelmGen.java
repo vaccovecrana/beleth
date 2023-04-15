@@ -1,4 +1,4 @@
-package io.vacco.beleth.Helm;
+package io.vacco.beleth.helm;
 
 import io.vacco.beleth.util.BlArchive;
 import io.vacco.beleth.xform.BlCodeGen;

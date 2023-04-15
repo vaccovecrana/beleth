@@ -16,7 +16,7 @@ import static java.lang.String.format;
 
 public class BlJavaContext {
 
-  public static final String vRaw = "raw", vValue = "value";
+  public static final String vValue = "value";
   private static final Logger log = LoggerFactory.getLogger(BlJavaContext.class);
 
   private final Map<String, BlSchema> primitiveIdx = new TreeMap<>();
@@ -69,7 +69,7 @@ public class BlJavaContext {
         "Field [{}] of schema {} cannot be mapped verbatim. Serialization will work, but name will be mangled.",
         field, schema
       );
-      var fieldAlias = format("v%s", BlSchemaContext.upperCaseFirst(field));
+      var fieldAlias = format("v%s", BlType.upperCaseFirst(field));
       mapFieldDeclaration(jcb, field, fieldAlias, ft);
       mapFieldChainMethod(schema, jcb, field, fieldAlias, ft);
     } else {
@@ -84,7 +84,9 @@ public class BlJavaContext {
     var enumArr = enumVals.toArray(JsonValue[]::new);
     for (int i = 0; i < enumArr.length; i++) {
       var raw = ((JsonString) enumArr[i]).getString();
-      if (!SourceVersion.isName(raw)) {
+      if (raw.length() == 0) {
+        log.warn("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
+      } else if (!SourceVersion.isName(raw)) {
         log.warn("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
         var alias = format("Val%03d", i);
         jeb.addEnumConstant(

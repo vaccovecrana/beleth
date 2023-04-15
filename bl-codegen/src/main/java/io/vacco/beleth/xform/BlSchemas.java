@@ -4,18 +4,18 @@ import com.squareup.javapoet.*;
 import jakarta.json.JsonObject;
 import java.util.*;
 
-import static io.vacco.beleth.util.BlFormat.swapDash;
-
 public class BlSchemas {
 
   public static final String
     kAdditionalProperties = "additionalProperties",
+    kAnyOf = "anyOf",
     kDefinitions = "definitions",
     kDescription = "description",
     kEnum = "enum",
     kItems = "items",
     kKind = "kind",
     kProperties = "properties",
+    kTitle = "title",
     kType = "type",
     kRef = "$ref";
 
@@ -53,6 +53,10 @@ public class BlSchemas {
 
   public static boolean isEnum(JsonObject obj) {
     return obj.containsKey(kEnum);
+  }
+
+  public static boolean isAnyOf(JsonObject obj) {
+    return obj.containsKey(kAnyOf);
   }
 
   public static boolean hasAdditionalPropTypes(JsonObject obj) {
@@ -94,7 +98,7 @@ public class BlSchemas {
   public static BlType getRefTypeOf(JsonObject obj) {
     var path = obj.getString(kRef);
     var parts = path.split("/");
-    return new BlType().withName(swapDash(parts[parts.length - 1]));
+    return new BlType().withName(parts[parts.length - 1]);
   }
 
 }

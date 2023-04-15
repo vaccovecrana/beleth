@@ -5,7 +5,6 @@ import jakarta.json.*;
 import org.slf4j.*;
 import java.util.*;
 
-import static io.vacco.beleth.util.BlFormat.swapDash;
 import static io.vacco.beleth.xform.BlSchemas.*;
 import static java.lang.String.*;
 
@@ -16,17 +15,13 @@ public class BlSchemaContext {
 
   public final Map<String, BlSchema> schemaIdx = new TreeMap<>();
 
-  public static String upperCaseFirst(String raw) {
-    return format("%s%s", valueOf(raw.charAt(0)).toUpperCase(), raw.substring(1));
-  }
-
   private void register(BlSchema schema) {
     schemaIdx.put(schema.name.toString(), schema);
   }
 
   private BlSchema initSchema(String packageName, String rawName, JsonObject doc) {
     BlSchema schema = new BlSchema()
-      .withName(swapDash(packageName), upperCaseFirst(rawName))
+      .withName(packageName, rawName)
       .withDocument(doc.asJsonObject());
     register(schema);
     build(schema);
@@ -54,6 +49,17 @@ public class BlSchemaContext {
             .withName(ParameterizedTypeName.get(javaList, itemType.get().name))
             .withDocument(obj)
         );
+      }
+    } else if (isAnyOf(obj)) {
+      var anyTypes = obj.getJsonArray(kAnyOf);
+      var ost = anyTypes.stream()
+        .filter(jv -> jv instanceof JsonObject)
+        .map(JsonValue::asJsonObject)
+        .filter(jo -> jo.getString(kType).equals(tString)).findFirst();
+      if (ost.isPresent()) {
+        return Optional.of(getPrimitiveTypeOf(ost.get()));
+      } else {
+        log.warn("Schema {} defines 'anyOf' declaration, but String was not found as candidate type. {}", parent, obj);
       }
     }
     log.warn("Schema {} contains unmappable declaration: {}", parent, obj);

@@ -1,5 +1,5 @@
-import io.vacco.beleth.Helm.BlHelmGen;
-import io.vacco.beleth.util.BlArchive;
+import io.vacco.beleth.helm.BlHelmGen;
+import io.vacco.beleth.util.*;
 import io.vacco.shax.logging.ShOption;
 import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
@@ -28,20 +28,25 @@ public class BlArchiveTest {
           System.out.println(f.getAbsolutePath());
         });
     });
-    it("Generates schemas from a Helm Chart archive", () -> {
+    it("Generates schemas from a Helm Chart archive", () -> BlHeadless.runOnDesktop(() -> {
       var buildDir = new File("./build");
       var helmJavaSrc = new File(buildDir, "helm-java-src");
 
-      // https://github.com/jenkinsci/helm-charts/releases/download/jenkins-4.3.20/jenkins-4.3.20.tgz
-      // https://github.com/fluxcd-community/helm-charts/releases/download/flux2-2.6.0/flux2-2.6.0.tgz
-      // https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-45.10.0/kube-prometheus-stack-45.10.0.tgz
-
       helmJavaSrc.mkdirs();
-      BlHelmGen.apply(
-        new URL("https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.5.2/ingress-nginx-4.5.2.tgz"),
-        "io.jenkins", buildDir, helmJavaSrc
-      );
-      System.out.println("lol");
-    });
+
+      var packages = new String[] {
+        "https://charts.cockroachdb.com/cockroachdb-10.0.6.tgz",
+        "https://github.com/metallb/metallb/releases/download/metallb-chart-0.13.9/metallb-0.13.9.tgz",
+        "https://github.com/jenkinsci/helm-charts/releases/download/jenkins-4.3.20/jenkins-4.3.20.tgz",
+        "https://github.com/fluxcd-community/helm-charts/releases/download/flux2-2.6.0/flux2-2.6.0.tgz",
+        "https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-45.10.0/kube-prometheus-stack-45.10.0.tgz",
+        "https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.5.2/ingress-nginx-4.5.2.tgz",
+        "https://charts.jetstack.io/charts/cert-manager-v1.8.2.tgz"
+      };
+
+      for (var pkg : packages) {
+        BlHelmGen.apply(new URL(pkg), "io.vacco.test", buildDir, helmJavaSrc);
+      }
+    }));
   }
 }

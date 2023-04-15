@@ -5,6 +5,8 @@ import jakarta.json.JsonObject;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.String.*;
+
 public class BlType {
 
   public TypeName name;
@@ -19,8 +21,8 @@ public class BlType {
   public <T extends BlType> T withName(String packageName, String name) {
     return withName(
       ClassName.get(
-        Objects.requireNonNull(packageName),
-        Objects.requireNonNull(name)
+        swapDash(Objects.requireNonNull(packageName)),
+        upperCaseFirst(Objects.requireNonNull(name))
       )
     );
   }
@@ -46,6 +48,14 @@ public class BlType {
 
   @Override public String toString() {
     return name.toString();
+  }
+
+  public static String upperCaseFirst(String raw) {
+    return format("%s%s", valueOf(raw.charAt(0)).toUpperCase(), raw.substring(1));
+  }
+
+  public static String swapDash(String raw) {
+    return raw.replace("-", "_");
   }
 
 }

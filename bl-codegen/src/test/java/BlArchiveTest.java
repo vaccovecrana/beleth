@@ -1,4 +1,4 @@
-import io.vacco.beleth.helm.BlHelmGen;
+import io.vacco.beleth.helm.*;
 import io.vacco.beleth.util.*;
 import io.vacco.shax.logging.ShOption;
 import j8spec.annotation.DefinedOrder;
@@ -6,9 +6,10 @@ import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 
-import static io.vacco.beleth.util.BlMaps.*;
 import static j8spec.J8Spec.*;
+import static org.junit.Assert.*;
 
 @DefinedOrder
 @RunWith(J8SpecRunner.class)
@@ -29,27 +30,45 @@ public class BlArchiveTest {
           System.out.println(f.getAbsolutePath());
         });
     });
+    it("Loads chart definitons from the Helm cache", () -> {
+      var helmCache = new BlHelmCache("./src/test/resources/helm");
+      var urlLatest = helmCache.chartFor("metallb", "metallb", null);
+      var urlVer = helmCache.chartFor("metallb", "metallb", "0.13.3");
+      assertNotNull(urlLatest);
+      assertNotNull(urlVer);
+    });
     it("Generates schemas from a Helm Chart archive", () -> BlHeadless.runOnDesktop(() -> {
       var buildDir = new File("./build");
       var helmJavaSrc = new File(buildDir, "helm-java-src");
+      var cache = new BlHelmCache();
 
       helmJavaSrc.mkdirs();
+      /*
+        helm repo add bitnami https://charts.bitnami.com/bitnami
+        helm repo add jenkins https://charts.jenkins.io
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+        helm repo add cockroachdb https://charts.cockroachdb.com/
+        helm repo add scylla https://scylla-operator-charts.storage.googleapis.com/stable
+        helm repo update
+       */
 
-      var chartIdx = obj(
-        kv("https://charts.bitnami.com/bitnami/clickhouse-3.1.6.tgz", "com.bitnami.clickhouse"),
-        kv("https://charts.bitnami.com/bitnami/apache-9.2.2.tgz", "com.bitnami.apache"),
-        kv("https://argoproj.github.io/argo-helm/argo-1.0.0.tgz", "com.github.argo"),
-        kv("https://scylla-operator-charts.storage.googleapis.com/stable/scylla-v1.8.0.tgz", "com.scylladb"),
-        kv("https://charts.cockroachdb.com/cockroachdb-10.0.6.tgz", "com.cockroachdb"),
-        kv("https://github.com/metallb/metallb/releases/download/metallb-chart-0.13.9/metallb-0.13.9.tgz", "metallb.io"),
-        kv("https://github.com/jenkinsci/helm-charts/releases/download/jenkins-4.3.20/jenkins-4.3.20.tgz", "com.github.jenkinsci"),
-        kv("https://github.com/fluxcd-community/helm-charts/releases/download/flux2-2.6.0/flux2-2.6.0.tgz", "com.github.fluxcd"),
-        kv("https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-45.10.0/kube-prometheus-stack-45.10.0.tgz", "com.github.prometheus"),
-        kv("https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.5.2/ingress-nginx-4.5.2.tgz", "com.github.kubernetes.nginx"),
-        kv("https://charts.jetstack.io/charts/cert-manager-v1.8.2.tgz", "io.jetstack.certmanager")
+      var charts = List.of(
+        cache.chartFor("bitnami", "clickhouse"),
+        cache.chartFor("bitnami", "apache"),
+        cache.chartFor("bitnami", "metallb", "4.1.13"),
+        cache.chartFor("bitnami", "kube-prometheus"),
+        cache.chartFor("bitnami", "flux"),
+        cache.chartFor("bitnami", "argo-cd"),
+        cache.chartFor("bitnami", "cert-manager"),
+        cache.chartFor("bitnami", "nats"),
+        cache.chartFor("scylla", "scylla"),
+        cache.chartFor("cockroachdb", "cockroachdb"),
+        cache.chartFor("jenkins", "jenkins"),
+        cache.chartFor("ingress-nginx", "ingress-nginx")
       );
-      for (var e : chartIdx.entrySet()) {
-        BlHelmGen.apply(new URL(e.getKey()), e.getValue(), buildDir, helmJavaSrc);
+
+      for (var c : charts) {
+        BlHelmGen.apply(c.url, c.rootPackage(), buildDir, helmJavaSrc);
       }
     }));
   }

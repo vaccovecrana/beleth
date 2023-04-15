@@ -101,7 +101,9 @@ public class BlJavaContext {
       if (raw.length() == 0) {
         log.warn("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
       } else if (!SourceVersion.isName(raw)) {
-        log.warn("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
+        if (log.isDebugEnabled()) {
+          log.debug("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
+        }
         var alias = format("Val%03d", i);
         jeb.addEnumConstant(
           alias,

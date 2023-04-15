@@ -2,7 +2,7 @@ package io.vacco.beleth.xform;
 
 import jakarta.json.*;
 import org.slf4j.*;
-import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.*;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
@@ -22,7 +22,15 @@ public class BlDocumentContext {
     pSpecVersions = "/spec/versions",
     pSchemaOpenApiV3Schema = "/schema/openAPIV3Schema";
 
-  private final Yaml y = new Yaml();
+  public static final int MaxYamlSize = 32 * 1024 * 1024;
+
+  private final Yaml y;
+
+  public BlDocumentContext() {
+    var yamlCfg = new LoaderOptions();
+    yamlCfg.setCodePointLimit(MaxYamlSize);
+    this.y = new Yaml(yamlCfg);
+  }
 
   public JsonObject loadTreeFromJson(URL json) {
     try {

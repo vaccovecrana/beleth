@@ -7,7 +7,6 @@ import javax.lang.model.SourceVersion;
 import java.io.File;
 import java.util.*;
 
-import static io.vacco.beleth.util.BlFormat.escapeHTML;
 import static io.vacco.beleth.xform.BlSchemas.*;
 import static com.squareup.javapoet.TypeSpec.*;
 import static com.squareup.javapoet.MethodSpec.*;
@@ -27,6 +26,21 @@ public class BlJavaContext {
       return primitiveIdx.get(t.name.toString()).primitiveType;
     }
     return t;
+  }
+
+  public static String escapeHTML(String s) {
+    StringBuilder out = new StringBuilder(Math.max(16, s.length()));
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (c > 127 || c == '"' || c == '\'' || c == '<' || c == '>' || c == '&') {
+        out.append("&#");
+        out.append((int) c);
+        out.append(';');
+      } else {
+        out.append(c);
+      }
+    }
+    return out.toString().replace("*", "<code>*</code>");
   }
 
   private Optional<String> getComment(JsonObject obj) {

@@ -34,10 +34,12 @@ public class BlDocumentContext {
     }
   }
 
-  private void sanitize(Map<?, ?> raw) {
+  @SuppressWarnings("rawtypes")
+  private void sanitize(Map raw) {
     var keys = raw.keySet().toArray();
     for (var k : keys) {
       if (!(k instanceof String)) {
+        log.warn("Removing invalid map key: [{}]", k);
         raw.remove(k);
       } else {
         var val = raw.get(k);

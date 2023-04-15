@@ -8,6 +8,7 @@ public class BlSchemas {
 
   public static final String
     kAdditionalProperties = "additionalProperties",
+    kAllOf = "allOf",
     kAnyOf = "anyOf",
     kDefinitions = "definitions",
     kDescription = "description",
@@ -59,6 +60,10 @@ public class BlSchemas {
     return obj.containsKey(kAnyOf);
   }
 
+  public static boolean isAllOf(JsonObject obj) {
+    return obj.containsKey(kAllOf);
+  }
+
   public static boolean hasAdditionalPropTypes(JsonObject obj) {
     if (obj.containsKey(kAdditionalProperties)) {
       var addProps = obj.get(kAdditionalProperties);
@@ -95,10 +100,18 @@ public class BlSchemas {
     return obj.containsKey(kRef);
   }
 
+  public static String lastComponentOf(String path) {
+    var parts = path.split("/");
+    return parts[parts.length - 1];
+  }
+
   public static BlType getRefTypeOf(JsonObject obj) {
     var path = obj.getString(kRef);
-    var parts = path.split("/");
-    return new BlType().withName(parts[parts.length - 1]);
+    return new BlType().withName(lastComponentOf(path));
+  }
+
+  public static String sanitizeIdentifier(String raw) {
+    return raw.replaceAll("[^A-Za-z0-9_]+", "");
   }
 
 }

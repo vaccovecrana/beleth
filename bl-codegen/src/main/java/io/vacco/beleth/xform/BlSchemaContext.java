@@ -55,14 +55,40 @@ public class BlSchemaContext {
       var ost = anyTypes.stream()
         .filter(jv -> jv instanceof JsonObject)
         .map(JsonValue::asJsonObject)
-        .filter(jo -> jo.getString(kType).equals(tString)).findFirst();
+        .filter(BlSchemas::isPrimitive).findFirst();
       if (ost.isPresent()) {
         return Optional.of(getPrimitiveTypeOf(ost.get()));
       } else {
-        log.warn("Schema {} defines 'anyOf' declaration, but String was not found as candidate type. {}", parent, obj);
+        log.warn(
+          "Schema {} defines property [{}] as 'anyOf' declaration, but no primitive candidate types were found. {}",
+          parent, property, obj
+        );
       }
+    } else if (isAllOf(obj)) {
+      var defs = obj.getJsonArray(kAllOf);
+      defs.stream()
+        .map(JsonValue::asJsonObject)
+        .map(jo -> {
+          if (jo.containsKey(kRef)) {
+            var path = jo.getString(kRef).replace("#", "");
+            var target = parent.document.getValue(path);
+            return target.asJsonObject();
+          } else {
+            return jo;
+          }
+        })
+        .reduce((jo0, jo1) -> {
+          var jm = Json.createObjectBuilder();
+          var jmProps = Json.createObjectBuilder();
+          jo0.getJsonObject(kProperties).forEach(jmProps::add);
+          jo1.getJsonObject(kProperties).forEach(jmProps::add);
+          jm.add(kType, jo0.getString(kType));
+          jm.add(kProperties, jmProps.build());
+          return jm.build();
+        }).ifPresent(jo -> initSchema(parent.getRootPackage(), property, jo));
+    } else {
+      log.warn("Schema {} contains unmappable declaration: {}", parent, obj);
     }
-    log.warn("Schema {} contains unmappable declaration: {}", parent, obj);
     return Optional.empty();
   }
 
@@ -70,8 +96,12 @@ public class BlSchemaContext {
     if (schema.document.containsKey(kProperties)) {
       var props = schema.document.get(kProperties).asJsonObject();
       for (var ep : props.entrySet()) {
-        build(ep.getKey(), ep.getValue().asJsonObject(), schema)
-          .ifPresent(type -> schema.addPropType(ep.getKey(), type));
+        var property = sanitizeIdentifier(ep.getKey());
+        if (!property.equals(ep.getKey())) {
+          log.warn("Schema {} contains invalid property name [{}], replacing with [{}]", schema, ep.getKey(), property);
+        }
+        build(property, ep.getValue().asJsonObject(), schema)
+          .ifPresent(type -> schema.addPropType(property, type));
       }
     } else if (isEnum(schema.document)) {
       schema.withEnum(true);

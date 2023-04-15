@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.net.URL;
 
+import static io.vacco.beleth.util.BlMaps.*;
 import static j8spec.J8Spec.*;
 
 @DefinedOrder
@@ -34,18 +35,18 @@ public class BlArchiveTest {
 
       helmJavaSrc.mkdirs();
 
-      var packages = new String[] {
-        "https://charts.cockroachdb.com/cockroachdb-10.0.6.tgz",
-        "https://github.com/metallb/metallb/releases/download/metallb-chart-0.13.9/metallb-0.13.9.tgz",
-        "https://github.com/jenkinsci/helm-charts/releases/download/jenkins-4.3.20/jenkins-4.3.20.tgz",
-        "https://github.com/fluxcd-community/helm-charts/releases/download/flux2-2.6.0/flux2-2.6.0.tgz",
-        "https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-45.10.0/kube-prometheus-stack-45.10.0.tgz",
-        "https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.5.2/ingress-nginx-4.5.2.tgz",
-        "https://charts.jetstack.io/charts/cert-manager-v1.8.2.tgz"
-      };
-
-      for (var pkg : packages) {
-        BlHelmGen.apply(new URL(pkg), "io.vacco.test", buildDir, helmJavaSrc);
+      var chartIdx = obj(
+        kv("https://scylla-operator-charts.storage.googleapis.com/stable/scylla-v1.8.0.tgz", "com.scylladb"),
+        kv("https://charts.cockroachdb.com/cockroachdb-10.0.6.tgz", "com.cockroachdb"),
+        kv("https://github.com/metallb/metallb/releases/download/metallb-chart-0.13.9/metallb-0.13.9.tgz", "io.metallb"),
+        kv("https://github.com/jenkinsci/helm-charts/releases/download/jenkins-4.3.20/jenkins-4.3.20.tgz", "com.github.jenkinsci"),
+        kv("https://github.com/fluxcd-community/helm-charts/releases/download/flux2-2.6.0/flux2-2.6.0.tgz", "com.github.fluxcd"),
+        kv("https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-45.10.0/kube-prometheus-stack-45.10.0.tgz", "com.github.prometheus"),
+        kv("https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.5.2/ingress-nginx-4.5.2.tgz", "com.github.kubernetes.nginx"),
+        kv("https://charts.jetstack.io/charts/cert-manager-v1.8.2.tgz", "io.jetstack.certmanager")
+      );
+      for (var e : chartIdx.entrySet()) {
+        BlHelmGen.apply(new URL(e.getKey()), e.getValue(), buildDir, helmJavaSrc);
       }
     }));
   }

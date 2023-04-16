@@ -79,10 +79,12 @@ public class BlJavaContext {
   public void mapField(BlSchema schema, TypeSpec.Builder jcb, String field, BlType fieldType) {
     var ft = swapPrimitive(fieldType);
     if (!SourceVersion.isName(field)) {
-      log.warn(
-        "Field [{}] of schema {} cannot be mapped verbatim. Serialization will work, but name will be mangled.",
-        field, schema
-      );
+      if (log.isDebugEnabled()) {
+        log.debug(
+          "Field [{}] of schema {} cannot be mapped verbatim. Serialization will work, but name will be mangled.",
+          field, schema
+        );
+      }
       var fieldAlias = format("v%s", BlType.upperCaseFirst(field));
       mapFieldDeclaration(jcb, field, fieldAlias, ft);
       mapFieldChainMethod(schema, jcb, field, fieldAlias, ft);
@@ -99,7 +101,9 @@ public class BlJavaContext {
     for (int i = 0; i < enumArr.length; i++) {
       var raw = ((JsonString) enumArr[i]).getString();
       if (raw.length() == 0) {
-        log.warn("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
+        if (log.isDebugEnabled()) {
+          log.debug("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
+        }
       } else if (!SourceVersion.isName(raw)) {
         if (log.isDebugEnabled()) {
           log.debug("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
@@ -190,9 +194,7 @@ public class BlJavaContext {
         for (var jt : typeIdx.values()) {
           var pkg = ((ClassName) jt.schema.name).packageName();
           var jf = JavaFile.builder(pkg, jt.typeSpec);
-          if (log.isDebugEnabled()) {
-            log.debug("Writing type [{}]", jt.schema.name);
-          }
+          log.info("Writing type [{}]", jt.schema.name);
           jf.build().writeTo(outDir);
         }
       }

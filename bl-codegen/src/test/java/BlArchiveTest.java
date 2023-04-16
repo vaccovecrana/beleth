@@ -15,7 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(J8SpecRunner.class)
 public class BlArchiveTest {
 
-  static { ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true"); }
+  static {
+    ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
+  }
 
   public static File tarGzDir, build = new File("./build");
 

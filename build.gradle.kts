@@ -10,6 +10,11 @@ subprojects {
     addClasspathHell()
   }
 
+  dependencies {
+    val testImplementation by configurations
+    testImplementation("io.vacco.shax:shax:2.0.6.0.1.0")
+  }
+
   configure<io.vacco.cphell.ChPluginExtension> {
     resourceExclusions.add("module-info.class")
   }

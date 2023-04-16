@@ -17,6 +17,7 @@ public class BlArchiveTest {
 
   static {
     ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
+    ShOption.setSysProp(ShOption.IO_VACCO_SHAX_LOGLEVEL, "debug");
   }
 
   public static File tarGzDir, build = new File("./build");
@@ -32,7 +33,7 @@ public class BlArchiveTest {
           System.out.println(f.getAbsolutePath());
         });
     });
-    it("Loads chart definitons from the Helm cache", () -> {
+    it("Loads chart definitions from the Helm cache", () -> {
       var helmCache = new BlHelmCache("./src/test/resources/helm");
       var urlLatest = helmCache.chartFor("metallb", "metallb", null);
       var urlVer = helmCache.chartFor("metallb", "metallb", "0.13.3");

@@ -11,20 +11,26 @@ import static j8spec.J8Spec.*;
 @DefinedOrder
 @RunWith(J8SpecRunner.class)
 public class BlCodeGenTest {
+
+  public static final File outDir = new File("./build/java-src");
+
   static {
     ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
+    outDir.mkdirs();
   }
+
   static {
     it("Emits Java sources from JSON/YAML schema containers", () -> {
       var cg = new BlCodeGen();
-      var outDir = new File("./build/java-src");
-      outDir.mkdirs();
-      cg.openApiCrdXForm(
-        new URL("https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml"),
-        outDir
-      );
-      cg.openApiCrdXForm(BlCodeGenTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
-      cg.swaggerXForm(BlCodeGenTest.class.getResource("/k8s-swagger.json"), outDir);
+      var yamlUrl = "https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml";
+      cg.crdXForm(new URL(yamlUrl), outDir);
+      cg.crdXForm(BlCodeGenTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
+      cg.jsonSchemaXForm(BlCodeGenTest.class.getResource("/k8s-swagger.json"), outDir);
+    });
+    it("Emits Java sources for JSON schema allOf rules", () -> {
+      var cg = new BlCodeGen();
+      var jsonUrl = BlCodeGenTest.class.getResource("/allof-test.json");
+      cg.jsonSchemaXForm(jsonUrl, outDir, "io.vacco.test");
     });
   }
 }

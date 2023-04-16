@@ -15,7 +15,7 @@ public class BlK8s125 {
   static {
     it("Generates classes for K8S 1.25", () -> BlHeadless.runOnDesktop(() -> {
       var cg = new BlCodeGen();
-      cg.swaggerXForm(
+      cg.jsonSchemaXForm(
         BlK8s125.class.getResource("/k8s-swagger.json"),
         new File("./src/main/java")
       );

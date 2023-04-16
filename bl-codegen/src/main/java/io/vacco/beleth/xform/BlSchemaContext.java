@@ -66,7 +66,7 @@ public class BlSchemaContext {
       }
     } else if (isAllOf(obj)) {
       var defs = obj.getJsonArray(kAllOf);
-      defs.stream()
+      var oMerged = defs.stream()
         .map(JsonValue::asJsonObject)
         .map(jo -> {
           if (jo.containsKey(kRef)) {
@@ -85,7 +85,10 @@ public class BlSchemaContext {
           jm.add(kType, jo0.getString(kType));
           jm.add(kProperties, jmProps.build());
           return jm.build();
-        }).ifPresent(jo -> initSchema(parent.getRootPackage(), property, jo));
+        });
+      if (oMerged.isPresent()) {
+        return Optional.of(initSchema(parent.getRootPackage(), property, oMerged.get()));
+      }
     } else {
       log.warn("Schema {} contains unmappable declaration: {}", parent, obj);
     }

@@ -24,9 +24,9 @@ public class BlHelmGen {
       var helmRoot = BlArchive.unpackTarGz(archiveUrl, stageDir);
       var codeGen = new BlCodeGen();
       BlArchive.scan(helmRoot, "json")
-        .forEach(jf -> codeGen.swaggerXForm(toUrl(jf), srcOutDir, rootPackage));
+        .forEach(jf -> codeGen.jsonSchemaXForm(toUrl(jf), srcOutDir, rootPackage));
       BlArchive.scan(helmRoot, ".yaml", ".yml")
-        .forEach(yf -> codeGen.openApiCrdXForm(toUrl(yf), srcOutDir));
+        .forEach(yf -> codeGen.crdXForm(toUrl(yf), srcOutDir));
     } catch (Exception e) {
       log.error("Unable to process Helm chart schemas from {}", archiveUrl, e);
     }

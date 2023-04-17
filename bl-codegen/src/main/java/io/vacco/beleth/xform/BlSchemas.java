@@ -7,6 +7,10 @@ import java.util.*;
 public class BlSchemas {
 
   public static final String
+    rxNonAlphaNum = "[^A-Za-z0-9_]+",
+    rxAlphaNum = "[A-Za-z0-9_]+";
+
+  public static final String
     kAdditionalProperties = "additionalProperties",
     kAllOf = "allOf",
     kAnyOf = "anyOf",
@@ -111,7 +115,11 @@ public class BlSchemas {
   }
 
   public static String sanitizeIdentifier(String raw) {
-    return raw.replaceAll("[^A-Za-z0-9_]+", "");
+    return raw.replaceAll(rxNonAlphaNum, "");
+  }
+
+  public static boolean isValidIdentifier(String raw) {
+    return raw.matches(rxAlphaNum);
   }
 
 }

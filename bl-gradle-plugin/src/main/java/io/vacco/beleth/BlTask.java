@@ -58,15 +58,19 @@ public abstract class BlTask extends DefaultTask {
   }
 
   @TaskAction public void action() {
-    for (var chart : getCharts().get()) {
-      BlHelmGen.apply(
-        chart.url, chart.rootPackage(),
-        getHelmStagingDir(), getHelmSourcesDir()
-      );
-    }
-    var cg = new BlCodeGen();
-    for (URL u : getCrdUrls().get()) {
-      cg.crdXForm(u, getHelmSourcesDir());
+    try {
+      for (var chart : getCharts().get()) {
+        BlHelmGen.apply(
+          new URL(chart.url), chart.rootPackage(),
+          getHelmStagingDir(), getHelmSourcesDir()
+        );
+      }
+      var cg = new BlCodeGen();
+      for (URL u : getCrdUrls().get()) {
+        cg.crdXForm(u, getHelmSourcesDir());
+      }
+    } catch (Exception e) {
+      throw new GradleException("Unable to generate java CRD sources.", e);
     }
   }
 

@@ -104,7 +104,7 @@ public class BlJavaContext {
         if (log.isDebugEnabled()) {
           log.debug("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
         }
-      } else if (!SourceVersion.isName(raw)) {
+      } else if (!SourceVersion.isName(raw) || !isValidIdentifier(raw)) {
         if (log.isDebugEnabled()) {
           log.debug("Schema {} declares unmappable enum constant [{}]. Enum name will be mangled.", schema, raw);
         }

@@ -35,7 +35,7 @@ public class BlHelmCache {
       if (version == null) {
         var latest = versions.getJsonObject(0);
         var url = latest.get(kUrls).asJsonArray().getString(0);
-        return new BlHelmChart().with(repoAlias, name, null, new URL(url));
+        return new BlHelmChart().with(repoAlias, name, null, url);
       }
       var oVer = versions.stream()
         .map(JsonValue::asJsonObject)
@@ -43,7 +43,7 @@ public class BlHelmCache {
         .findFirst();
       return new BlHelmChart().with(
         repoAlias, name, version,
-        new URL(oVer.get().getJsonArray(kUrls).getString(0))
+        oVer.get().getJsonArray(kUrls).getString(0)
       );
     } catch (Exception e) {
       throw new IllegalStateException(

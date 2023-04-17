@@ -53,6 +53,7 @@ public class BlArchiveTest {
         helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
         helm repo add cockroachdb https://charts.cockroachdb.com/
         helm repo add scylla https://scylla-operator-charts.storage.googleapis.com/stable
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
         helm repo update
        */
 
@@ -60,7 +61,6 @@ public class BlArchiveTest {
         cache.chartFor("bitnami", "clickhouse"),
         cache.chartFor("bitnami", "apache"),
         cache.chartFor("bitnami", "metallb", "4.1.13"),
-        cache.chartFor("bitnami", "kube-prometheus"),
         cache.chartFor("bitnami", "flux"),
         cache.chartFor("bitnami", "argo-cd"),
         cache.chartFor("bitnami", "cert-manager"),
@@ -68,11 +68,12 @@ public class BlArchiveTest {
         cache.chartFor("scylla", "scylla"),
         cache.chartFor("cockroachdb", "cockroachdb"),
         cache.chartFor("jenkins", "jenkins"),
-        cache.chartFor("ingress-nginx", "ingress-nginx")
+        cache.chartFor("ingress-nginx", "ingress-nginx"),
+        cache.chartFor("prometheus-community", "kube-prometheus-stack", "43.1.4")
       );
 
       for (var c : charts) {
-        BlHelmGen.apply(c.url, c.rootPackage(), buildDir, helmJavaSrc);
+        BlHelmGen.apply(new URL(c.url), c.rootPackage(), buildDir, helmJavaSrc);
       }
     }));
   }

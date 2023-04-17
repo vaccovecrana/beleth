@@ -1,14 +1,15 @@
 package io.vacco.beleth.helm;
 
-import java.net.URL;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BlHelmChart {
+public class BlHelmChart implements Serializable {
 
-  public String repoAlias, name, version;
-  public URL url;
+  public static final long serialVersionUID = 1;
 
-  public BlHelmChart with(String repoAlias, String name, String version, URL url) {
+  public String repoAlias, name, version, url;
+
+  public BlHelmChart with(String repoAlias, String name, String version, String url) {
     this.repoAlias = Objects.requireNonNull(repoAlias);
     this.name = Objects.requireNonNull(name);
     this.version = version;

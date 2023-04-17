@@ -4,7 +4,7 @@ Programmatic resource management for Kubernetes.
 
 Schema objects are generated for the latest three [Patch Releases](https://kubernetes.io/releases/patch-releases/). 
 
-`kubectl` and `helm` executables must be available in `PATH` in order to interact with a live K8S cluster.
+`kubectl` and `helm` 3.0 executables must be available in `PATH` in order to interact with a live K8S cluster.
 
 ## Development Notes
 

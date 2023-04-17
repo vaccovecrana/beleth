@@ -1,5 +1,6 @@
 package io.vacco.beleth.rt;
 
+import io.vacco.beleth.xform.BlDocumentContext;
 import org.buildobjects.process.*;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
@@ -10,17 +11,19 @@ public class BlKubeCtl {
 
   public static final String kubectl = "kubectl";
 
+  public final BlDocumentContext ctx = new BlDocumentContext();
+
   public ProcResult apply(Object manifest) {
-    var yaml = y.dump(manifest);
+    var json = ctx.toJson(manifest);
     var pb = new ProcBuilder(kubectl, "apply", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(yaml.getBytes()));
+      .withInputStream(new ByteArrayInputStream(json.getBytes()));
     return runCmd(pb);
   }
 
   public String diff(Object manifest) {
-    var yaml = y.dump(manifest);
+    var json = ctx.toJson(manifest);
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(yaml.getBytes()))
+      .withInputStream(new ByteArrayInputStream(json.getBytes()))
       .ignoreExitStatus();
     var pr = runCmd(pb);
     int sc = pr.getExitValue();
@@ -44,9 +47,9 @@ public class BlKubeCtl {
   }
 
   public ProcResult delete(Object manifest) {
-    var yaml = y.dump(manifest);
+    var json = ctx.toJson(manifest);
     var pb = new ProcBuilder(kubectl, "delete", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(yaml.getBytes()))
+      .withInputStream(new ByteArrayInputStream(json.getBytes()))
       .ignoreExitStatus();
     return runCmd(pb);
   }

@@ -1,5 +1,6 @@
 package io.vacco.beleth.rt;
 
+import io.vacco.beleth.xform.BlDocumentContext;
 import org.buildobjects.process.*;
 import java.io.ByteArrayInputStream;
 import java.util.*;
@@ -10,14 +11,16 @@ public class BlHelmCtl {
 
   public static final String helm = "helm";
 
+  public final BlDocumentContext ctx = new BlDocumentContext();
+
   public ProcResult repoUpdate() {
     return runCmd(new ProcBuilder(helm, "repo", "update"));
   }
 
   public BlHelmRepoListResponse[] repoList() {
-    var pb = new ProcBuilder(helm, "repo", "list", "-o", "yaml");
+    var pb = new ProcBuilder(helm, "repo", "list", "-o", "json");
     var out = runCmd(pb).getOutputString();
-    return y.loadAs(out, BlHelmRepoListResponse[].class);
+    return ctx.fromJson(out, BlHelmRepoListResponse[].class);
   }
 
   public boolean isDefined(String repoUrl) {
@@ -37,7 +40,10 @@ public class BlHelmCtl {
                             String namespace, String version,
                             Object values) {
     var pb = new ProcBuilder(helm, "install", release, chart);
-    var vYaml = y.dump(values);
+    var valuesJson = ctx.toJson(values);
+    var valuesRaw = ctx.fromJson(valuesJson, Map.class);
+    var valuesYaml = ctx.toYaml(valuesRaw);
+
     if (namespace != null && namespace.trim().length() > 0) {
       pb.withArgs("--namespace", namespace);
     }
@@ -46,7 +52,7 @@ public class BlHelmCtl {
     }
     pb
       .withArgs("-f", "-")
-      .withInputStream(new ByteArrayInputStream(vYaml.getBytes()))
+      .withInputStream(new ByteArrayInputStream(valuesYaml.getBytes()))
       .withNoTimeout();
     return runCmd(pb);
   }
@@ -67,7 +73,8 @@ public class BlHelmCtl {
     if (namespace != null) {
       pb.withArgs("--namespace", namespace);
     }
-    return y.loadAs(runCmd(pb).getOutputString(), BlHelmStatusResponse[].class);
+    var json = runCmd(pb).getOutputString();
+    return ctx.fromJson(json, BlHelmStatusResponse[].class);
   }
 
   public boolean isDeployed(String release, String namespace, String version) {
@@ -92,10 +99,6 @@ public class BlHelmCtl {
 
   public BlHelmCtl pause(long ms) {
     return BlCmd.pause(this, ms);
-  }
-
-  public String render(Object manifest) {
-    return y.dump(manifest);
   }
 
 }

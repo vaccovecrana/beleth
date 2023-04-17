@@ -1,5 +1,6 @@
 package io.vacco.beleth.xform;
 
+import com.google.gson.Gson;
 import jakarta.json.*;
 import org.slf4j.*;
 import org.yaml.snakeyaml.*;
@@ -25,11 +26,24 @@ public class BlDocumentContext {
   public static final int MaxYamlSize = 32 * 1024 * 1024;
 
   private final Yaml y;
+  private final Gson g = new Gson();
 
   public BlDocumentContext() {
     var yamlCfg = new LoaderOptions();
     yamlCfg.setCodePointLimit(MaxYamlSize);
     this.y = new Yaml(yamlCfg);
+  }
+
+  public <T> T fromJson(String json, Class<T> type) {
+    return g.fromJson(json, type);
+  }
+
+  public String toJson(Object o) {
+    return g.toJson(o);
+  }
+
+  public String toYaml(Object o) {
+    return y.dump(o);
   }
 
   public JsonObject loadTreeFromJson(URL json) {

@@ -45,14 +45,14 @@ public class BlHelmCtlTest {
       }
     }));
     it("Installs a Helm package", () -> BlHeadless.runOnDesktop(() -> {
-      h.pause(10000).sync(
+      h.pause(40_000).sync(
         "kube-prometheus-stack",
         "prometheus-community/kube-prometheus-stack",
         null, "43.1.4", values
       );
     }));
     it("Retrieves Helm package statuses", () -> BlHeadless.runOnDesktop(() -> {
-      System.out.println(h.render(h.listAll(null)));
+      System.out.println(h.ctx.toJson(h.listAll(null)));
     }));
     it("Uninstalls a Helm package", () -> BlHeadless.runOnDesktop(() -> {
       if (h.isDeployed(release, null, null)) {

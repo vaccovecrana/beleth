@@ -194,7 +194,9 @@ public class BlJavaContext {
         for (var jt : typeIdx.values()) {
           var pkg = ((ClassName) jt.schema.name).packageName();
           var jf = JavaFile.builder(pkg, jt.typeSpec);
-          log.info("Writing type [{}]", jt.schema.name);
+          if (log.isDebugEnabled()) {
+            log.debug("Writing type [{}]", jt.schema.name);
+          }
           jf.build().writeTo(outDir);
         }
       }

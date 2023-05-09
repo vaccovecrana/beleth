@@ -15,10 +15,9 @@ public class BlCmd {
     return res;
   }
 
-  public static <T> T pause(T t, long ms) {
+  public static void pause(long ms) {
     try {
       Thread.sleep(ms);
-      return t;
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }

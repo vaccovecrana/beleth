@@ -23,14 +23,13 @@ public class BlHelmCtl {
     return ctx.fromJson(out, BlHelmRepoListResponse[].class);
   }
 
-  public boolean isDefined(String repoUrl) {
-    return Arrays.stream(repoList())
-      .anyMatch(r -> r.url.equalsIgnoreCase(repoUrl));
+  public boolean isRepoDefined(String repoUrl) {
+    return Arrays.stream(repoList()).anyMatch(r -> r.url.equalsIgnoreCase(repoUrl));
   }
 
   public void repoSync(String name, String url) {
     // TODO should this include more options (i.e. more flags)?
-    if (!isDefined(url)) {
+    if (!isRepoDefined(url)) {
       var pb = new ProcBuilder(helm, "repo", "add", name, url);
       runCmd(pb);
     }
@@ -68,7 +67,7 @@ public class BlHelmCtl {
     return runCmd(pb);
   }
 
-  public BlHelmStatusResponse[] listAll(String namespace) {
+  public BlHelmStatusResponse[] listReleases(String namespace) {
     var pb = new ProcBuilder(helm, "list", "--all", "--output", "json");
     if (namespace != null) {
       pb.withArgs("--namespace", namespace);
@@ -77,8 +76,8 @@ public class BlHelmCtl {
     return ctx.fromJson(json, BlHelmStatusResponse[].class);
   }
 
-  public boolean isDeployed(String release, String namespace, String version) {
-    var status = listAll(namespace);
+  public boolean isReleaseDeployed(String release, String namespace, String version) {
+    var status = listReleases(namespace);
     var dep = Arrays.stream(status)
       .filter(st -> st.name.equals(release))
       .filter(st -> st.status.equals("deployed"));
@@ -89,16 +88,12 @@ public class BlHelmCtl {
   }
 
   public Optional<ProcResult> sync(String release, String chart,
-                       String namespace, String version,
-                       Object values) {
-    if (!isDeployed(release, namespace, version)) {
+                                   String namespace, String version,
+                                   Object values) {
+    if (!isReleaseDeployed(release, namespace, version)) {
       return Optional.of(install(release, chart, namespace, version, values));
     }
     return Optional.empty();
-  }
-
-  public BlHelmCtl pause(long ms) {
-    return BlCmd.pause(this, ms);
   }
 
 }

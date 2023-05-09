@@ -7,6 +7,7 @@ import j8spec.annotation.DefinedOrder;
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
 
+import static io.vacco.beleth.rt.BlCmd.*;
 import static io.vacco.beleth.util.BlMaps.*;
 import static j8spec.J8Spec.*;
 
@@ -40,7 +41,7 @@ public class BlHelmCtlTest {
       h.repoSync("radar-base", "https://radar-base.github.io/radar-helm-charts");
     }));
     it("Uninstalls a Helm package, if present", () -> BlHeadless.runOnDesktop(() -> {
-      if (h.isDeployed(release, null, null)) {
+      if (h.isReleaseDeployed(release, null, null)) {
         h.uninstall(release, null, true);
       }
     }));
@@ -50,13 +51,13 @@ public class BlHelmCtlTest {
         "prometheus-community/kube-prometheus-stack",
         null, "43.1.4", values
       );
-      h.pause(60_000);
+      pause(60_000);
     }));
     it("Retrieves Helm package statuses", () -> BlHeadless.runOnDesktop(() -> {
-      System.out.println(h.ctx.toJson(h.listAll(null)));
+      System.out.println(h.ctx.toJson(h.listReleases(null)));
     }));
     it("Uninstalls a Helm package", () -> BlHeadless.runOnDesktop(() -> {
-      if (h.isDeployed(release, null, null)) {
+      if (h.isReleaseDeployed(release, null, null)) {
         h.uninstall(release, null, false);
       }
     }));

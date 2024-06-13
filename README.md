@@ -17,7 +17,7 @@ $ curl localhost:8080/openapi/v2 > tmp.json
 $ jq ".definitions" tmp.json > k8s-swagger.json 
 ```
 
-Alternatively, use fetch the definitions from Github: https://github.com/kubernetes/kubernetes/blob/v1.25.8/api/openapi-spec/swagger.json
+Alternatively, fetch the definitions from Github: https://github.com/kubernetes/kubernetes/blob/v1.25.8/api/openapi-spec/swagger.json
 
 For CI/CD servers, a base Docker image or Runtime environment must have the following tools installed:
 

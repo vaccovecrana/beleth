@@ -100,7 +100,7 @@ public class BlJavaContext {
     var enumArr = enumVals.toArray(JsonValue[]::new);
     for (int i = 0; i < enumArr.length; i++) {
       var raw = ((JsonString) enumArr[i]).getString();
-      if (raw.length() == 0) {
+      if (raw.isEmpty()) {
         if (log.isDebugEnabled()) {
           log.debug("Schema {} declares empty enum constant. Skipping declaration. {}", schema, schema.document);
         }

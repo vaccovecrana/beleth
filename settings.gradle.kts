@@ -5,7 +5,9 @@ include(
   "bl-k8s-1-25",
   "bl-k8s-1-26",
   "bl-k8s-1-27",
+  "bl-k8s-1-30",
   "bl-k8s-rt",
+  "bl-k8s-test",
   "bl-gradle-plugin",
 )
 

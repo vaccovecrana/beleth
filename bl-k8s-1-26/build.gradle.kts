@@ -2,7 +2,4 @@ configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, f
 
 version = "1.26.3"
 
-dependencies {
-  compileOnly(project(":bl-codegen"))
-  testImplementation(project(":bl-codegen"))
-}
+dependencies { compileOnly(project(":bl-codegen")) }

@@ -10,7 +10,7 @@ public class BlPlugin implements Plugin<Project> {
       var classes = tasks.getByName("classes");
       var blTask = tasks.create("crd-codegen", BlTask.class);
       blTask.setGroup("build");
-      blTask.setDescription("Generates java sources from Helm packages and CRDs.");
+      blTask.setDescription("Generates java sources for CRDs.");
       classes.dependsOn(blTask);
     });
   }

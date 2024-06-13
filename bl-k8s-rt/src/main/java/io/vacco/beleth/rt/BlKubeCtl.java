@@ -45,7 +45,7 @@ public class BlKubeCtl {
     }
   }
 
-  @SuppressWarnings({"uncheked", "rawtypes"})
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public void injectMeta(Object manifest, String labelKey, String labelValue) {
     try {
       if (manifest instanceof Map) {

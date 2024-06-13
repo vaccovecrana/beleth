@@ -105,4 +105,8 @@ public class ValidatingWebhook {
     this.timeoutSeconds = timeoutSeconds;
     return this;
   }
+
+  public static ValidatingWebhook validatingWebhook() {
+    return new ValidatingWebhook();
+  }
 }

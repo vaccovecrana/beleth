@@ -35,4 +35,8 @@ public class ResourceClaimParametersReference {
     this.name = name;
     return this;
   }
+
+  public static ResourceClaimParametersReference resourceClaimParametersReference() {
+    return new ResourceClaimParametersReference();
+  }
 }

@@ -80,4 +80,8 @@ public class Status {
     this.status = status;
     return this;
   }
+
+  public static Status status() {
+    return new Status();
+  }
 }

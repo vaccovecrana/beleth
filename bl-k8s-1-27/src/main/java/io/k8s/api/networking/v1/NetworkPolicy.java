@@ -47,4 +47,8 @@ public class NetworkPolicy {
     this.status = status;
     return this;
   }
+
+  public static NetworkPolicy networkPolicy() {
+    return new NetworkPolicy();
+  }
 }

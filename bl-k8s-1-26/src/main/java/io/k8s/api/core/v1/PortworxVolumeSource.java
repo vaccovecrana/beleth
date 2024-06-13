@@ -36,4 +36,8 @@ public class PortworxVolumeSource {
     this.volumeID = volumeID;
     return this;
   }
+
+  public static PortworxVolumeSource portworxVolumeSource() {
+    return new PortworxVolumeSource();
+  }
 }

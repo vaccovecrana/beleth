@@ -29,4 +29,8 @@ public class ValidatingAdmissionPolicyBindingSpec {
     this.policyName = policyName;
     return this;
   }
+
+  public static ValidatingAdmissionPolicyBindingSpec validatingAdmissionPolicyBindingSpec() {
+    return new ValidatingAdmissionPolicyBindingSpec();
+  }
 }

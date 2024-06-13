@@ -51,4 +51,8 @@ public class RoleBinding {
     this.subjects = subjects;
     return this;
   }
+
+  public static RoleBinding roleBinding() {
+    return new RoleBinding();
+  }
 }

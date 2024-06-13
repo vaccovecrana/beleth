@@ -10,4 +10,8 @@ public class NodeConfigSource {
     this.configMap = configMap;
     return this;
   }
+
+  public static NodeConfigSource nodeConfigSource() {
+    return new NodeConfigSource();
+  }
 }

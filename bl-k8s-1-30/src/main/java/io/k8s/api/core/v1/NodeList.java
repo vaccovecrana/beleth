@@ -44,4 +44,8 @@ public class NodeList {
     this.metadata = metadata;
     return this;
   }
+
+  public static NodeList nodeList() {
+    return new NodeList();
+  }
 }

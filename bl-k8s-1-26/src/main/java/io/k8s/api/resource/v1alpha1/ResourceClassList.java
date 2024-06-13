@@ -44,4 +44,8 @@ public class ResourceClassList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ResourceClassList resourceClassList() {
+    return new ResourceClassList();
+  }
 }

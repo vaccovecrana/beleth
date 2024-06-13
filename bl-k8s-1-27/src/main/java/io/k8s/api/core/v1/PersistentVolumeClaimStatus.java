@@ -68,4 +68,8 @@ public class PersistentVolumeClaimStatus {
     this.resizeStatus = resizeStatus;
     return this;
   }
+
+  public static PersistentVolumeClaimStatus persistentVolumeClaimStatus() {
+    return new PersistentVolumeClaimStatus();
+  }
 }

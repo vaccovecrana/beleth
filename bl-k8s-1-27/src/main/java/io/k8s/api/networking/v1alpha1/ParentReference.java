@@ -55,4 +55,8 @@ public class ParentReference {
     this.uid = uid;
     return this;
   }
+
+  public static ParentReference parentReference() {
+    return new ParentReference();
+  }
 }

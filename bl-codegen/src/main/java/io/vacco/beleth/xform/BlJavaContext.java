@@ -124,6 +124,22 @@ public class BlJavaContext {
     return new BlJavaType().with(schema, jEnum);
   }
 
+  private MethodSpec mapStaticBuilder(BlSchema schema) {
+    var clazz = (ClassName) schema.name;
+    var clazzName = clazz.simpleName();
+    var staticBuilderMethod = clazzName.substring(0, 1).toLowerCase() + clazzName.substring(1);
+
+    if (staticBuilderMethod.equals("default")) {
+      staticBuilderMethod = "_default";
+    }
+
+    return methodBuilder(staticBuilderMethod)
+      .addModifiers(PUBLIC, STATIC)
+      .returns(schema.name)
+      .addStatement(format("return new %s()", clazzName))
+      .build();
+  }
+
   private BlJavaType mapOpen(BlSchema schema) {
     var vt = schema.additionalPropType != null
       ? schema.additionalPropType
@@ -149,16 +165,19 @@ public class BlJavaContext {
       .addStatement("put(key, value)")
       .addStatement("return this");
     jcb.addMethod(kvChain.build());
+    jcb.addMethod(mapStaticBuilder(schema));
 
     var jClass = jcb.build();
-
     return new BlJavaType().with(schema, jClass);
   }
 
   private BlJavaType mapClass(BlSchema schema) {
-    var jcb = classBuilder((ClassName) schema.name).addModifiers(PUBLIC);
+    var clazz = (ClassName) schema.name;
+    var jcb = classBuilder(clazz).addModifiers(PUBLIC);
     getComment(schema.document).ifPresent(desc -> jcb.addJavadoc("$L", desc));
     schema.propTypes.forEach((field, type) -> mapField(schema, jcb, field, type));
+    jcb.addMethod(mapStaticBuilder(schema));
+
     var jClass = jcb.build();
     return new BlJavaType().with(schema, jClass);
   }

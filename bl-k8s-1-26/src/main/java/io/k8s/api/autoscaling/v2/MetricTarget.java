@@ -118,4 +118,8 @@ public class MetricTarget {
     this.value = value;
     return this;
   }
+
+  public static MetricTarget metricTarget() {
+    return new MetricTarget();
+  }
 }

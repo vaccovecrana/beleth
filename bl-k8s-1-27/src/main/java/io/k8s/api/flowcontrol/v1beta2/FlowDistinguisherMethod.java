@@ -15,4 +15,8 @@ public class FlowDistinguisherMethod {
     this.type = type;
     return this;
   }
+
+  public static FlowDistinguisherMethod flowDistinguisherMethod() {
+    return new FlowDistinguisherMethod();
+  }
 }

@@ -15,4 +15,8 @@ public class HostIP {
     this.ip = ip;
     return this;
   }
+
+  public static HostIP hostIP() {
+    return new HostIP();
+  }
 }

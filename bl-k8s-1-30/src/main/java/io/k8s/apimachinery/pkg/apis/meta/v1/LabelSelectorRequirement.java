@@ -36,4 +36,8 @@ public class LabelSelectorRequirement {
     this.values = values;
     return this;
   }
+
+  public static LabelSelectorRequirement labelSelectorRequirement() {
+    return new LabelSelectorRequirement();
+  }
 }

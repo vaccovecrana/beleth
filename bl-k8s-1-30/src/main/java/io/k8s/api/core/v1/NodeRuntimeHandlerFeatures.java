@@ -15,4 +15,8 @@ public class NodeRuntimeHandlerFeatures {
     this.recursiveReadOnlyMounts = recursiveReadOnlyMounts;
     return this;
   }
+
+  public static NodeRuntimeHandlerFeatures nodeRuntimeHandlerFeatures() {
+    return new NodeRuntimeHandlerFeatures();
+  }
 }

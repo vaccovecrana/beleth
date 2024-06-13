@@ -47,4 +47,8 @@ public class UserInfo {
     this.username = username;
     return this;
   }
+
+  public static UserInfo userInfo() {
+    return new UserInfo();
+  }
 }

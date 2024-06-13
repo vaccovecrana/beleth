@@ -22,4 +22,8 @@ public class StorageVersionMigrationSpec {
     this.resource = resource;
     return this;
   }
+
+  public static StorageVersionMigrationSpec storageVersionMigrationSpec() {
+    return new StorageVersionMigrationSpec();
+  }
 }

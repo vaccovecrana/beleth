@@ -28,4 +28,8 @@ public class ConfigMapEnvSource {
     this.optional = optional;
     return this;
   }
+
+  public static ConfigMapEnvSource configMapEnvSource() {
+    return new ConfigMapEnvSource();
+  }
 }

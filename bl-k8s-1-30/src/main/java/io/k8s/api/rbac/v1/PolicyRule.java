@@ -56,4 +56,8 @@ public class PolicyRule {
     this.verbs = verbs;
     return this;
   }
+
+  public static PolicyRule policyRule() {
+    return new PolicyRule();
+  }
 }

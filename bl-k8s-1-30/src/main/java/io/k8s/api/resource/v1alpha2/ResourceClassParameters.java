@@ -61,4 +61,8 @@ public class ResourceClassParameters {
     this.vendorParameters = vendorParameters;
     return this;
   }
+
+  public static ResourceClassParameters resourceClassParameters() {
+    return new ResourceClassParameters();
+  }
 }

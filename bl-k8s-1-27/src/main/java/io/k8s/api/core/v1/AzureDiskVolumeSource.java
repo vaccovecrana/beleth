@@ -66,4 +66,8 @@ public class AzureDiskVolumeSource {
     this.readOnly = readOnly;
     return this;
   }
+
+  public static AzureDiskVolumeSource azureDiskVolumeSource() {
+    return new AzureDiskVolumeSource();
+  }
 }

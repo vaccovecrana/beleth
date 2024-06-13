@@ -44,4 +44,8 @@ public class JobList {
     this.metadata = metadata;
     return this;
   }
+
+  public static JobList jobList() {
+    return new JobList();
+  }
 }

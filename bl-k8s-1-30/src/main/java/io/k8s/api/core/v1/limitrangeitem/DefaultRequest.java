@@ -10,4 +10,8 @@ public class DefaultRequest extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static DefaultRequest defaultRequest() {
+    return new DefaultRequest();
+  }
 }

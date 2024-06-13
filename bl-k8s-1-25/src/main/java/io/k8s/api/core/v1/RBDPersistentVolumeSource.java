@@ -84,4 +84,8 @@ public class RBDPersistentVolumeSource {
     this.user = user;
     return this;
   }
+
+  public static RBDPersistentVolumeSource rBDPersistentVolumeSource() {
+    return new RBDPersistentVolumeSource();
+  }
 }

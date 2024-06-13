@@ -45,4 +45,8 @@ public class VsphereVirtualDiskVolumeSource {
     this.volumePath = volumePath;
     return this;
   }
+
+  public static VsphereVirtualDiskVolumeSource vsphereVirtualDiskVolumeSource() {
+    return new VsphereVirtualDiskVolumeSource();
+  }
 }

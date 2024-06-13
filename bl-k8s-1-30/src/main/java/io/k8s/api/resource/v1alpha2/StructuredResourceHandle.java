@@ -41,4 +41,8 @@ public class StructuredResourceHandle {
     this.vendorClassParameters = vendorClassParameters;
     return this;
   }
+
+  public static StructuredResourceHandle structuredResourceHandle() {
+    return new StructuredResourceHandle();
+  }
 }

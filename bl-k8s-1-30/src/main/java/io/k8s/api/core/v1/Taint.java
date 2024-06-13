@@ -45,4 +45,8 @@ public class Taint {
     this.value = value;
     return this;
   }
+
+  public static Taint taint() {
+    return new Taint();
+  }
 }

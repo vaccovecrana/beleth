@@ -26,4 +26,8 @@ public class UncountedTerminatedPods {
     this.succeeded = succeeded;
     return this;
   }
+
+  public static UncountedTerminatedPods uncountedTerminatedPods() {
+    return new UncountedTerminatedPods();
+  }
 }

@@ -10,4 +10,8 @@ public class Selector extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Selector selector() {
+    return new Selector();
+  }
 }

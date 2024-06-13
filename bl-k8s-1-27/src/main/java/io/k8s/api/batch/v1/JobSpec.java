@@ -116,4 +116,8 @@ public class JobSpec {
     this.ttlSecondsAfterFinished = ttlSecondsAfterFinished;
     return this;
   }
+
+  public static JobSpec jobSpec() {
+    return new JobSpec();
+  }
 }

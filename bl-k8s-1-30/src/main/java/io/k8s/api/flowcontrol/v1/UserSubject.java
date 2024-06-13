@@ -15,4 +15,8 @@ public class UserSubject {
     this.name = name;
     return this;
   }
+
+  public static UserSubject userSubject() {
+    return new UserSubject();
+  }
 }

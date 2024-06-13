@@ -56,4 +56,8 @@ public class Toleration {
     this.value = value;
     return this;
   }
+
+  public static Toleration toleration() {
+    return new Toleration();
+  }
 }

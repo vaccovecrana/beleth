@@ -27,4 +27,8 @@ public class ContainerImage {
     this.sizeBytes = sizeBytes;
     return this;
   }
+
+  public static ContainerImage containerImage() {
+    return new ContainerImage();
+  }
 }

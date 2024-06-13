@@ -10,4 +10,8 @@ public class Capacity extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Capacity capacity() {
+    return new Capacity();
+  }
 }

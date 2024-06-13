@@ -39,4 +39,8 @@ public class ConfigMapProjection {
     this.optional = optional;
     return this;
   }
+
+  public static ConfigMapProjection configMapProjection() {
+    return new ConfigMapProjection();
+  }
 }

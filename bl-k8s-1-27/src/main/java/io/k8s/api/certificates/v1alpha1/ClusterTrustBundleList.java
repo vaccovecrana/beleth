@@ -44,4 +44,8 @@ public class ClusterTrustBundleList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ClusterTrustBundleList clusterTrustBundleList() {
+    return new ClusterTrustBundleList();
+  }
 }

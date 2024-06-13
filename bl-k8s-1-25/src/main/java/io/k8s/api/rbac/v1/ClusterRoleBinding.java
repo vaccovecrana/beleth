@@ -51,4 +51,8 @@ public class ClusterRoleBinding {
     this.subjects = subjects;
     return this;
   }
+
+  public static ClusterRoleBinding clusterRoleBinding() {
+    return new ClusterRoleBinding();
+  }
 }

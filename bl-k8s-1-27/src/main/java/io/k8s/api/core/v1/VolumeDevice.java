@@ -25,4 +25,8 @@ public class VolumeDevice {
     this.name = name;
     return this;
   }
+
+  public static VolumeDevice volumeDevice() {
+    return new VolumeDevice();
+  }
 }

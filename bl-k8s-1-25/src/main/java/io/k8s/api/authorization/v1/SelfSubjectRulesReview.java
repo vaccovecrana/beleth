@@ -47,4 +47,8 @@ public class SelfSubjectRulesReview {
     this.status = status;
     return this;
   }
+
+  public static SelfSubjectRulesReview selfSubjectRulesReview() {
+    return new SelfSubjectRulesReview();
+  }
 }

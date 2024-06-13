@@ -44,4 +44,8 @@ public class ClusterTrustBundle {
     this.spec = spec;
     return this;
   }
+
+  public static ClusterTrustBundle clusterTrustBundle() {
+    return new ClusterTrustBundle();
+  }
 }

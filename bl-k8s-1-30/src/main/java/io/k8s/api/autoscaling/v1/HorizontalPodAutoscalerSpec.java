@@ -43,4 +43,8 @@ public class HorizontalPodAutoscalerSpec {
     this.targetCPUUtilizationPercentage = targetCPUUtilizationPercentage;
     return this;
   }
+
+  public static HorizontalPodAutoscalerSpec horizontalPodAutoscalerSpec() {
+    return new HorizontalPodAutoscalerSpec();
+  }
 }

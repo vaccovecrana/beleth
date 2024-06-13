@@ -151,4 +151,8 @@ public class CSIStorageCapacity {
     this.storageClassName = storageClassName;
     return this;
   }
+
+  public static CSIStorageCapacity cSIStorageCapacity() {
+    return new CSIStorageCapacity();
+  }
 }

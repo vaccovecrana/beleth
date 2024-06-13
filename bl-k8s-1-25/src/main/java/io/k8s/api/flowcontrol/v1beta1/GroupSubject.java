@@ -15,4 +15,8 @@ public class GroupSubject {
     this.name = name;
     return this;
   }
+
+  public static GroupSubject groupSubject() {
+    return new GroupSubject();
+  }
 }

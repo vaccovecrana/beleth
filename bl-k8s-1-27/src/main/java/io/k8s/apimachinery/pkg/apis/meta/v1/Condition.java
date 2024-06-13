@@ -66,4 +66,8 @@ public class Condition {
     this.type = type;
     return this;
   }
+
+  public static Condition condition() {
+    return new Condition();
+  }
 }

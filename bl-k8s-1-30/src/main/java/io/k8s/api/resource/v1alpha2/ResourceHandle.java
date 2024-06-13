@@ -34,4 +34,8 @@ public class ResourceHandle {
     this.structuredData = structuredData;
     return this;
   }
+
+  public static ResourceHandle resourceHandle() {
+    return new ResourceHandle();
+  }
 }

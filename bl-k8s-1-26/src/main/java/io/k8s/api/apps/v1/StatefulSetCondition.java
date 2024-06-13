@@ -55,4 +55,8 @@ public class StatefulSetCondition {
     this.type = type;
     return this;
   }
+
+  public static StatefulSetCondition statefulSetCondition() {
+    return new StatefulSetCondition();
+  }
 }

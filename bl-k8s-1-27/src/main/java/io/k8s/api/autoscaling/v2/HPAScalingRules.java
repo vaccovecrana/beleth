@@ -37,4 +37,8 @@ public class HPAScalingRules {
     this.stabilizationWindowSeconds = stabilizationWindowSeconds;
     return this;
   }
+
+  public static HPAScalingRules hPAScalingRules() {
+    return new HPAScalingRules();
+  }
 }

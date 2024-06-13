@@ -45,4 +45,8 @@ public class ParentReference {
     this.resource = resource;
     return this;
   }
+
+  public static ParentReference parentReference() {
+    return new ParentReference();
+  }
 }

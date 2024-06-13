@@ -1,18 +1,32 @@
-package io.vacco.beleth;
-
 import com.google.gson.*;
-import io.k8s.api.apps.v1.*;
-import io.k8s.api.core.v1.*;
-import io.k8s.api.core.v1.configmap.Data;
-import io.k8s.api.core.v1.resourcerequirements.*;
-import io.k8s.apimachinery.pkg.apis.meta.v1.*;
-import io.k8s.apimachinery.pkg.apis.meta.v1.labelselector.MatchLabels;
-import io.k8s.apimachinery.pkg.apis.meta.v1.objectmeta.Labels;
+
 import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
 import java.util.List;
 
 import static j8spec.J8Spec.*;
+
+import static io.k8s.api.core.v1.ConfigMap.*;
+import static io.k8s.api.core.v1.Container.*;
+import static io.k8s.api.core.v1.ContainerPort.*;
+import static io.k8s.api.core.v1.configmap.Data.data;
+import static io.k8s.api.core.v1.Namespace.*;
+import static io.k8s.api.core.v1.Pod.*;
+import static io.k8s.api.core.v1.PodTemplateSpec.*;
+import static io.k8s.api.core.v1.PodSecurityContext.*;
+import static io.k8s.api.core.v1.PodSpec.*;
+import static io.k8s.api.core.v1.ResourceRequirements.*;
+
+import static io.k8s.api.apps.v1.Deployment.*;
+import static io.k8s.api.apps.v1.DeploymentSpec.*;
+
+import static io.k8s.apimachinery.pkg.apis.meta.v1.labelselector.MatchLabels.matchLabels;
+import static io.k8s.apimachinery.pkg.apis.meta.v1.objectmeta.Labels.labels;
+import static io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta.*;
+import static io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector.*;
+
+import static io.k8s.api.core.v1.resourcerequirements.Limits.*;
+import static io.k8s.api.core.v1.resourcerequirements.Requests.*;
 
 @RunWith(J8SpecRunner.class)
 public class BlObjectTest {
@@ -20,93 +34,88 @@ public class BlObjectTest {
   private static final Gson g = new GsonBuilder().setPrettyPrinting().create();
 
   static {
-    it("Instantiates/serializes core K8s objects",  () -> {
-      var dep = new Deployment()
+    it("Instantiates/serializes core K8s objects", () -> {
+      var dep = deployment()
         .apiVersion("apps/v1")
         .kind("Deployment")
         .metadata(
-          new ObjectMeta()
+          objectMeta()
             .name("web-server")
             .namespace("web")
         ).spec(
-          new DeploymentSpec()
+          deploymentSpec()
             .replicas(3L)
             .selector(
-              new LabelSelector()
+              labelSelector()
                 .matchLabels(
-                  new MatchLabels().kv("foo", "bar")
+                  matchLabels().kv("foo", "bar")
                 )
             ).template(
-              new PodTemplateSpec()
+              podTemplateSpec()
                 .metadata(
-                  new ObjectMeta().labels(new Labels().kv("name", "prometheus")))
+                  objectMeta().labels(labels().kv("name", "prometheus")))
                 .spec(
-                  new PodSpec()
+                  podSpec()
                     .containers(List.of(
-                      new Container()
+                      container()
                         .image("prom/prometheus")
                         .name("prometheus")
-                        .ports(List.of(new ContainerPort().containerPort(9090L).name("api")))
+                        .ports(List.of(containerPort().containerPort(9090L).name("api")))
                     ))
                 )
             )
         );
 
-      var reqs = new Requests()
-        .kv("memory", "64Mi")
-        .kv("cpu", "250m");
+      var reqs = requests().kv("memory", "64Mi").kv("cpu", "250m");
+      var lims = limits().kv("memory", "128Mi").kv("cpu", "500m");
 
-      var lims = new Limits()
-        .kv("memory", "128Mi")
-        .kv("cpu", "500m");
-
-      var pod = new Pod()
+      var pod = pod()
         .apiVersion("v1")
         .kind("Pod")
-        .metadata(new ObjectMeta().name("frontend"))
+        .metadata(objectMeta().name("frontend"))
         .spec(
-          new PodSpec().containers(List.of(
-            new Container()
+          podSpec().containers(List.of(
+            container()
               .name("app")
               .image("images.my-company.example/app:v4")
               .imagePullPolicy("IfNotPresent")
               .resources(
-                new ResourceRequirements()
+                resourceRequirements()
                   .requests(reqs)
                   .limits(lims)
               ),
-            new Container()
+            container()
               .name("log-aggregator")
               .image("images.my-company.example/log-aggregator:v6")
               .resources(
-                new ResourceRequirements()
+                resourceRequirements()
                   .requests(reqs)
                   .limits(lims)
               )
-          )).securityContext(new PodSecurityContext().fsGroup(1001L))
+          )).securityContext(podSecurityContext().fsGroup(1001L))
         );
 
-      var cm = new ConfigMap()
+      var cm = configMap()
         .apiVersion("v1")
-        .data(new Data().kv("start-master.sh", "SOME_STRING_FROM_FILE"));
+        .data(data().kv("start-master.sh", "SOME_STRING_FROM_FILE"));
 
-      var ns = new Namespace()
+      var ns = namespace()
         .apiVersion("v1")
         .kind("Namespace")
-        .metadata(new ObjectMeta().name("gopher-infra"));
+        .metadata(objectMeta().name("gopher-infra"));
 
-      var cfgMap = new ConfigMap()
+      var cfgMap = configMap()
         .apiVersion("v1")
         .kind("ConfigMap")
         .metadata(
-          new ObjectMeta()
+          objectMeta()
             .creationTimestamp("2016-02-18T18:52:05Z")
             .name("game-config")
             .name("default")
             .resourceVersion("516")
             .uid("b4952dc3-d670-11e5-8cd0-68f728db1985")
         ).data(
-          new Data()
+          data()
             .kv("game.properties", String.join("\n",
               "enemies=aliens",
               "lives=3",

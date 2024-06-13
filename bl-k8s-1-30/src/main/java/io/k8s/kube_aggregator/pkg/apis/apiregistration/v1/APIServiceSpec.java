@@ -74,4 +74,8 @@ public class APIServiceSpec {
     this.versionPriority = versionPriority;
     return this;
   }
+
+  public static APIServiceSpec aPIServiceSpec() {
+    return new APIServiceSpec();
+  }
 }

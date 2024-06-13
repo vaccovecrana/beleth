@@ -55,4 +55,8 @@ public class PriorityLevelConfigurationCondition {
     this.type = type;
     return this;
   }
+
+  public static PriorityLevelConfigurationCondition priorityLevelConfigurationCondition() {
+    return new PriorityLevelConfigurationCondition();
+  }
 }

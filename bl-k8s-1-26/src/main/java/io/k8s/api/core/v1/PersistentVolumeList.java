@@ -44,4 +44,8 @@ public class PersistentVolumeList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PersistentVolumeList persistentVolumeList() {
+    return new PersistentVolumeList();
+  }
 }

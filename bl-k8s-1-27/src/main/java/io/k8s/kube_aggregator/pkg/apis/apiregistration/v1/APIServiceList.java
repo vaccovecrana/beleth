@@ -44,4 +44,8 @@ public class APIServiceList {
     this.metadata = metadata;
     return this;
   }
+
+  public static APIServiceList aPIServiceList() {
+    return new APIServiceList();
+  }
 }

@@ -27,4 +27,8 @@ public class PodAffinity {
     this.requiredDuringSchedulingIgnoredDuringExecution = requiredDuringSchedulingIgnoredDuringExecution;
     return this;
   }
+
+  public static PodAffinity podAffinity() {
+    return new PodAffinity();
+  }
 }

@@ -44,4 +44,8 @@ public class SecretList {
     this.metadata = metadata;
     return this;
   }
+
+  public static SecretList secretList() {
+    return new SecretList();
+  }
 }

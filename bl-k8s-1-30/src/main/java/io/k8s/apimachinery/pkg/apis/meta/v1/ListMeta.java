@@ -48,4 +48,8 @@ public class ListMeta {
     this.selfLink = selfLink;
     return this;
   }
+
+  public static ListMeta listMeta() {
+    return new ListMeta();
+  }
 }

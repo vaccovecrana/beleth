@@ -19,4 +19,8 @@ public class DriverAllocationResult {
     this.vendorRequestParameters = vendorRequestParameters;
     return this;
   }
+
+  public static DriverAllocationResult driverAllocationResult() {
+    return new DriverAllocationResult();
+  }
 }

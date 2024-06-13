@@ -45,4 +45,8 @@ public class SELinuxOptions {
     this.user = user;
     return this;
   }
+
+  public static SELinuxOptions sELinuxOptions() {
+    return new SELinuxOptions();
+  }
 }

@@ -44,4 +44,8 @@ public class ClusterCIDRSpec {
     this.perNodeHostBits = perNodeHostBits;
     return this;
   }
+
+  public static ClusterCIDRSpec clusterCIDRSpec() {
+    return new ClusterCIDRSpec();
+  }
 }

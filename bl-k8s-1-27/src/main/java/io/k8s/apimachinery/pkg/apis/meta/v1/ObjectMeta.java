@@ -169,4 +169,8 @@ public class ObjectMeta {
     this.uid = uid;
     return this;
   }
+
+  public static ObjectMeta objectMeta() {
+    return new ObjectMeta();
+  }
 }

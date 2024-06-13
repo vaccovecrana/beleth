@@ -66,4 +66,8 @@ public class QuobyteVolumeSource {
     this.volume = volume;
     return this;
   }
+
+  public static QuobyteVolumeSource quobyteVolumeSource() {
+    return new QuobyteVolumeSource();
+  }
 }

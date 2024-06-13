@@ -45,4 +45,8 @@ public class Subject {
     this.namespace = namespace;
     return this;
   }
+
+  public static Subject subject() {
+    return new Subject();
+  }
 }

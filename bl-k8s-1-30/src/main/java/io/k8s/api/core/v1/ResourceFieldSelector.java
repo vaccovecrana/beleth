@@ -71,4 +71,8 @@ public class ResourceFieldSelector {
     this.resource = resource;
     return this;
   }
+
+  public static ResourceFieldSelector resourceFieldSelector() {
+    return new ResourceFieldSelector();
+  }
 }

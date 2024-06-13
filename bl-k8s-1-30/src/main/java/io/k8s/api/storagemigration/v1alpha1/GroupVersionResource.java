@@ -35,4 +35,8 @@ public class GroupVersionResource {
     this.version = version;
     return this;
   }
+
+  public static GroupVersionResource groupVersionResource() {
+    return new GroupVersionResource();
+  }
 }

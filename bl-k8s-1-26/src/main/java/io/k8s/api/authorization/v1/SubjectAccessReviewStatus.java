@@ -46,4 +46,8 @@ public class SubjectAccessReviewStatus {
     this.reason = reason;
     return this;
   }
+
+  public static SubjectAccessReviewStatus subjectAccessReviewStatus() {
+    return new SubjectAccessReviewStatus();
+  }
 }

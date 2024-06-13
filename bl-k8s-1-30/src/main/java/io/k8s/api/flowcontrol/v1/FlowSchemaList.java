@@ -44,4 +44,8 @@ public class FlowSchemaList {
     this.metadata = metadata;
     return this;
   }
+
+  public static FlowSchemaList flowSchemaList() {
+    return new FlowSchemaList();
+  }
 }

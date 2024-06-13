@@ -57,4 +57,8 @@ public class HTTPGetAction {
     this.scheme = scheme;
     return this;
   }
+
+  public static HTTPGetAction hTTPGetAction() {
+    return new HTTPGetAction();
+  }
 }

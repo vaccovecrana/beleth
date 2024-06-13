@@ -37,4 +37,8 @@ public class PortStatus {
     this.protocol = protocol;
     return this;
   }
+
+  public static PortStatus portStatus() {
+    return new PortStatus();
+  }
 }

@@ -10,4 +10,8 @@ public class NodeDaemonEndpoints {
     this.kubeletEndpoint = kubeletEndpoint;
     return this;
   }
+
+  public static NodeDaemonEndpoints nodeDaemonEndpoints() {
+    return new NodeDaemonEndpoints();
+  }
 }

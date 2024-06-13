@@ -11,4 +11,8 @@ public class FieldsV1 extends LinkedHashMap<String, Object> {
     put(key, value);
     return this;
   }
+
+  public static FieldsV1 fieldsV1() {
+    return new FieldsV1();
+  }
 }

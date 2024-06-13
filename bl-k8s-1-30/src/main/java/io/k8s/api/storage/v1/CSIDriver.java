@@ -40,4 +40,8 @@ public class CSIDriver {
     this.spec = spec;
     return this;
   }
+
+  public static CSIDriver cSIDriver() {
+    return new CSIDriver();
+  }
 }

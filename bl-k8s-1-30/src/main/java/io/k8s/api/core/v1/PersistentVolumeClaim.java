@@ -47,4 +47,8 @@ public class PersistentVolumeClaim {
     this.status = status;
     return this;
   }
+
+  public static PersistentVolumeClaim persistentVolumeClaim() {
+    return new PersistentVolumeClaim();
+  }
 }

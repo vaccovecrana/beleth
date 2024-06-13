@@ -40,4 +40,8 @@ public class Lease {
     this.spec = spec;
     return this;
   }
+
+  public static Lease lease() {
+    return new Lease();
+  }
 }

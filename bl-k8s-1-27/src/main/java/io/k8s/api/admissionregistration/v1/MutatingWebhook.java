@@ -140,4 +140,8 @@ public class MutatingWebhook {
     this.timeoutSeconds = timeoutSeconds;
     return this;
   }
+
+  public static MutatingWebhook mutatingWebhook() {
+    return new MutatingWebhook();
+  }
 }

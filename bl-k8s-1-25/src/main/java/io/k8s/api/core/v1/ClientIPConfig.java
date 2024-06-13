@@ -15,4 +15,8 @@ public class ClientIPConfig {
     this.timeoutSeconds = timeoutSeconds;
     return this;
   }
+
+  public static ClientIPConfig clientIPConfig() {
+    return new ClientIPConfig();
+  }
 }

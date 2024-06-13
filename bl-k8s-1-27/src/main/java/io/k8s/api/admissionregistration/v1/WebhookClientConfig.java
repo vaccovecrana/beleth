@@ -42,4 +42,8 @@ public class WebhookClientConfig {
     this.url = url;
     return this;
   }
+
+  public static WebhookClientConfig webhookClientConfig() {
+    return new WebhookClientConfig();
+  }
 }

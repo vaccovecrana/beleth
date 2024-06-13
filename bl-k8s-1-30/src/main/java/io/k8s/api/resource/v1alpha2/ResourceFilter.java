@@ -22,4 +22,8 @@ public class ResourceFilter {
     this.namedResources = namedResources;
     return this;
   }
+
+  public static ResourceFilter resourceFilter() {
+    return new ResourceFilter();
+  }
 }

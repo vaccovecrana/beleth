@@ -15,4 +15,8 @@ public class NodeSelector {
     this.nodeSelectorTerms = nodeSelectorTerms;
     return this;
   }
+
+  public static NodeSelector nodeSelector() {
+    return new NodeSelector();
+  }
 }

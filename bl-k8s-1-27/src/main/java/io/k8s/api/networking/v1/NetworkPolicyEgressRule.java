@@ -25,4 +25,8 @@ public class NetworkPolicyEgressRule {
     this.to = to;
     return this;
   }
+
+  public static NetworkPolicyEgressRule networkPolicyEgressRule() {
+    return new NetworkPolicyEgressRule();
+  }
 }

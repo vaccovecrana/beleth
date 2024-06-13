@@ -17,4 +17,8 @@ public class HorizontalPodAutoscalerBehavior {
     this.scaleUp = scaleUp;
     return this;
   }
+
+  public static HorizontalPodAutoscalerBehavior horizontalPodAutoscalerBehavior() {
+    return new HorizontalPodAutoscalerBehavior();
+  }
 }

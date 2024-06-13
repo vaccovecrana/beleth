@@ -66,4 +66,8 @@ public class ReplicaSetStatus {
     this.replicas = replicas;
     return this;
   }
+
+  public static ReplicaSetStatus replicaSetStatus() {
+    return new ReplicaSetStatus();
+  }
 }

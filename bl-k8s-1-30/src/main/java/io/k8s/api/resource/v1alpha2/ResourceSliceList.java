@@ -44,4 +44,8 @@ public class ResourceSliceList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ResourceSliceList resourceSliceList() {
+    return new ResourceSliceList();
+  }
 }

@@ -44,4 +44,8 @@ public class PodSchedulingContextList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PodSchedulingContextList podSchedulingContextList() {
+    return new PodSchedulingContextList();
+  }
 }

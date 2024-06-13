@@ -27,4 +27,8 @@ public class SeccompProfile {
     this.type = type;
     return this;
   }
+
+  public static SeccompProfile seccompProfile() {
+    return new SeccompProfile();
+  }
 }

@@ -15,4 +15,8 @@ public class SuccessPolicy {
     this.rules = rules;
     return this;
   }
+
+  public static SuccessPolicy successPolicy() {
+    return new SuccessPolicy();
+  }
 }

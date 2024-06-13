@@ -56,4 +56,8 @@ public class LeaseSpec {
     this.renewTime = renewTime;
     return this;
   }
+
+  public static LeaseSpec leaseSpec() {
+    return new LeaseSpec();
+  }
 }

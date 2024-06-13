@@ -86,4 +86,8 @@ public class CronJobSpec {
     this.timeZone = timeZone;
     return this;
   }
+
+  public static CronJobSpec cronJobSpec() {
+    return new CronJobSpec();
+  }
 }

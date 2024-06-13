@@ -66,4 +66,8 @@ public class OwnerReference {
     this.uid = uid;
     return this;
   }
+
+  public static OwnerReference ownerReference() {
+    return new OwnerReference();
+  }
 }

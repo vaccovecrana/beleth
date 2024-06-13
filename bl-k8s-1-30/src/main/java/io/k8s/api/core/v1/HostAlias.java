@@ -26,4 +26,8 @@ public class HostAlias {
     this.ip = ip;
     return this;
   }
+
+  public static HostAlias hostAlias() {
+    return new HostAlias();
+  }
 }

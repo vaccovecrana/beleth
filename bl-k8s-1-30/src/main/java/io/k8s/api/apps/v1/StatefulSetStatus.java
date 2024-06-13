@@ -107,4 +107,8 @@ public class StatefulSetStatus {
     this.updatedReplicas = updatedReplicas;
     return this;
   }
+
+  public static StatefulSetStatus statefulSetStatus() {
+    return new StatefulSetStatus();
+  }
 }

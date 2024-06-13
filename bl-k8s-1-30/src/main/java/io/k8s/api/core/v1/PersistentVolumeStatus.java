@@ -45,4 +45,8 @@ public class PersistentVolumeStatus {
     this.reason = reason;
     return this;
   }
+
+  public static PersistentVolumeStatus persistentVolumeStatus() {
+    return new PersistentVolumeStatus();
+  }
 }

@@ -15,4 +15,8 @@ public class ContainerStateRunning {
     this.startedAt = startedAt;
     return this;
   }
+
+  public static ContainerStateRunning containerStateRunning() {
+    return new ContainerStateRunning();
+  }
 }

@@ -32,4 +32,8 @@ public class NonResourcePolicyRule {
     this.verbs = verbs;
     return this;
   }
+
+  public static NonResourcePolicyRule nonResourcePolicyRule() {
+    return new NonResourcePolicyRule();
+  }
 }

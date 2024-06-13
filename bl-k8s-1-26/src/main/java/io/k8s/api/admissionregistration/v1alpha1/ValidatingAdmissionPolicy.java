@@ -40,4 +40,8 @@ public class ValidatingAdmissionPolicy {
     this.spec = spec;
     return this;
   }
+
+  public static ValidatingAdmissionPolicy validatingAdmissionPolicy() {
+    return new ValidatingAdmissionPolicy();
+  }
 }

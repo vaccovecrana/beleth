@@ -25,4 +25,8 @@ public class PodResourceClaimStatus {
     this.resourceClaimName = resourceClaimName;
     return this;
   }
+
+  public static PodResourceClaimStatus podResourceClaimStatus() {
+    return new PodResourceClaimStatus();
+  }
 }

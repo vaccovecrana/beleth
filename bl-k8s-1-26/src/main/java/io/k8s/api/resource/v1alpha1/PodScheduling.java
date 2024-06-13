@@ -49,4 +49,8 @@ public class PodScheduling {
     this.status = status;
     return this;
   }
+
+  public static PodScheduling podScheduling() {
+    return new PodScheduling();
+  }
 }

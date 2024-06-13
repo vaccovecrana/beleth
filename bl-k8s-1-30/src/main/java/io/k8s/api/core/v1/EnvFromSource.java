@@ -29,4 +29,8 @@ public class EnvFromSource {
     this.secretRef = secretRef;
     return this;
   }
+
+  public static EnvFromSource envFromSource() {
+    return new EnvFromSource();
+  }
 }

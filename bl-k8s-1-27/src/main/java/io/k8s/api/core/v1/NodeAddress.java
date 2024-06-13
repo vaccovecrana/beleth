@@ -25,4 +25,8 @@ public class NodeAddress {
     this.type = type;
     return this;
   }
+
+  public static NodeAddress nodeAddress() {
+    return new NodeAddress();
+  }
 }

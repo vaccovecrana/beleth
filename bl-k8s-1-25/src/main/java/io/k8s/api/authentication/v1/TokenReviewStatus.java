@@ -44,4 +44,8 @@ public class TokenReviewStatus {
     this.user = user;
     return this;
   }
+
+  public static TokenReviewStatus tokenReviewStatus() {
+    return new TokenReviewStatus();
+  }
 }

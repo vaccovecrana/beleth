@@ -36,4 +36,8 @@ public class NodeSelectorRequirement {
     this.values = values;
     return this;
   }
+
+  public static NodeSelectorRequirement nodeSelectorRequirement() {
+    return new NodeSelectorRequirement();
+  }
 }

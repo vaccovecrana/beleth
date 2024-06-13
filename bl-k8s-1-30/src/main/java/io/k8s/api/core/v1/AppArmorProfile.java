@@ -28,4 +28,8 @@ public class AppArmorProfile {
     this.type = type;
     return this;
   }
+
+  public static AppArmorProfile appArmorProfile() {
+    return new AppArmorProfile();
+  }
 }

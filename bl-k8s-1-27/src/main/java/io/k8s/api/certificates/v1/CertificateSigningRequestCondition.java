@@ -75,4 +75,8 @@ public class CertificateSigningRequestCondition {
     this.type = type;
     return this;
   }
+
+  public static CertificateSigningRequestCondition certificateSigningRequestCondition() {
+    return new CertificateSigningRequestCondition();
+  }
 }

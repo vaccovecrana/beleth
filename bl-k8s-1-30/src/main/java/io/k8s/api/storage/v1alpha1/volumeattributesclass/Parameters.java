@@ -10,4 +10,8 @@ public class Parameters extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Parameters parameters() {
+    return new Parameters();
+  }
 }

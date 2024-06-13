@@ -15,4 +15,8 @@ public class DownwardAPIProjection {
     this.items = items;
     return this;
   }
+
+  public static DownwardAPIProjection downwardAPIProjection() {
+    return new DownwardAPIProjection();
+  }
 }

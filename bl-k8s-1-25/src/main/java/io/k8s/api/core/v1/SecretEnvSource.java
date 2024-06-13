@@ -28,4 +28,8 @@ public class SecretEnvSource {
     this.optional = optional;
     return this;
   }
+
+  public static SecretEnvSource secretEnvSource() {
+    return new SecretEnvSource();
+  }
 }

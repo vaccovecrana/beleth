@@ -25,4 +25,8 @@ public class LocalVolumeSource {
     this.path = path;
     return this;
   }
+
+  public static LocalVolumeSource localVolumeSource() {
+    return new LocalVolumeSource();
+  }
 }

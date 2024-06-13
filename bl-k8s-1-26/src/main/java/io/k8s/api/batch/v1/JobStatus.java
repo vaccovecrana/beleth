@@ -96,4 +96,8 @@ public class JobStatus {
     this.uncountedTerminatedPods = uncountedTerminatedPods;
     return this;
   }
+
+  public static JobStatus jobStatus() {
+    return new JobStatus();
+  }
 }

@@ -54,4 +54,8 @@ public class CSIVolumeSource {
     this.volumeAttributes = volumeAttributes;
     return this;
   }
+
+  public static CSIVolumeSource cSIVolumeSource() {
+    return new CSIVolumeSource();
+  }
 }

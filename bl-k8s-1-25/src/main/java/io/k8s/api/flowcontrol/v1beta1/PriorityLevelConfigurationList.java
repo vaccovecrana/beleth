@@ -44,4 +44,8 @@ public class PriorityLevelConfigurationList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PriorityLevelConfigurationList priorityLevelConfigurationList() {
+    return new PriorityLevelConfigurationList();
+  }
 }

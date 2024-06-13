@@ -16,4 +16,8 @@ public class NamespaceSpec {
     this.finalizers = finalizers;
     return this;
   }
+
+  public static NamespaceSpec namespaceSpec() {
+    return new NamespaceSpec();
+  }
 }

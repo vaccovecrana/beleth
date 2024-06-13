@@ -15,4 +15,8 @@ public class APIServiceStatus {
     this.conditions = conditions;
     return this;
   }
+
+  public static APIServiceStatus aPIServiceStatus() {
+    return new APIServiceStatus();
+  }
 }

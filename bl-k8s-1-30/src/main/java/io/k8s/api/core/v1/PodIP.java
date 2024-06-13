@@ -15,4 +15,8 @@ public class PodIP {
     this.ip = ip;
     return this;
   }
+
+  public static PodIP podIP() {
+    return new PodIP();
+  }
 }

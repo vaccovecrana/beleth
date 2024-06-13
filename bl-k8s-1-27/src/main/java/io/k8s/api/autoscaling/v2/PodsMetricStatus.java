@@ -17,4 +17,8 @@ public class PodsMetricStatus {
     this.metric = metric;
     return this;
   }
+
+  public static PodsMetricStatus podsMetricStatus() {
+    return new PodsMetricStatus();
+  }
 }

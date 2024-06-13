@@ -25,4 +25,8 @@ public class ContainerStateWaiting {
     this.reason = reason;
     return this;
   }
+
+  public static ContainerStateWaiting containerStateWaiting() {
+    return new ContainerStateWaiting();
+  }
 }

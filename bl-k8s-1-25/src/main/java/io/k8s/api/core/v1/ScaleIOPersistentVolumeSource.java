@@ -103,4 +103,8 @@ public class ScaleIOPersistentVolumeSource {
     this.volumeName = volumeName;
     return this;
   }
+
+  public static ScaleIOPersistentVolumeSource scaleIOPersistentVolumeSource() {
+    return new ScaleIOPersistentVolumeSource();
+  }
 }

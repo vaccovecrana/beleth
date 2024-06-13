@@ -72,4 +72,8 @@ public class NamedRuleWithOperations {
     this.scope = scope;
     return this;
   }
+
+  public static NamedRuleWithOperations namedRuleWithOperations() {
+    return new NamedRuleWithOperations();
+  }
 }

@@ -66,4 +66,8 @@ public class VolumeMount {
     this.subPathExpr = subPathExpr;
     return this;
   }
+
+  public static VolumeMount volumeMount() {
+    return new VolumeMount();
+  }
 }

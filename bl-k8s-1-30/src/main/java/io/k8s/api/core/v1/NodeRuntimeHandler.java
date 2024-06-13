@@ -22,4 +22,8 @@ public class NodeRuntimeHandler {
     this.name = name;
     return this;
   }
+
+  public static NodeRuntimeHandler nodeRuntimeHandler() {
+    return new NodeRuntimeHandler();
+  }
 }

@@ -47,4 +47,8 @@ public class Node {
     this.status = status;
     return this;
   }
+
+  public static Node node() {
+    return new Node();
+  }
 }

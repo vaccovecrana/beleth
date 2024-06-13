@@ -35,4 +35,8 @@ public class CrossVersionObjectReference {
     this.name = name;
     return this;
   }
+
+  public static CrossVersionObjectReference crossVersionObjectReference() {
+    return new CrossVersionObjectReference();
+  }
 }

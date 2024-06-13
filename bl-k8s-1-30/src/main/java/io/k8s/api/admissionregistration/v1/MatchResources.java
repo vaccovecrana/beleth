@@ -57,4 +57,8 @@ public class MatchResources {
     this.resourceRules = resourceRules;
     return this;
   }
+
+  public static MatchResources matchResources() {
+    return new MatchResources();
+  }
 }

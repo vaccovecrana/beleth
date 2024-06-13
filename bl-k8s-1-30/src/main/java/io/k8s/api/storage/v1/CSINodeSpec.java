@@ -15,4 +15,8 @@ public class CSINodeSpec {
     this.drivers = drivers;
     return this;
   }
+
+  public static CSINodeSpec cSINodeSpec() {
+    return new CSINodeSpec();
+  }
 }

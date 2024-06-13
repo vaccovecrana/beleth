@@ -47,4 +47,8 @@ public class ServiceCIDR {
     this.status = status;
     return this;
   }
+
+  public static ServiceCIDR serviceCIDR() {
+    return new ServiceCIDR();
+  }
 }

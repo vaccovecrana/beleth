@@ -47,4 +47,8 @@ public class Job {
     this.status = status;
     return this;
   }
+
+  public static Job job() {
+    return new Job();
+  }
 }

@@ -64,4 +64,8 @@ public class CephFSPersistentVolumeSource {
     this.user = user;
     return this;
   }
+
+  public static CephFSPersistentVolumeSource cephFSPersistentVolumeSource() {
+    return new CephFSPersistentVolumeSource();
+  }
 }

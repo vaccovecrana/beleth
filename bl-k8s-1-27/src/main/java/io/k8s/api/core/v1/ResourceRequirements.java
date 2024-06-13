@@ -41,4 +41,8 @@ public class ResourceRequirements {
     this.requests = requests;
     return this;
   }
+
+  public static ResourceRequirements resourceRequirements() {
+    return new ResourceRequirements();
+  }
 }

@@ -25,4 +25,8 @@ public class ExpressionWarning {
     this.warning = warning;
     return this;
   }
+
+  public static ExpressionWarning expressionWarning() {
+    return new ExpressionWarning();
+  }
 }

@@ -40,4 +40,8 @@ public class ValidatingAdmissionPolicyBinding {
     this.spec = spec;
     return this;
   }
+
+  public static ValidatingAdmissionPolicyBinding validatingAdmissionPolicyBinding() {
+    return new ValidatingAdmissionPolicyBinding();
+  }
 }

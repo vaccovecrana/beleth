@@ -43,4 +43,8 @@ public class CSINodeDriver {
     this.topologyKeys = topologyKeys;
     return this;
   }
+
+  public static CSINodeDriver cSINodeDriver() {
+    return new CSINodeDriver();
+  }
 }

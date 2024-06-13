@@ -18,4 +18,8 @@ public class StatefulSetOrdinals {
     this.start = start;
     return this;
   }
+
+  public static StatefulSetOrdinals statefulSetOrdinals() {
+    return new StatefulSetOrdinals();
+  }
 }

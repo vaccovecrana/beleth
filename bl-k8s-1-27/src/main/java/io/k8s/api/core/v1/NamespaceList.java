@@ -44,4 +44,8 @@ public class NamespaceList {
     this.metadata = metadata;
     return this;
   }
+
+  public static NamespaceList namespaceList() {
+    return new NamespaceList();
+  }
 }

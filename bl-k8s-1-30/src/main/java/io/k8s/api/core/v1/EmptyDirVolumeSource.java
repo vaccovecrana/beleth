@@ -61,4 +61,8 @@ public class EmptyDirVolumeSource {
     this.sizeLimit = sizeLimit;
     return this;
   }
+
+  public static EmptyDirVolumeSource emptyDirVolumeSource() {
+    return new EmptyDirVolumeSource();
+  }
 }

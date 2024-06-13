@@ -55,4 +55,8 @@ public class FlowSchemaCondition {
     this.type = type;
     return this;
   }
+
+  public static FlowSchemaCondition flowSchemaCondition() {
+    return new FlowSchemaCondition();
+  }
 }

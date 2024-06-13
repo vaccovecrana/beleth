@@ -40,4 +40,8 @@ public class SelfSubjectReview {
     this.status = status;
     return this;
   }
+
+  public static SelfSubjectReview selfSubjectReview() {
+    return new SelfSubjectReview();
+  }
 }

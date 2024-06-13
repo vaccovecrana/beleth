@@ -47,4 +47,8 @@ public class ValidatingAdmissionPolicy {
     this.status = status;
     return this;
   }
+
+  public static ValidatingAdmissionPolicy validatingAdmissionPolicy() {
+    return new ValidatingAdmissionPolicy();
+  }
 }

@@ -34,4 +34,8 @@ public class ResourceQuotaSpec {
     this.scopes = scopes;
     return this;
   }
+
+  public static ResourceQuotaSpec resourceQuotaSpec() {
+    return new ResourceQuotaSpec();
+  }
 }

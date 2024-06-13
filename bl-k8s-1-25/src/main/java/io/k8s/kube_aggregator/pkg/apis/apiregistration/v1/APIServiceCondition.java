@@ -55,4 +55,8 @@ public class APIServiceCondition {
     this.type = type;
     return this;
   }
+
+  public static APIServiceCondition aPIServiceCondition() {
+    return new APIServiceCondition();
+  }
 }

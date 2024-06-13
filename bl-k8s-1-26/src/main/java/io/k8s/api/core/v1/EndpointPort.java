@@ -47,4 +47,8 @@ public class EndpointPort {
     this.protocol = protocol;
     return this;
   }
+
+  public static EndpointPort endpointPort() {
+    return new EndpointPort();
+  }
 }

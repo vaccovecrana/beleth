@@ -112,4 +112,8 @@ public class SecurityContext {
     this.windowsOptions = windowsOptions;
     return this;
   }
+
+  public static SecurityContext securityContext() {
+    return new SecurityContext();
+  }
 }

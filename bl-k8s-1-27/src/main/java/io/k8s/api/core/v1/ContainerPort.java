@@ -56,4 +56,8 @@ public class ContainerPort {
     this.protocol = protocol;
     return this;
   }
+
+  public static ContainerPort containerPort() {
+    return new ContainerPort();
+  }
 }

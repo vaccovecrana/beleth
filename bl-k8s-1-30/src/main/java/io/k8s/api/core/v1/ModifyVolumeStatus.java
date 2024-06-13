@@ -35,4 +35,8 @@ public class ModifyVolumeStatus {
     this.targetVolumeAttributesClassName = targetVolumeAttributesClassName;
     return this;
   }
+
+  public static ModifyVolumeStatus modifyVolumeStatus() {
+    return new ModifyVolumeStatus();
+  }
 }

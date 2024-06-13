@@ -164,4 +164,8 @@ public class Event {
     this.type = type;
     return this;
   }
+
+  public static Event event() {
+    return new Event();
+  }
 }

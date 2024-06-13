@@ -44,4 +44,8 @@ public class StatefulSetList {
     this.metadata = metadata;
     return this;
   }
+
+  public static StatefulSetList statefulSetList() {
+    return new StatefulSetList();
+  }
 }

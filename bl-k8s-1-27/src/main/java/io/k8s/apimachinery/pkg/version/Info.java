@@ -68,4 +68,8 @@ public class Info {
     this.platform = platform;
     return this;
   }
+
+  public static Info info() {
+    return new Info();
+  }
 }

@@ -17,4 +17,8 @@ public class ExternalMetricSource {
     this.target = target;
     return this;
   }
+
+  public static ExternalMetricSource externalMetricSource() {
+    return new ExternalMetricSource();
+  }
 }

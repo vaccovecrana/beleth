@@ -49,4 +49,8 @@ public class ResourceClaim {
     this.status = status;
     return this;
   }
+
+  public static ResourceClaim resourceClaim() {
+    return new ResourceClaim();
+  }
 }

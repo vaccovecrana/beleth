@@ -44,4 +44,8 @@ public class PodDisruptionBudgetList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PodDisruptionBudgetList podDisruptionBudgetList() {
+    return new PodDisruptionBudgetList();
+  }
 }

@@ -67,4 +67,8 @@ public class StatusDetails {
     this.uid = uid;
     return this;
   }
+
+  public static StatusDetails statusDetails() {
+    return new StatusDetails();
+  }
 }

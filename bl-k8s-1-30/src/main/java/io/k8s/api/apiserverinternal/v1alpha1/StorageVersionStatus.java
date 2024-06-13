@@ -36,4 +36,8 @@ public class StorageVersionStatus {
     this.storageVersions = storageVersions;
     return this;
   }
+
+  public static StorageVersionStatus storageVersionStatus() {
+    return new StorageVersionStatus();
+  }
 }

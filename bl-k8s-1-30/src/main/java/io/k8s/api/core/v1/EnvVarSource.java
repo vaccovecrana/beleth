@@ -31,4 +31,8 @@ public class EnvVarSource {
     this.secretKeyRef = secretKeyRef;
     return this;
   }
+
+  public static EnvVarSource envVarSource() {
+    return new EnvVarSource();
+  }
 }

@@ -43,4 +43,8 @@ public class CinderVolumeSource {
     this.volumeID = volumeID;
     return this;
   }
+
+  public static CinderVolumeSource cinderVolumeSource() {
+    return new CinderVolumeSource();
+  }
 }

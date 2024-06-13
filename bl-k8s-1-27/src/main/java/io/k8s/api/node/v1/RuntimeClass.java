@@ -57,4 +57,8 @@ public class RuntimeClass {
     this.scheduling = scheduling;
     return this;
   }
+
+  public static RuntimeClass runtimeClass() {
+    return new RuntimeClass();
+  }
 }

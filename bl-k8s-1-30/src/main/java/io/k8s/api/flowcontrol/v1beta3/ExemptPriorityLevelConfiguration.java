@@ -31,4 +31,8 @@ public class ExemptPriorityLevelConfiguration {
     this.nominalConcurrencyShares = nominalConcurrencyShares;
     return this;
   }
+
+  public static ExemptPriorityLevelConfiguration exemptPriorityLevelConfiguration() {
+    return new ExemptPriorityLevelConfiguration();
+  }
 }

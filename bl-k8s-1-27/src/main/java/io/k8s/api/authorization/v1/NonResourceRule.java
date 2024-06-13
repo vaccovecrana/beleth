@@ -26,4 +26,8 @@ public class NonResourceRule {
     this.verbs = verbs;
     return this;
   }
+
+  public static NonResourceRule nonResourceRule() {
+    return new NonResourceRule();
+  }
 }

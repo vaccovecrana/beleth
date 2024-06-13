@@ -55,4 +55,8 @@ public class HorizontalPodAutoscalerCondition {
     this.type = type;
     return this;
   }
+
+  public static HorizontalPodAutoscalerCondition horizontalPodAutoscalerCondition() {
+    return new HorizontalPodAutoscalerCondition();
+  }
 }

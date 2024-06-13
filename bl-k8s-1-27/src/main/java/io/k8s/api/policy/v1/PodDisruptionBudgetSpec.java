@@ -53,4 +53,8 @@ public class PodDisruptionBudgetSpec {
     this.unhealthyPodEvictionPolicy = unhealthyPodEvictionPolicy;
     return this;
   }
+
+  public static PodDisruptionBudgetSpec podDisruptionBudgetSpec() {
+    return new PodDisruptionBudgetSpec();
+  }
 }

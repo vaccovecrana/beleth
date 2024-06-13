@@ -47,4 +47,8 @@ public class Deployment {
     this.status = status;
     return this;
   }
+
+  public static Deployment deployment() {
+    return new Deployment();
+  }
 }

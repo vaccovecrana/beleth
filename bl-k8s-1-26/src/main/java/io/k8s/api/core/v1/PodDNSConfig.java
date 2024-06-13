@@ -36,4 +36,8 @@ public class PodDNSConfig {
     this.searches = searches;
     return this;
   }
+
+  public static PodDNSConfig podDNSConfig() {
+    return new PodDNSConfig();
+  }
 }

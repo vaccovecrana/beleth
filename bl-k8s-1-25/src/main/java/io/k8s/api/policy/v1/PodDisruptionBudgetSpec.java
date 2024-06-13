@@ -33,4 +33,8 @@ public class PodDisruptionBudgetSpec {
     this.selector = selector;
     return this;
   }
+
+  public static PodDisruptionBudgetSpec podDisruptionBudgetSpec() {
+    return new PodDisruptionBudgetSpec();
+  }
 }

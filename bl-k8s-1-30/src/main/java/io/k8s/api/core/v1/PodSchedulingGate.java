@@ -15,4 +15,8 @@ public class PodSchedulingGate {
     this.name = name;
     return this;
   }
+
+  public static PodSchedulingGate podSchedulingGate() {
+    return new PodSchedulingGate();
+  }
 }

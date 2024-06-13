@@ -36,4 +36,8 @@ public class SecretKeySelector {
     this.optional = optional;
     return this;
   }
+
+  public static SecretKeySelector secretKeySelector() {
+    return new SecretKeySelector();
+  }
 }

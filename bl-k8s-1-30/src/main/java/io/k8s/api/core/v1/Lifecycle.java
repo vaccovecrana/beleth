@@ -17,4 +17,8 @@ public class Lifecycle {
     this.preStop = preStop;
     return this;
   }
+
+  public static Lifecycle lifecycle() {
+    return new Lifecycle();
+  }
 }

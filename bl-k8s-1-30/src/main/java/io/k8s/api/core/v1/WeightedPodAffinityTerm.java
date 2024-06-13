@@ -22,4 +22,8 @@ public class WeightedPodAffinityTerm {
     this.weight = weight;
     return this;
   }
+
+  public static WeightedPodAffinityTerm weightedPodAffinityTerm() {
+    return new WeightedPodAffinityTerm();
+  }
 }

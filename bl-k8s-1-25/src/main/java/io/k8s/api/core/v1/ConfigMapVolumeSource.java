@@ -50,4 +50,8 @@ public class ConfigMapVolumeSource {
     this.optional = optional;
     return this;
   }
+
+  public static ConfigMapVolumeSource configMapVolumeSource() {
+    return new ConfigMapVolumeSource();
+  }
 }

@@ -47,4 +47,8 @@ public class ReplicaSet {
     this.status = status;
     return this;
   }
+
+  public static ReplicaSet replicaSet() {
+    return new ReplicaSet();
+  }
 }

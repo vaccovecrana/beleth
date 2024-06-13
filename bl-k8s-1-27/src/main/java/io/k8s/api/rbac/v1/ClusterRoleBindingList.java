@@ -44,4 +44,8 @@ public class ClusterRoleBindingList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ClusterRoleBindingList clusterRoleBindingList() {
+    return new ClusterRoleBindingList();
+  }
 }

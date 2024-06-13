@@ -115,4 +115,8 @@ public class ISCSIPersistentVolumeSource {
     this.targetPortal = targetPortal;
     return this;
   }
+
+  public static ISCSIPersistentVolumeSource iSCSIPersistentVolumeSource() {
+    return new ISCSIPersistentVolumeSource();
+  }
 }

@@ -10,4 +10,8 @@ public class MatchLabels extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static MatchLabels matchLabels() {
+    return new MatchLabels();
+  }
 }

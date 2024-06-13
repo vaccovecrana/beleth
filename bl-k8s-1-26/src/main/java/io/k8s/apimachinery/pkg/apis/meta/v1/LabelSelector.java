@@ -26,4 +26,8 @@ public class LabelSelector {
     this.matchLabels = matchLabels;
     return this;
   }
+
+  public static LabelSelector labelSelector() {
+    return new LabelSelector();
+  }
 }

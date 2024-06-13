@@ -40,4 +40,8 @@ public class NetworkPolicy {
     this.spec = spec;
     return this;
   }
+
+  public static NetworkPolicy networkPolicy() {
+    return new NetworkPolicy();
+  }
 }

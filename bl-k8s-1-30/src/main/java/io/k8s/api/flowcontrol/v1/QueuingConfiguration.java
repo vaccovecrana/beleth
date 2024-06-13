@@ -35,4 +35,8 @@ public class QueuingConfiguration {
     this.queues = queues;
     return this;
   }
+
+  public static QueuingConfiguration queuingConfiguration() {
+    return new QueuingConfiguration();
+  }
 }

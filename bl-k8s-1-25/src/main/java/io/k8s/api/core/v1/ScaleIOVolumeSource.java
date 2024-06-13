@@ -103,4 +103,8 @@ public class ScaleIOVolumeSource {
     this.volumeName = volumeName;
     return this;
   }
+
+  public static ScaleIOVolumeSource scaleIOVolumeSource() {
+    return new ScaleIOVolumeSource();
+  }
 }

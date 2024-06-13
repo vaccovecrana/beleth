@@ -15,4 +15,8 @@ public class EndpointHints {
     this.forZones = forZones;
     return this;
   }
+
+  public static EndpointHints endpointHints() {
+    return new EndpointHints();
+  }
 }

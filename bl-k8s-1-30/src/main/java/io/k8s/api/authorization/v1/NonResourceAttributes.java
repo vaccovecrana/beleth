@@ -25,4 +25,8 @@ public class NonResourceAttributes {
     this.verb = verb;
     return this;
   }
+
+  public static NonResourceAttributes nonResourceAttributes() {
+    return new NonResourceAttributes();
+  }
 }

@@ -10,4 +10,8 @@ public class Annotations extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Annotations annotations() {
+    return new Annotations();
+  }
 }

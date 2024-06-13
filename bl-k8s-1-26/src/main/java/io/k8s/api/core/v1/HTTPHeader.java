@@ -25,4 +25,8 @@ public class HTTPHeader {
     this.value = value;
     return this;
   }
+
+  public static HTTPHeader hTTPHeader() {
+    return new HTTPHeader();
+  }
 }

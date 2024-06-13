@@ -23,4 +23,8 @@ public class ServiceStatus {
     this.loadBalancer = loadBalancer;
     return this;
   }
+
+  public static ServiceStatus serviceStatus() {
+    return new ServiceStatus();
+  }
 }

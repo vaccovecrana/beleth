@@ -233,4 +233,8 @@ public class EphemeralContainer {
     this.workingDir = workingDir;
     return this;
   }
+
+  public static EphemeralContainer ephemeralContainer() {
+    return new EphemeralContainer();
+  }
 }

@@ -40,4 +40,8 @@ public class IPAddress {
     this.spec = spec;
     return this;
   }
+
+  public static IPAddress iPAddress() {
+    return new IPAddress();
+  }
 }

@@ -44,4 +44,8 @@ public class ResourceQuotaList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ResourceQuotaList resourceQuotaList() {
+    return new ResourceQuotaList();
+  }
 }

@@ -26,4 +26,8 @@ public class ResourceQuotaStatus {
     this.used = used;
     return this;
   }
+
+  public static ResourceQuotaStatus resourceQuotaStatus() {
+    return new ResourceQuotaStatus();
+  }
 }

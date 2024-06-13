@@ -47,4 +47,8 @@ public class PodDisruptionBudget {
     this.status = status;
     return this;
   }
+
+  public static PodDisruptionBudget podDisruptionBudget() {
+    return new PodDisruptionBudget();
+  }
 }

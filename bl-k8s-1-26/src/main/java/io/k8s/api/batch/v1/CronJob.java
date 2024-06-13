@@ -47,4 +47,8 @@ public class CronJob {
     this.status = status;
     return this;
   }
+
+  public static CronJob cronJob() {
+    return new CronJob();
+  }
 }

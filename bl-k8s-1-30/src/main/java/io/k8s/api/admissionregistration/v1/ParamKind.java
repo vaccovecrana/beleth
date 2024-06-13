@@ -25,4 +25,8 @@ public class ParamKind {
     this.kind = kind;
     return this;
   }
+
+  public static ParamKind paramKind() {
+    return new ParamKind();
+  }
 }

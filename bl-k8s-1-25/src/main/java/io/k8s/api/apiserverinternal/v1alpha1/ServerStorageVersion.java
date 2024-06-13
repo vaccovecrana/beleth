@@ -36,4 +36,8 @@ public class ServerStorageVersion {
     this.encodingVersion = encodingVersion;
     return this;
   }
+
+  public static ServerStorageVersion serverStorageVersion() {
+    return new ServerStorageVersion();
+  }
 }

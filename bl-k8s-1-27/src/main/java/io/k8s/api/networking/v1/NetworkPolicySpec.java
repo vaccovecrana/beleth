@@ -44,4 +44,8 @@ public class NetworkPolicySpec {
     this.policyTypes = policyTypes;
     return this;
   }
+
+  public static NetworkPolicySpec networkPolicySpec() {
+    return new NetworkPolicySpec();
+  }
 }

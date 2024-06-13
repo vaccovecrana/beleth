@@ -25,4 +25,8 @@ public class RollingUpdateDeployment {
     this.maxUnavailable = maxUnavailable;
     return this;
   }
+
+  public static RollingUpdateDeployment rollingUpdateDeployment() {
+    return new RollingUpdateDeployment();
+  }
 }

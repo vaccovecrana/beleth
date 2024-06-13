@@ -40,4 +40,7 @@ package io.k8s.apimachinery.pkg.api.resource;
  * This format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.
  */
 public class Quantity {
+  public static Quantity quantity() {
+    return new Quantity();
+  }
 }

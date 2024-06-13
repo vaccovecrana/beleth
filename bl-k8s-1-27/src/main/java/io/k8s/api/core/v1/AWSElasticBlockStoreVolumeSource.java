@@ -49,4 +49,8 @@ public class AWSElasticBlockStoreVolumeSource {
     this.volumeID = volumeID;
     return this;
   }
+
+  public static AWSElasticBlockStoreVolumeSource aWSElasticBlockStoreVolumeSource() {
+    return new AWSElasticBlockStoreVolumeSource();
+  }
 }

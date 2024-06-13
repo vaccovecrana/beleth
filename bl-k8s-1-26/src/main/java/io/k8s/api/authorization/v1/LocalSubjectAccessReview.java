@@ -47,4 +47,8 @@ public class LocalSubjectAccessReview {
     this.status = status;
     return this;
   }
+
+  public static LocalSubjectAccessReview localSubjectAccessReview() {
+    return new LocalSubjectAccessReview();
+  }
 }

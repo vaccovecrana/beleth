@@ -19,4 +19,8 @@ public class ResourceRequest {
     this.vendorParameters = vendorParameters;
     return this;
   }
+
+  public static ResourceRequest resourceRequest() {
+    return new ResourceRequest();
+  }
 }

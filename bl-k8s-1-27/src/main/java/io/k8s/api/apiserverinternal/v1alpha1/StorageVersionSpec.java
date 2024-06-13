@@ -11,4 +11,8 @@ public class StorageVersionSpec extends LinkedHashMap<String, Object> {
     put(key, value);
     return this;
   }
+
+  public static StorageVersionSpec storageVersionSpec() {
+    return new StorageVersionSpec();
+  }
 }

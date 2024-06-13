@@ -94,4 +94,8 @@ public class CSIPersistentVolumeSource {
     this.volumeHandle = volumeHandle;
     return this;
   }
+
+  public static CSIPersistentVolumeSource cSIPersistentVolumeSource() {
+    return new CSIPersistentVolumeSource();
+  }
 }

@@ -26,4 +26,8 @@ public class NamespaceStatus {
     this.phase = phase;
     return this;
   }
+
+  public static NamespaceStatus namespaceStatus() {
+    return new NamespaceStatus();
+  }
 }

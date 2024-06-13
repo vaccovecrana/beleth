@@ -44,4 +44,8 @@ public class ValidatingWebhookConfigurationList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ValidatingWebhookConfigurationList validatingWebhookConfigurationList() {
+    return new ValidatingWebhookConfigurationList();
+  }
 }

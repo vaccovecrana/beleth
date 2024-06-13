@@ -44,4 +44,8 @@ public class LimitRangeList {
     this.metadata = metadata;
     return this;
   }
+
+  public static LimitRangeList limitRangeList() {
+    return new LimitRangeList();
+  }
 }

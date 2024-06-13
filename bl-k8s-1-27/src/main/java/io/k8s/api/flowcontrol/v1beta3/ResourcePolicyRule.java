@@ -57,4 +57,8 @@ public class ResourcePolicyRule {
     this.verbs = verbs;
     return this;
   }
+
+  public static ResourcePolicyRule resourcePolicyRule() {
+    return new ResourcePolicyRule();
+  }
 }

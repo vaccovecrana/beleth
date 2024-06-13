@@ -28,4 +28,8 @@ public class ResourceClaimSchedulingStatus {
     this.unsuitableNodes = unsuitableNodes;
     return this;
   }
+
+  public static ResourceClaimSchedulingStatus resourceClaimSchedulingStatus() {
+    return new ResourceClaimSchedulingStatus();
+  }
 }

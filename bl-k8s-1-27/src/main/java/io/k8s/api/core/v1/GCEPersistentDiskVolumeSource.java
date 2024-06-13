@@ -49,4 +49,8 @@ public class GCEPersistentDiskVolumeSource {
     this.readOnly = readOnly;
     return this;
   }
+
+  public static GCEPersistentDiskVolumeSource gCEPersistentDiskVolumeSource() {
+    return new GCEPersistentDiskVolumeSource();
+  }
 }

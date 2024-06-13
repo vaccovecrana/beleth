@@ -22,4 +22,8 @@ public class IngressClassSpec {
     this.parameters = parameters;
     return this;
   }
+
+  public static IngressClassSpec ingressClassSpec() {
+    return new IngressClassSpec();
+  }
 }

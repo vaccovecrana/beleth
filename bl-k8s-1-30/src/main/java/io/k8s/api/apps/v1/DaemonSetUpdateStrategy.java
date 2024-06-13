@@ -22,4 +22,8 @@ public class DaemonSetUpdateStrategy {
     this.type = type;
     return this;
   }
+
+  public static DaemonSetUpdateStrategy daemonSetUpdateStrategy() {
+    return new DaemonSetUpdateStrategy();
+  }
 }

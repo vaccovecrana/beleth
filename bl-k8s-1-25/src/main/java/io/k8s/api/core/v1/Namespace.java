@@ -47,4 +47,8 @@ public class Namespace {
     this.status = status;
     return this;
   }
+
+  public static Namespace namespace() {
+    return new Namespace();
+  }
 }

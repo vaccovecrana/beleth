@@ -43,4 +43,8 @@ public class CinderPersistentVolumeSource {
     this.volumeID = volumeID;
     return this;
   }
+
+  public static CinderPersistentVolumeSource cinderPersistentVolumeSource() {
+    return new CinderPersistentVolumeSource();
+  }
 }

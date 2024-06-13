@@ -18,4 +18,8 @@ public class SelfSubjectAccessReviewSpec {
     this.resourceAttributes = resourceAttributes;
     return this;
   }
+
+  public static SelfSubjectAccessReviewSpec selfSubjectAccessReviewSpec() {
+    return new SelfSubjectAccessReviewSpec();
+  }
 }

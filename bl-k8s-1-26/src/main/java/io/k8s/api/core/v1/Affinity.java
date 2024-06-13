@@ -24,4 +24,8 @@ public class Affinity {
     this.podAntiAffinity = podAntiAffinity;
     return this;
   }
+
+  public static Affinity affinity() {
+    return new Affinity();
+  }
 }

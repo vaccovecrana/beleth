@@ -15,4 +15,8 @@ public class DaemonEndpoint {
     this.Port = Port;
     return this;
   }
+
+  public static DaemonEndpoint daemonEndpoint() {
+    return new DaemonEndpoint();
+  }
 }

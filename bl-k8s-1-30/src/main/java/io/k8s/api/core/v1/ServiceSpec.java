@@ -210,4 +210,8 @@ public class ServiceSpec {
     this.type = type;
     return this;
   }
+
+  public static ServiceSpec serviceSpec() {
+    return new ServiceSpec();
+  }
 }

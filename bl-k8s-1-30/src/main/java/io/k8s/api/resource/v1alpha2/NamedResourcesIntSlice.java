@@ -16,4 +16,8 @@ public class NamedResourcesIntSlice {
     this.ints = ints;
     return this;
   }
+
+  public static NamedResourcesIntSlice namedResourcesIntSlice() {
+    return new NamedResourcesIntSlice();
+  }
 }

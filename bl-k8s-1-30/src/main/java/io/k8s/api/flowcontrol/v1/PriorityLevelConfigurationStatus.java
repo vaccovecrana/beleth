@@ -16,4 +16,8 @@ public class PriorityLevelConfigurationStatus {
     this.conditions = conditions;
     return this;
   }
+
+  public static PriorityLevelConfigurationStatus priorityLevelConfigurationStatus() {
+    return new PriorityLevelConfigurationStatus();
+  }
 }

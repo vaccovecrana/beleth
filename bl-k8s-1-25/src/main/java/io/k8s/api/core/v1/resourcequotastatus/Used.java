@@ -10,4 +10,8 @@ public class Used extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Used used() {
+    return new Used();
+  }
 }

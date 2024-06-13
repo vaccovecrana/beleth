@@ -44,4 +44,8 @@ public class StorageVersionMigrationList {
     this.metadata = metadata;
     return this;
   }
+
+  public static StorageVersionMigrationList storageVersionMigrationList() {
+    return new StorageVersionMigrationList();
+  }
 }

@@ -106,4 +106,8 @@ public class DaemonSetStatus {
     this.updatedNumberScheduled = updatedNumberScheduled;
     return this;
   }
+
+  public static DaemonSetStatus daemonSetStatus() {
+    return new DaemonSetStatus();
+  }
 }

@@ -10,4 +10,8 @@ public class PodFixed extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static PodFixed podFixed() {
+    return new PodFixed();
+  }
 }

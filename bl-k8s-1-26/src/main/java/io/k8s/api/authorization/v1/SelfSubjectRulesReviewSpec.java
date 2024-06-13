@@ -15,4 +15,8 @@ public class SelfSubjectRulesReviewSpec {
     this.namespace = namespace;
     return this;
   }
+
+  public static SelfSubjectRulesReviewSpec selfSubjectRulesReviewSpec() {
+    return new SelfSubjectRulesReviewSpec();
+  }
 }

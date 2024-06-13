@@ -35,4 +35,8 @@ public class TypedLocalObjectReference {
     this.name = name;
     return this;
   }
+
+  public static TypedLocalObjectReference typedLocalObjectReference() {
+    return new TypedLocalObjectReference();
+  }
 }

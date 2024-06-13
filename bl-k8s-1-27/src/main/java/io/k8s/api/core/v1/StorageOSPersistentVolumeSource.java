@@ -53,4 +53,8 @@ public class StorageOSPersistentVolumeSource {
     this.volumeNamespace = volumeNamespace;
     return this;
   }
+
+  public static StorageOSPersistentVolumeSource storageOSPersistentVolumeSource() {
+    return new StorageOSPersistentVolumeSource();
+  }
 }

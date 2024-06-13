@@ -36,4 +36,8 @@ public class ConfigMapKeySelector {
     this.optional = optional;
     return this;
   }
+
+  public static ConfigMapKeySelector configMapKeySelector() {
+    return new ConfigMapKeySelector();
+  }
 }

@@ -55,4 +55,8 @@ public class ReplicationControllerCondition {
     this.type = type;
     return this;
   }
+
+  public static ReplicationControllerCondition replicationControllerCondition() {
+    return new ReplicationControllerCondition();
+  }
 }

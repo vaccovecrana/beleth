@@ -56,4 +56,8 @@ public class VolumeAttributesClass {
     this.parameters = parameters;
     return this;
   }
+
+  public static VolumeAttributesClass volumeAttributesClass() {
+    return new VolumeAttributesClass();
+  }
 }

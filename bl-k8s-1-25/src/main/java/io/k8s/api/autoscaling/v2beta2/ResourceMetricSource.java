@@ -22,4 +22,8 @@ public class ResourceMetricSource {
     this.target = target;
     return this;
   }
+
+  public static ResourceMetricSource resourceMetricSource() {
+    return new ResourceMetricSource();
+  }
 }

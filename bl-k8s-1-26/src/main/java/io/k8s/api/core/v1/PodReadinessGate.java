@@ -15,4 +15,8 @@ public class PodReadinessGate {
     this.conditionType = conditionType;
     return this;
   }
+
+  public static PodReadinessGate podReadinessGate() {
+    return new PodReadinessGate();
+  }
 }

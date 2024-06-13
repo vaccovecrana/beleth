@@ -237,4 +237,8 @@ public class PersistentVolumeSpec {
     this.vsphereVolume = vsphereVolume;
     return this;
   }
+
+  public static PersistentVolumeSpec persistentVolumeSpec() {
+    return new PersistentVolumeSpec();
+  }
 }

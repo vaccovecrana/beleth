@@ -25,4 +25,8 @@ public class AttachedVolume {
     this.name = name;
     return this;
   }
+
+  public static AttachedVolume attachedVolume() {
+    return new AttachedVolume();
+  }
 }

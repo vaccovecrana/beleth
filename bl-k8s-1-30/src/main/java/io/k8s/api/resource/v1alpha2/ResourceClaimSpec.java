@@ -32,4 +32,8 @@ public class ResourceClaimSpec {
     this.resourceClassName = resourceClassName;
     return this;
   }
+
+  public static ResourceClaimSpec resourceClaimSpec() {
+    return new ResourceClaimSpec();
+  }
 }

@@ -44,4 +44,8 @@ public class CSIDriverList {
     this.metadata = metadata;
     return this;
   }
+
+  public static CSIDriverList cSIDriverList() {
+    return new CSIDriverList();
+  }
 }

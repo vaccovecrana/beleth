@@ -26,4 +26,8 @@ public class IPBlock {
     this.except = except;
     return this;
   }
+
+  public static IPBlock iPBlock() {
+    return new IPBlock();
+  }
 }

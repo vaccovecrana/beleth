@@ -50,4 +50,8 @@ public class MetricSpec {
     this.type = type;
     return this;
   }
+
+  public static MetricSpec metricSpec() {
+    return new MetricSpec();
+  }
 }

@@ -86,4 +86,8 @@ public class DeploymentStatus {
     this.updatedReplicas = updatedReplicas;
     return this;
   }
+
+  public static DeploymentStatus deploymentStatus() {
+    return new DeploymentStatus();
+  }
 }

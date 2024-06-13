@@ -44,4 +44,8 @@ public class StorageClassList {
     this.metadata = metadata;
     return this;
   }
+
+  public static StorageClassList storageClassList() {
+    return new StorageClassList();
+  }
 }

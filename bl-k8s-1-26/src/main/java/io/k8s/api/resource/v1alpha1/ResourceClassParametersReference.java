@@ -45,4 +45,8 @@ public class ResourceClassParametersReference {
     this.namespace = namespace;
     return this;
   }
+
+  public static ResourceClassParametersReference resourceClassParametersReference() {
+    return new ResourceClassParametersReference();
+  }
 }

@@ -46,4 +46,8 @@ public class ServerStorageVersion {
     this.servedVersions = servedVersions;
     return this;
   }
+
+  public static ServerStorageVersion serverStorageVersion() {
+    return new ServerStorageVersion();
+  }
 }

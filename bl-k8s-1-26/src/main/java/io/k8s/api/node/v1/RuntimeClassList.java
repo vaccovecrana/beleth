@@ -44,4 +44,8 @@ public class RuntimeClassList {
     this.metadata = metadata;
     return this;
   }
+
+  public static RuntimeClassList runtimeClassList() {
+    return new RuntimeClassList();
+  }
 }

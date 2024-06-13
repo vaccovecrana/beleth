@@ -44,4 +44,8 @@ public class Role {
     this.rules = rules;
     return this;
   }
+
+  public static Role role() {
+    return new Role();
+  }
 }

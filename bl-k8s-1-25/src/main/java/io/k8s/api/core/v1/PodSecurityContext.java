@@ -103,4 +103,8 @@ public class PodSecurityContext {
     this.windowsOptions = windowsOptions;
     return this;
   }
+
+  public static PodSecurityContext podSecurityContext() {
+    return new PodSecurityContext();
+  }
 }

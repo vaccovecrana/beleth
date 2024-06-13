@@ -48,4 +48,8 @@ public class DaemonSetSpec {
     this.updateStrategy = updateStrategy;
     return this;
   }
+
+  public static DaemonSetSpec daemonSetSpec() {
+    return new DaemonSetSpec();
+  }
 }

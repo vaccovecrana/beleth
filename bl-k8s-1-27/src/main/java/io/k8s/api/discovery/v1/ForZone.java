@@ -15,4 +15,8 @@ public class ForZone {
     this.name = name;
     return this;
   }
+
+  public static ForZone forZone() {
+    return new ForZone();
+  }
 }

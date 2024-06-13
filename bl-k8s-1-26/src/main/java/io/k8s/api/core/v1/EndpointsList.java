@@ -44,4 +44,8 @@ public class EndpointsList {
     this.metadata = metadata;
     return this;
   }
+
+  public static EndpointsList endpointsList() {
+    return new EndpointsList();
+  }
 }

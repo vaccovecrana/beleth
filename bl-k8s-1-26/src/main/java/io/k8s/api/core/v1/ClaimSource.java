@@ -33,4 +33,8 @@ public class ClaimSource {
     this.resourceClaimTemplateName = resourceClaimTemplateName;
     return this;
   }
+
+  public static ClaimSource claimSource() {
+    return new ClaimSource();
+  }
 }

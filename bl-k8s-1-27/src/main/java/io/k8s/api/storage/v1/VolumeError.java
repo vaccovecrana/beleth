@@ -25,4 +25,8 @@ public class VolumeError {
     this.time = time;
     return this;
   }
+
+  public static VolumeError volumeError() {
+    return new VolumeError();
+  }
 }

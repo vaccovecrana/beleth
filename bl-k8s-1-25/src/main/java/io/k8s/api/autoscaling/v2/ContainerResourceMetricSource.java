@@ -32,4 +32,8 @@ public class ContainerResourceMetricSource {
     this.target = target;
     return this;
   }
+
+  public static ContainerResourceMetricSource containerResourceMetricSource() {
+    return new ContainerResourceMetricSource();
+  }
 }

@@ -41,4 +41,8 @@ public class FlowSchemaSpec {
     this.rules = rules;
     return this;
   }
+
+  public static FlowSchemaSpec flowSchemaSpec() {
+    return new FlowSchemaSpec();
+  }
 }

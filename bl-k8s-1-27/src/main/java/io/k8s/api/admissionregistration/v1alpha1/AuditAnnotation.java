@@ -35,4 +35,8 @@ public class AuditAnnotation {
     this.valueExpression = valueExpression;
     return this;
   }
+
+  public static AuditAnnotation auditAnnotation() {
+    return new AuditAnnotation();
+  }
 }

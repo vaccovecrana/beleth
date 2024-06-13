@@ -19,4 +19,8 @@ public class JobTemplateSpec {
     this.spec = spec;
     return this;
   }
+
+  public static JobTemplateSpec jobTemplateSpec() {
+    return new JobTemplateSpec();
+  }
 }

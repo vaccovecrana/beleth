@@ -44,4 +44,8 @@ public class EndpointSliceList {
     this.metadata = metadata;
     return this;
   }
+
+  public static EndpointSliceList endpointSliceList() {
+    return new EndpointSliceList();
+  }
 }

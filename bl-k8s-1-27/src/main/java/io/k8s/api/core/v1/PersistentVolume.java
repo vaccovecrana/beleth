@@ -47,4 +47,8 @@ public class PersistentVolume {
     this.status = status;
     return this;
   }
+
+  public static PersistentVolume persistentVolume() {
+    return new PersistentVolume();
+  }
 }

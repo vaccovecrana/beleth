@@ -19,4 +19,8 @@ public class PodTemplateSpec {
     this.spec = spec;
     return this;
   }
+
+  public static PodTemplateSpec podTemplateSpec() {
+    return new PodTemplateSpec();
+  }
 }

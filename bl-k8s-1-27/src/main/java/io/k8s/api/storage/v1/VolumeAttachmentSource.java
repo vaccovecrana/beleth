@@ -23,4 +23,8 @@ public class VolumeAttachmentSource {
     this.persistentVolumeName = persistentVolumeName;
     return this;
   }
+
+  public static VolumeAttachmentSource volumeAttachmentSource() {
+    return new VolumeAttachmentSource();
+  }
 }

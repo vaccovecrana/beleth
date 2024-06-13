@@ -79,4 +79,8 @@ public class DeploymentSpec {
     this.template = template;
     return this;
   }
+
+  public static DeploymentSpec deploymentSpec() {
+    return new DeploymentSpec();
+  }
 }

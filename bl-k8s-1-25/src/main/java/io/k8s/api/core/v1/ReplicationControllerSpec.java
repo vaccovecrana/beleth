@@ -43,4 +43,8 @@ public class ReplicationControllerSpec {
     this.template = template;
     return this;
   }
+
+  public static ReplicationControllerSpec replicationControllerSpec() {
+    return new ReplicationControllerSpec();
+  }
 }

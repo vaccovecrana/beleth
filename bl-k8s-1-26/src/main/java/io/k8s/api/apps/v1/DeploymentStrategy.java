@@ -23,4 +23,8 @@ public class DeploymentStrategy {
     this.type = type;
     return this;
   }
+
+  public static DeploymentStrategy deploymentStrategy() {
+    return new DeploymentStrategy();
+  }
 }

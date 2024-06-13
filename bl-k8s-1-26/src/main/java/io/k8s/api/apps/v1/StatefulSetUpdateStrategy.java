@@ -23,4 +23,8 @@ public class StatefulSetUpdateStrategy {
     this.type = type;
     return this;
   }
+
+  public static StatefulSetUpdateStrategy statefulSetUpdateStrategy() {
+    return new StatefulSetUpdateStrategy();
+  }
 }

@@ -76,4 +76,8 @@ public class Secret {
     this.type = type;
     return this;
   }
+
+  public static Secret secret() {
+    return new Secret();
+  }
 }

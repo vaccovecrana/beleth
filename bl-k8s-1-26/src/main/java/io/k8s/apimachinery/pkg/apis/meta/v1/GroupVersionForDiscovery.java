@@ -25,4 +25,8 @@ public class GroupVersionForDiscovery {
     this.version = version;
     return this;
   }
+
+  public static GroupVersionForDiscovery groupVersionForDiscovery() {
+    return new GroupVersionForDiscovery();
+  }
 }

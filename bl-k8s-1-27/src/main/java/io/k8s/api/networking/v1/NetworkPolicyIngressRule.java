@@ -25,4 +25,8 @@ public class NetworkPolicyIngressRule {
     this.ports = ports;
     return this;
   }
+
+  public static NetworkPolicyIngressRule networkPolicyIngressRule() {
+    return new NetworkPolicyIngressRule();
+  }
 }

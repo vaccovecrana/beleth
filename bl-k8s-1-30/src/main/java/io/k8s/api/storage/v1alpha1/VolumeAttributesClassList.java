@@ -44,4 +44,8 @@ public class VolumeAttributesClassList {
     this.metadata = metadata;
     return this;
   }
+
+  public static VolumeAttributesClassList volumeAttributesClassList() {
+    return new VolumeAttributesClassList();
+  }
 }

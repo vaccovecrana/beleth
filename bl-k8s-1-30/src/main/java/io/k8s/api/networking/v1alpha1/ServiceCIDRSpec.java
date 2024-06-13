@@ -16,4 +16,8 @@ public class ServiceCIDRSpec {
     this.cidrs = cidrs;
     return this;
   }
+
+  public static ServiceCIDRSpec serviceCIDRSpec() {
+    return new ServiceCIDRSpec();
+  }
 }

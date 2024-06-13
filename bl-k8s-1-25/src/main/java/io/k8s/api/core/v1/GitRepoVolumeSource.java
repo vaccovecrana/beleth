@@ -37,4 +37,8 @@ public class GitRepoVolumeSource {
     this.revision = revision;
     return this;
   }
+
+  public static GitRepoVolumeSource gitRepoVolumeSource() {
+    return new GitRepoVolumeSource();
+  }
 }

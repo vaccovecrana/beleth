@@ -74,4 +74,8 @@ public class NodeSpec {
     this.unschedulable = unschedulable;
     return this;
   }
+
+  public static NodeSpec nodeSpec() {
+    return new NodeSpec();
+  }
 }

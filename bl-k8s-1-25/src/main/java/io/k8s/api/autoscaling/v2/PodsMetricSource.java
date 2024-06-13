@@ -17,4 +17,8 @@ public class PodsMetricSource {
     this.target = target;
     return this;
   }
+
+  public static PodsMetricSource podsMetricSource() {
+    return new PodsMetricSource();
+  }
 }

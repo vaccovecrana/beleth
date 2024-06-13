@@ -55,4 +55,8 @@ public class IngressClassParametersReference {
     this.scope = scope;
     return this;
   }
+
+  public static IngressClassParametersReference ingressClassParametersReference() {
+    return new IngressClassParametersReference();
+  }
 }

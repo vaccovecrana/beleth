@@ -66,4 +66,8 @@ public class StorageVersionCondition {
     this.type = type;
     return this;
   }
+
+  public static StorageVersionCondition storageVersionCondition() {
+    return new StorageVersionCondition();
+  }
 }

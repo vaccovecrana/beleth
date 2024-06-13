@@ -25,4 +25,8 @@ public class TCPSocketAction {
     this.port = port;
     return this;
   }
+
+  public static TCPSocketAction tCPSocketAction() {
+    return new TCPSocketAction();
+  }
 }

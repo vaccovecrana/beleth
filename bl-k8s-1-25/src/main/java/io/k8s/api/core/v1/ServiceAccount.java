@@ -65,4 +65,8 @@ public class ServiceAccount {
     this.secrets = secrets;
     return this;
   }
+
+  public static ServiceAccount serviceAccount() {
+    return new ServiceAccount();
+  }
 }

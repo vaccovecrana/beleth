@@ -58,4 +58,8 @@ public class FCVolumeSource {
     this.wwids = wwids;
     return this;
   }
+
+  public static FCVolumeSource fCVolumeSource() {
+    return new FCVolumeSource();
+  }
 }

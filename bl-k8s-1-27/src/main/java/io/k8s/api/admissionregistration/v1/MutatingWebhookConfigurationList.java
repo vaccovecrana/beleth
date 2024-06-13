@@ -44,4 +44,8 @@ public class MutatingWebhookConfigurationList {
     this.metadata = metadata;
     return this;
   }
+
+  public static MutatingWebhookConfigurationList mutatingWebhookConfigurationList() {
+    return new MutatingWebhookConfigurationList();
+  }
 }

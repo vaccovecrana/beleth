@@ -10,4 +10,8 @@ public class BinaryData extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static BinaryData binaryData() {
+    return new BinaryData();
+  }
 }

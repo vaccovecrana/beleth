@@ -10,4 +10,8 @@ public class DisruptedPods extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static DisruptedPods disruptedPods() {
+    return new DisruptedPods();
+  }
 }

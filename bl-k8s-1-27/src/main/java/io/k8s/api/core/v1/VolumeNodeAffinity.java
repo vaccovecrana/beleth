@@ -10,4 +10,8 @@ public class VolumeNodeAffinity {
     this.required = required;
     return this;
   }
+
+  public static VolumeNodeAffinity volumeNodeAffinity() {
+    return new VolumeNodeAffinity();
+  }
 }

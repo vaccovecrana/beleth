@@ -34,4 +34,8 @@ public class ValidatingAdmissionPolicyStatus {
     this.typeChecking = typeChecking;
     return this;
   }
+
+  public static ValidatingAdmissionPolicyStatus validatingAdmissionPolicyStatus() {
+    return new ValidatingAdmissionPolicyStatus();
+  }
 }

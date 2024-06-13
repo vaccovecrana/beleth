@@ -47,4 +47,8 @@ public class StorageVersionMigration {
     this.status = status;
     return this;
   }
+
+  public static StorageVersionMigration storageVersionMigration() {
+    return new StorageVersionMigration();
+  }
 }

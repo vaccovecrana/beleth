@@ -15,4 +15,8 @@ public class SleepAction {
     this.seconds = seconds;
     return this;
   }
+
+  public static SleepAction sleepAction() {
+    return new SleepAction();
+  }
 }

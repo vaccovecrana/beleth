@@ -10,4 +10,8 @@ public class Max extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Max max() {
+    return new Max();
+  }
 }

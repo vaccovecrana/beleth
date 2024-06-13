@@ -15,4 +15,8 @@ public class PriorityLevelConfigurationReference {
     this.name = name;
     return this;
   }
+
+  public static PriorityLevelConfigurationReference priorityLevelConfigurationReference() {
+    return new PriorityLevelConfigurationReference();
+  }
 }

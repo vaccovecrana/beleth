@@ -15,4 +15,8 @@ public class HTTPIngressRuleValue {
     this.paths = paths;
     return this;
   }
+
+  public static HTTPIngressRuleValue hTTPIngressRuleValue() {
+    return new HTTPIngressRuleValue();
+  }
 }

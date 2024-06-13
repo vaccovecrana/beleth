@@ -53,4 +53,8 @@ public class ParamRef {
     this.selector = selector;
     return this;
   }
+
+  public static ParamRef paramRef() {
+    return new ParamRef();
+  }
 }

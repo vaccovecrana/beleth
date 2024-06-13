@@ -127,4 +127,8 @@ public class PersistentVolumeClaimStatus {
     this.phase = phase;
     return this;
   }
+
+  public static PersistentVolumeClaimStatus persistentVolumeClaimStatus() {
+    return new PersistentVolumeClaimStatus();
+  }
 }

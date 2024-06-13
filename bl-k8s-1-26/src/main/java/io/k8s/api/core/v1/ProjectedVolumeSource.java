@@ -26,4 +26,8 @@ public class ProjectedVolumeSource {
     this.sources = sources;
     return this;
   }
+
+  public static ProjectedVolumeSource projectedVolumeSource() {
+    return new ProjectedVolumeSource();
+  }
 }

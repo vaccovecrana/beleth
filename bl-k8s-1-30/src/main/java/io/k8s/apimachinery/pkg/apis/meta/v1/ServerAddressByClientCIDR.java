@@ -25,4 +25,8 @@ public class ServerAddressByClientCIDR {
     this.serverAddress = serverAddress;
     return this;
   }
+
+  public static ServerAddressByClientCIDR serverAddressByClientCIDR() {
+    return new ServerAddressByClientCIDR();
+  }
 }

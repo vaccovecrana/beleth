@@ -16,4 +16,8 @@ public class ExecAction {
     this.command = command;
     return this;
   }
+
+  public static ExecAction execAction() {
+    return new ExecAction();
+  }
 }

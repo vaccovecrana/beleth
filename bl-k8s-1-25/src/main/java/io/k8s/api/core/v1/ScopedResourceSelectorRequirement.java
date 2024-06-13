@@ -38,4 +38,8 @@ public class ScopedResourceSelectorRequirement {
     this.values = values;
     return this;
   }
+
+  public static ScopedResourceSelectorRequirement scopedResourceSelectorRequirement() {
+    return new ScopedResourceSelectorRequirement();
+  }
 }

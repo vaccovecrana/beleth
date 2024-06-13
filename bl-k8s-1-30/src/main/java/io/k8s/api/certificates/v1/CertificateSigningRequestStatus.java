@@ -48,4 +48,8 @@ public class CertificateSigningRequestStatus {
     this.conditions = conditions;
     return this;
   }
+
+  public static CertificateSigningRequestStatus certificateSigningRequestStatus() {
+    return new CertificateSigningRequestStatus();
+  }
 }

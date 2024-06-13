@@ -15,4 +15,8 @@ public class LocalObjectReference {
     this.name = name;
     return this;
   }
+
+  public static LocalObjectReference localObjectReference() {
+    return new LocalObjectReference();
+  }
 }

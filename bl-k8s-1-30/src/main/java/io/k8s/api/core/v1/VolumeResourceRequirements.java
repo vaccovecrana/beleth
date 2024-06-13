@@ -26,4 +26,8 @@ public class VolumeResourceRequirements {
     this.requests = requests;
     return this;
   }
+
+  public static VolumeResourceRequirements volumeResourceRequirements() {
+    return new VolumeResourceRequirements();
+  }
 }

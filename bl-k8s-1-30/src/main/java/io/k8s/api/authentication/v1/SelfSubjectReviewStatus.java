@@ -10,4 +10,8 @@ public class SelfSubjectReviewStatus {
     this.userInfo = userInfo;
     return this;
   }
+
+  public static SelfSubjectReviewStatus selfSubjectReviewStatus() {
+    return new SelfSubjectReviewStatus();
+  }
 }

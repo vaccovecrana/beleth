@@ -53,4 +53,8 @@ public class StorageOSVolumeSource {
     this.volumeNamespace = volumeNamespace;
     return this;
   }
+
+  public static StorageOSVolumeSource storageOSVolumeSource() {
+    return new StorageOSVolumeSource();
+  }
 }

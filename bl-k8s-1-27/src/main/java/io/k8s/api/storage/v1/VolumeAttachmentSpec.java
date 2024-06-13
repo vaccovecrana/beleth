@@ -32,4 +32,8 @@ public class VolumeAttachmentSpec {
     this.source = source;
     return this;
   }
+
+  public static VolumeAttachmentSpec volumeAttachmentSpec() {
+    return new VolumeAttachmentSpec();
+  }
 }

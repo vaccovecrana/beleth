@@ -39,4 +39,8 @@ public class StatusCause {
     this.reason = reason;
     return this;
   }
+
+  public static StatusCause statusCause() {
+    return new StatusCause();
+  }
 }

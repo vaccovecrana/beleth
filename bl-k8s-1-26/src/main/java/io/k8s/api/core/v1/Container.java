@@ -211,4 +211,8 @@ public class Container {
     this.workingDir = workingDir;
     return this;
   }
+
+  public static Container container() {
+    return new Container();
+  }
 }

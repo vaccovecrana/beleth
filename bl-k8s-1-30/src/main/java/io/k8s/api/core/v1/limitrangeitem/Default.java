@@ -10,4 +10,8 @@ public class Default extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Default _default() {
+    return new Default();
+  }
 }

@@ -122,4 +122,8 @@ public class CSIDriverSpec {
     this.volumeLifecycleModes = volumeLifecycleModes;
     return this;
   }
+
+  public static CSIDriverSpec cSIDriverSpec() {
+    return new CSIDriverSpec();
+  }
 }

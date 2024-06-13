@@ -36,4 +36,8 @@ public class NodeConfigStatus {
     this.lastKnownGood = lastKnownGood;
     return this;
   }
+
+  public static NodeConfigStatus nodeConfigStatus() {
+    return new NodeConfigStatus();
+  }
 }

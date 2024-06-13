@@ -395,4 +395,8 @@ public class PodSpec {
     this.volumes = volumes;
     return this;
   }
+
+  public static PodSpec podSpec() {
+    return new PodSpec();
+  }
 }

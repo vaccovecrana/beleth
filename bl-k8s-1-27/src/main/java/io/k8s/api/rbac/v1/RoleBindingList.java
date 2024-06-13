@@ -44,4 +44,8 @@ public class RoleBindingList {
     this.metadata = metadata;
     return this;
   }
+
+  public static RoleBindingList roleBindingList() {
+    return new RoleBindingList();
+  }
 }

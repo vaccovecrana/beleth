@@ -41,4 +41,8 @@ public class Eviction {
     this.metadata = metadata;
     return this;
   }
+
+  public static Eviction eviction() {
+    return new Eviction();
+  }
 }

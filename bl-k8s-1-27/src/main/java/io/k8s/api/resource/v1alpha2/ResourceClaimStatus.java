@@ -50,4 +50,8 @@ public class ResourceClaimStatus {
     this.reservedFor = reservedFor;
     return this;
   }
+
+  public static ResourceClaimStatus resourceClaimStatus() {
+    return new ResourceClaimStatus();
+  }
 }

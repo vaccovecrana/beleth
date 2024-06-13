@@ -36,4 +36,8 @@ public class KeyToPath {
     this.path = path;
     return this;
   }
+
+  public static KeyToPath keyToPath() {
+    return new KeyToPath();
+  }
 }

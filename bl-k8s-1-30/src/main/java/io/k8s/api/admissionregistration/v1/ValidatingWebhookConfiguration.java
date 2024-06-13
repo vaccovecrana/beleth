@@ -44,4 +44,8 @@ public class ValidatingWebhookConfiguration {
     this.webhooks = webhooks;
     return this;
   }
+
+  public static ValidatingWebhookConfiguration validatingWebhookConfiguration() {
+    return new ValidatingWebhookConfiguration();
+  }
 }

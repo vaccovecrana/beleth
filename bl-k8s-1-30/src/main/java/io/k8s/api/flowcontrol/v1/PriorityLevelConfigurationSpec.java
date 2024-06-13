@@ -29,4 +29,8 @@ public class PriorityLevelConfigurationSpec {
     this.type = type;
     return this;
   }
+
+  public static PriorityLevelConfigurationSpec priorityLevelConfigurationSpec() {
+    return new PriorityLevelConfigurationSpec();
+  }
 }

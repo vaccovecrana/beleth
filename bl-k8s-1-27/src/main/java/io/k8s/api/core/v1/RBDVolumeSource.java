@@ -84,4 +84,8 @@ public class RBDVolumeSource {
     this.user = user;
     return this;
   }
+
+  public static RBDVolumeSource rBDVolumeSource() {
+    return new RBDVolumeSource();
+  }
 }

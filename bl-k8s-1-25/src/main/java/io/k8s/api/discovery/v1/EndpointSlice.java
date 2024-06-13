@@ -65,4 +65,8 @@ public class EndpointSlice {
     this.ports = ports;
     return this;
   }
+
+  public static EndpointSlice endpointSlice() {
+    return new EndpointSlice();
+  }
 }

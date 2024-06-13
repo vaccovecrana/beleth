@@ -19,4 +19,8 @@ public class IngressBackend {
     this.service = service;
     return this;
   }
+
+  public static IngressBackend ingressBackend() {
+    return new IngressBackend();
+  }
 }

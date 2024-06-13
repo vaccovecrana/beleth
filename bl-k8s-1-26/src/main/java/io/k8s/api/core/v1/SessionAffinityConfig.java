@@ -10,4 +10,8 @@ public class SessionAffinityConfig {
     this.clientIP = clientIP;
     return this;
   }
+
+  public static SessionAffinityConfig sessionAffinityConfig() {
+    return new SessionAffinityConfig();
+  }
 }

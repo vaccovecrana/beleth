@@ -47,4 +47,8 @@ public class Pod {
     this.status = status;
     return this;
   }
+
+  public static Pod pod() {
+    return new Pod();
+  }
 }

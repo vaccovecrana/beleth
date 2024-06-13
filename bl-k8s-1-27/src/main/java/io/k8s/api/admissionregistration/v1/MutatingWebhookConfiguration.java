@@ -44,4 +44,8 @@ public class MutatingWebhookConfiguration {
     this.webhooks = webhooks;
     return this;
   }
+
+  public static MutatingWebhookConfiguration mutatingWebhookConfiguration() {
+    return new MutatingWebhookConfiguration();
+  }
 }

@@ -107,4 +107,8 @@ public class StatefulSetSpec {
     this.volumeClaimTemplates = volumeClaimTemplates;
     return this;
   }
+
+  public static StatefulSetSpec statefulSetSpec() {
+    return new StatefulSetSpec();
+  }
 }

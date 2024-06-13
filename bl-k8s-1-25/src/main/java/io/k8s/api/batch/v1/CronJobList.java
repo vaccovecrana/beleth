@@ -44,4 +44,8 @@ public class CronJobList {
     this.metadata = metadata;
     return this;
   }
+
+  public static CronJobList cronJobList() {
+    return new CronJobList();
+  }
 }

@@ -26,4 +26,8 @@ public class TopologySelectorLabelRequirement {
     this.values = values;
     return this;
   }
+
+  public static TopologySelectorLabelRequirement topologySelectorLabelRequirement() {
+    return new TopologySelectorLabelRequirement();
+  }
 }

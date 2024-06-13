@@ -36,4 +36,8 @@ public class APIGroupList {
     this.kind = kind;
     return this;
   }
+
+  public static APIGroupList aPIGroupList() {
+    return new APIGroupList();
+  }
 }

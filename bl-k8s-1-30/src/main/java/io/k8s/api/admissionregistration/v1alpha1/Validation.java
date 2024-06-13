@@ -70,4 +70,8 @@ public class Validation {
     this.reason = reason;
     return this;
   }
+
+  public static Validation validation() {
+    return new Validation();
+  }
 }

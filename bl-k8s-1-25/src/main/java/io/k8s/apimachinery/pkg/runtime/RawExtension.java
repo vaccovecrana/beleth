@@ -11,4 +11,8 @@ public class RawExtension extends LinkedHashMap<String, Object> {
     put(key, value);
     return this;
   }
+
+  public static RawExtension rawExtension() {
+    return new RawExtension();
+  }
 }

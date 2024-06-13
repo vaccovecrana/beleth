@@ -51,4 +51,8 @@ public class ClusterRole {
     this.rules = rules;
     return this;
   }
+
+  public static ClusterRole clusterRole() {
+    return new ClusterRole();
+  }
 }

@@ -36,4 +36,8 @@ public class NFSVolumeSource {
     this.server = server;
     return this;
   }
+
+  public static NFSVolumeSource nFSVolumeSource() {
+    return new NFSVolumeSource();
+  }
 }

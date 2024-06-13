@@ -40,4 +40,8 @@ public class DownwardAPIVolumeFile {
     this.resourceFieldRef = resourceFieldRef;
     return this;
   }
+
+  public static DownwardAPIVolumeFile downwardAPIVolumeFile() {
+    return new DownwardAPIVolumeFile();
+  }
 }

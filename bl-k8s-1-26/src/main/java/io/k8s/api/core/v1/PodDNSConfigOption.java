@@ -22,4 +22,8 @@ public class PodDNSConfigOption {
     this.value = value;
     return this;
   }
+
+  public static PodDNSConfigOption podDNSConfigOption() {
+    return new PodDNSConfigOption();
+  }
 }

@@ -47,4 +47,8 @@ public class FlowSchema {
     this.status = status;
     return this;
   }
+
+  public static FlowSchema flowSchema() {
+    return new FlowSchema();
+  }
 }

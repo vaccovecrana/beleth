@@ -40,4 +40,8 @@ public class IngressClass {
     this.spec = spec;
     return this;
   }
+
+  public static IngressClass ingressClass() {
+    return new IngressClass();
+  }
 }

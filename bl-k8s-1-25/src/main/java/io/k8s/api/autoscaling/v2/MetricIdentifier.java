@@ -23,4 +23,8 @@ public class MetricIdentifier {
     this.selector = selector;
     return this;
   }
+
+  public static MetricIdentifier metricIdentifier() {
+    return new MetricIdentifier();
+  }
 }

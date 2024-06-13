@@ -26,4 +26,8 @@ public class PersistentVolumeClaimVolumeSource {
     this.readOnly = readOnly;
     return this;
   }
+
+  public static PersistentVolumeClaimVolumeSource persistentVolumeClaimVolumeSource() {
+    return new PersistentVolumeClaimVolumeSource();
+  }
 }

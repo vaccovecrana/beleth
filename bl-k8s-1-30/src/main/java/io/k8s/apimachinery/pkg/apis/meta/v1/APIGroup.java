@@ -64,4 +64,8 @@ public class APIGroup {
     this.versions = versions;
     return this;
   }
+
+  public static APIGroup aPIGroup() {
+    return new APIGroup();
+  }
 }

@@ -72,4 +72,8 @@ public class LimitRangeItem {
     this.type = type;
     return this;
   }
+
+  public static LimitRangeItem limitRangeItem() {
+    return new LimitRangeItem();
+  }
 }

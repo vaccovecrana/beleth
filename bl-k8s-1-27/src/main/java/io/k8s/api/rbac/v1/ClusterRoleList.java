@@ -44,4 +44,8 @@ public class ClusterRoleList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ClusterRoleList clusterRoleList() {
+    return new ClusterRoleList();
+  }
 }

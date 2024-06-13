@@ -44,4 +44,8 @@ public class PodList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PodList podList() {
+    return new PodList();
+  }
 }

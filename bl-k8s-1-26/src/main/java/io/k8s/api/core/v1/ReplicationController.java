@@ -47,4 +47,8 @@ public class ReplicationController {
     this.status = status;
     return this;
   }
+
+  public static ReplicationController replicationController() {
+    return new ReplicationController();
+  }
 }

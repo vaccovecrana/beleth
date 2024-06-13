@@ -15,4 +15,8 @@ public class IngressLoadBalancerStatus {
     this.ingress = ingress;
     return this;
   }
+
+  public static IngressLoadBalancerStatus ingressLoadBalancerStatus() {
+    return new IngressLoadBalancerStatus();
+  }
 }

@@ -73,4 +73,8 @@ public class ResourceClass {
     this.suitableNodes = suitableNodes;
     return this;
   }
+
+  public static ResourceClass resourceClass() {
+    return new ResourceClass();
+  }
 }

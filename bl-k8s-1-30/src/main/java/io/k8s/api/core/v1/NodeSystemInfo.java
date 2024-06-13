@@ -105,4 +105,8 @@ public class NodeSystemInfo {
     this.systemUUID = systemUUID;
     return this;
   }
+
+  public static NodeSystemInfo nodeSystemInfo() {
+    return new NodeSystemInfo();
+  }
 }

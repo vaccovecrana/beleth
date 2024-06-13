@@ -15,4 +15,8 @@ public class VolumeNodeResources {
     this.count = count;
     return this;
   }
+
+  public static VolumeNodeResources volumeNodeResources() {
+    return new VolumeNodeResources();
+  }
 }

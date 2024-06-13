@@ -44,4 +44,8 @@ public class DaemonSetList {
     this.metadata = metadata;
     return this;
   }
+
+  public static DaemonSetList daemonSetList() {
+    return new DaemonSetList();
+  }
 }

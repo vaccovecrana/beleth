@@ -46,4 +46,8 @@ public class GlusterfsPersistentVolumeSource {
     this.readOnly = readOnly;
     return this;
   }
+
+  public static GlusterfsPersistentVolumeSource glusterfsPersistentVolumeSource() {
+    return new GlusterfsPersistentVolumeSource();
+  }
 }

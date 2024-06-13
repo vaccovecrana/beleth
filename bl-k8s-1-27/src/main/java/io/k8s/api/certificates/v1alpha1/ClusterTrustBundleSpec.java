@@ -37,4 +37,8 @@ public class ClusterTrustBundleSpec {
     this.trustBundle = trustBundle;
     return this;
   }
+
+  public static ClusterTrustBundleSpec clusterTrustBundleSpec() {
+    return new ClusterTrustBundleSpec();
+  }
 }

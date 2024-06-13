@@ -44,4 +44,8 @@ public class PersistentVolumeClaimList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PersistentVolumeClaimList persistentVolumeClaimList() {
+    return new PersistentVolumeClaimList();
+  }
 }

@@ -26,4 +26,8 @@ public class Capabilities {
     this.drop = drop;
     return this;
   }
+
+  public static Capabilities capabilities() {
+    return new Capabilities();
+  }
 }

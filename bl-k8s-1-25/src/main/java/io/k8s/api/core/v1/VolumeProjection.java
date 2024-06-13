@@ -31,4 +31,8 @@ public class VolumeProjection {
     this.serviceAccountToken = serviceAccountToken;
     return this;
   }
+
+  public static VolumeProjection volumeProjection() {
+    return new VolumeProjection();
+  }
 }

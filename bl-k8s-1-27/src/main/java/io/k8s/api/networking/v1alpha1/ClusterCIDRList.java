@@ -44,4 +44,8 @@ public class ClusterCIDRList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ClusterCIDRList clusterCIDRList() {
+    return new ClusterCIDRList();
+  }
 }

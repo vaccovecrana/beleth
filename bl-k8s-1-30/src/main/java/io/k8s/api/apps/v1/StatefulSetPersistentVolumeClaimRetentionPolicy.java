@@ -25,4 +25,9 @@ public class StatefulSetPersistentVolumeClaimRetentionPolicy {
     this.whenScaled = whenScaled;
     return this;
   }
+
+  public static StatefulSetPersistentVolumeClaimRetentionPolicy statefulSetPersistentVolumeClaimRetentionPolicy(
+      ) {
+    return new StatefulSetPersistentVolumeClaimRetentionPolicy();
+  }
 }

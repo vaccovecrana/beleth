@@ -45,4 +45,8 @@ public class EndpointSubset {
     this.ports = ports;
     return this;
   }
+
+  public static EndpointSubset endpointSubset() {
+    return new EndpointSubset();
+  }
 }

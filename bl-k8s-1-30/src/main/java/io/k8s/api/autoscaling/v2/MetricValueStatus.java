@@ -108,4 +108,8 @@ public class MetricValueStatus {
     this.value = value;
     return this;
   }
+
+  public static MetricValueStatus metricValueStatus() {
+    return new MetricValueStatus();
+  }
 }

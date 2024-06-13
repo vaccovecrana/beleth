@@ -47,4 +47,8 @@ public class SubjectRulesReviewStatus {
     this.resourceRules = resourceRules;
     return this;
   }
+
+  public static SubjectRulesReviewStatus subjectRulesReviewStatus() {
+    return new SubjectRulesReviewStatus();
+  }
 }

@@ -15,4 +15,8 @@ public class NamedResourcesResources {
     this.instances = instances;
     return this;
   }
+
+  public static NamedResourcesResources namedResourcesResources() {
+    return new NamedResourcesResources();
+  }
 }

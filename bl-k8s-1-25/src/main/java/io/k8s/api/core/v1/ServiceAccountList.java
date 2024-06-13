@@ -44,4 +44,8 @@ public class ServiceAccountList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ServiceAccountList serviceAccountList() {
+    return new ServiceAccountList();
+  }
 }

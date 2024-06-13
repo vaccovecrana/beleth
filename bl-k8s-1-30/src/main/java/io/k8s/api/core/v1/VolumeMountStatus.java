@@ -46,4 +46,8 @@ public class VolumeMountStatus {
     this.recursiveReadOnly = recursiveReadOnly;
     return this;
   }
+
+  public static VolumeMountStatus volumeMountStatus() {
+    return new VolumeMountStatus();
+  }
 }

@@ -62,4 +62,8 @@ public class RuleWithOperations {
     this.scope = scope;
     return this;
   }
+
+  public static RuleWithOperations ruleWithOperations() {
+    return new RuleWithOperations();
+  }
 }

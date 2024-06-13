@@ -52,4 +52,8 @@ public class ControllerRevision {
     this.revision = revision;
     return this;
   }
+
+  public static ControllerRevision controllerRevision() {
+    return new ControllerRevision();
+  }
 }

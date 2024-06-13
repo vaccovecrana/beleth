@@ -36,4 +36,8 @@ public class GlusterfsVolumeSource {
     this.readOnly = readOnly;
     return this;
   }
+
+  public static GlusterfsVolumeSource glusterfsVolumeSource() {
+    return new GlusterfsVolumeSource();
+  }
 }

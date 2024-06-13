@@ -26,4 +26,8 @@ public class TokenReviewSpec {
     this.token = token;
     return this;
   }
+
+  public static TokenReviewSpec tokenReviewSpec() {
+    return new TokenReviewSpec();
+  }
 }

@@ -44,4 +44,8 @@ public class DeploymentList {
     this.metadata = metadata;
     return this;
   }
+
+  public static DeploymentList deploymentList() {
+    return new DeploymentList();
+  }
 }

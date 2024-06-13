@@ -15,4 +15,8 @@ public class PodOS {
     this.name = name;
     return this;
   }
+
+  public static PodOS podOS() {
+    return new PodOS();
+  }
 }

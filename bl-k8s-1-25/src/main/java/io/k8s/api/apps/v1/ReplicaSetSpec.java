@@ -41,4 +41,8 @@ public class ReplicaSetSpec {
     this.template = template;
     return this;
   }
+
+  public static ReplicaSetSpec replicaSetSpec() {
+    return new ReplicaSetSpec();
+  }
 }

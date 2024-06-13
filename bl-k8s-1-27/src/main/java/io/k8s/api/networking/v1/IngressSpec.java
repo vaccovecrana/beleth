@@ -43,4 +43,8 @@ public class IngressSpec {
     this.tls = tls;
     return this;
   }
+
+  public static IngressSpec ingressSpec() {
+    return new IngressSpec();
+  }
 }

@@ -10,4 +10,8 @@ public class IngressStatus {
     this.loadBalancer = loadBalancer;
     return this;
   }
+
+  public static IngressStatus ingressStatus() {
+    return new IngressStatus();
+  }
 }

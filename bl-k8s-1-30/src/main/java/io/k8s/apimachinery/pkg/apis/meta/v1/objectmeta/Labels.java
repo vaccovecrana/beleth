@@ -10,4 +10,8 @@ public class Labels extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Labels labels() {
+    return new Labels();
+  }
 }

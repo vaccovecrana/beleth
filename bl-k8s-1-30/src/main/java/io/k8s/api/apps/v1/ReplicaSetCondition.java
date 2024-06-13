@@ -55,4 +55,8 @@ public class ReplicaSetCondition {
     this.type = type;
     return this;
   }
+
+  public static ReplicaSetCondition replicaSetCondition() {
+    return new ReplicaSetCondition();
+  }
 }

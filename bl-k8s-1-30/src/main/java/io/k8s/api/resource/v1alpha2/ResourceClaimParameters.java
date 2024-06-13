@@ -64,4 +64,8 @@ public class ResourceClaimParameters {
     this.shareable = shareable;
     return this;
   }
+
+  public static ResourceClaimParameters resourceClaimParameters() {
+    return new ResourceClaimParameters();
+  }
 }

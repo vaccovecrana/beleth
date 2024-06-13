@@ -10,4 +10,8 @@ public class AttachmentMetadata extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static AttachmentMetadata attachmentMetadata() {
+    return new AttachmentMetadata();
+  }
 }

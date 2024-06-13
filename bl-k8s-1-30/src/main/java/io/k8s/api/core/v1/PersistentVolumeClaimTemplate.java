@@ -19,4 +19,8 @@ public class PersistentVolumeClaimTemplate {
     this.spec = spec;
     return this;
   }
+
+  public static PersistentVolumeClaimTemplate persistentVolumeClaimTemplate() {
+    return new PersistentVolumeClaimTemplate();
+  }
 }

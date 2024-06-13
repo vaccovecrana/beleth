@@ -27,4 +27,8 @@ public class Scheduling {
     this.tolerations = tolerations;
     return this;
   }
+
+  public static Scheduling scheduling() {
+    return new Scheduling();
+  }
 }

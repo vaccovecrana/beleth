@@ -75,4 +75,8 @@ public class PriorityClass {
     this.value = value;
     return this;
   }
+
+  public static PriorityClass priorityClass() {
+    return new PriorityClass();
+  }
 }

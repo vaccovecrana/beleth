@@ -49,4 +49,8 @@ public class VolumeAttachment {
     this.status = status;
     return this;
   }
+
+  public static VolumeAttachment volumeAttachment() {
+    return new VolumeAttachment();
+  }
 }

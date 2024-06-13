@@ -86,4 +86,8 @@ public class PodDisruptionBudgetStatus {
     this.observedGeneration = observedGeneration;
     return this;
   }
+
+  public static PodDisruptionBudgetStatus podDisruptionBudgetStatus() {
+    return new PodDisruptionBudgetStatus();
+  }
 }

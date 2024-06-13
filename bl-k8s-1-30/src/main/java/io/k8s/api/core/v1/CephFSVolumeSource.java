@@ -64,4 +64,8 @@ public class CephFSVolumeSource {
     this.user = user;
     return this;
   }
+
+  public static CephFSVolumeSource cephFSVolumeSource() {
+    return new CephFSVolumeSource();
+  }
 }

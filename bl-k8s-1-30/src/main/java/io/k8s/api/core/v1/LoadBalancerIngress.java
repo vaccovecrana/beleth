@@ -46,4 +46,8 @@ public class LoadBalancerIngress {
     this.ports = ports;
     return this;
   }
+
+  public static LoadBalancerIngress loadBalancerIngress() {
+    return new LoadBalancerIngress();
+  }
 }

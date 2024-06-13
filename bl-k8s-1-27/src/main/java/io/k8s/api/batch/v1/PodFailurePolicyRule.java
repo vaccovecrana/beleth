@@ -42,4 +42,8 @@ public class PodFailurePolicyRule {
     this.onPodConditions = onPodConditions;
     return this;
   }
+
+  public static PodFailurePolicyRule podFailurePolicyRule() {
+    return new PodFailurePolicyRule();
+  }
 }

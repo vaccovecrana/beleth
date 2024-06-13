@@ -25,4 +25,8 @@ public class PodFailurePolicyOnPodConditionsPattern {
     this.type = type;
     return this;
   }
+
+  public static PodFailurePolicyOnPodConditionsPattern podFailurePolicyOnPodConditionsPattern() {
+    return new PodFailurePolicyOnPodConditionsPattern();
+  }
 }

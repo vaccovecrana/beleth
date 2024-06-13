@@ -79,4 +79,8 @@ public class Endpoint {
     this.zone = zone;
     return this;
   }
+
+  public static Endpoint endpoint() {
+    return new Endpoint();
+  }
 }

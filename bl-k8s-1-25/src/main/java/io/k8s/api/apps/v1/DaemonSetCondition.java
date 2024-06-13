@@ -55,4 +55,8 @@ public class DaemonSetCondition {
     this.type = type;
     return this;
   }
+
+  public static DaemonSetCondition daemonSetCondition() {
+    return new DaemonSetCondition();
+  }
 }

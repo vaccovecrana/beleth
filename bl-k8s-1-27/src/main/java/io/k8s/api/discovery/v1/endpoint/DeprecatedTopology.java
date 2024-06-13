@@ -10,4 +10,8 @@ public class DeprecatedTopology extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static DeprecatedTopology deprecatedTopology() {
+    return new DeprecatedTopology();
+  }
 }

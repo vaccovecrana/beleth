@@ -10,4 +10,8 @@ public class MaxLimitRequestRatio extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static MaxLimitRequestRatio maxLimitRequestRatio() {
+    return new MaxLimitRequestRatio();
+  }
 }

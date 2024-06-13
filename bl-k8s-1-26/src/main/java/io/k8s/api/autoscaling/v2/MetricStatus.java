@@ -50,4 +50,8 @@ public class MetricStatus {
     this.type = type;
     return this;
   }
+
+  public static MetricStatus metricStatus() {
+    return new MetricStatus();
+  }
 }

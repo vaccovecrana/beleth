@@ -67,4 +67,8 @@ public class ServicePort {
     this.targetPort = targetPort;
     return this;
   }
+
+  public static ServicePort servicePort() {
+    return new ServicePort();
+  }
 }

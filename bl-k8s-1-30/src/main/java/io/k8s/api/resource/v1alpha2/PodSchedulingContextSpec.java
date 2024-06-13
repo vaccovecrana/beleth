@@ -28,4 +28,8 @@ public class PodSchedulingContextSpec {
     this.selectedNode = selectedNode;
     return this;
   }
+
+  public static PodSchedulingContextSpec podSchedulingContextSpec() {
+    return new PodSchedulingContextSpec();
+  }
 }

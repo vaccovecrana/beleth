@@ -54,4 +54,8 @@ public class FlexVolumeSource {
     this.secretRef = secretRef;
     return this;
   }
+
+  public static FlexVolumeSource flexVolumeSource() {
+    return new FlexVolumeSource();
+  }
 }

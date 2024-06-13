@@ -39,4 +39,8 @@ public class IngressPortStatus {
     this.protocol = protocol;
     return this;
   }
+
+  public static IngressPortStatus ingressPortStatus() {
+    return new IngressPortStatus();
+  }
 }

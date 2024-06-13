@@ -25,4 +25,8 @@ public class ObjectFieldSelector {
     this.fieldPath = fieldPath;
     return this;
   }
+
+  public static ObjectFieldSelector objectFieldSelector() {
+    return new ObjectFieldSelector();
+  }
 }

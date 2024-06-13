@@ -24,4 +24,8 @@ public class ObjectMetricSource {
     this.target = target;
     return this;
   }
+
+  public static ObjectMetricSource objectMetricSource() {
+    return new ObjectMetricSource();
+  }
 }

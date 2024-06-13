@@ -53,4 +53,8 @@ public class CertificateSigningRequest {
     this.status = status;
     return this;
   }
+
+  public static CertificateSigningRequest certificateSigningRequest() {
+    return new CertificateSigningRequest();
+  }
 }

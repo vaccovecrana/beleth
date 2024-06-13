@@ -46,4 +46,8 @@ public class APIResourceList {
     this.resources = resources;
     return this;
   }
+
+  public static APIResourceList aPIResourceList() {
+    return new APIResourceList();
+  }
 }

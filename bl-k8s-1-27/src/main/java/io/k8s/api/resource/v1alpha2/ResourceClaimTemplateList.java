@@ -44,4 +44,8 @@ public class ResourceClaimTemplateList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ResourceClaimTemplateList resourceClaimTemplateList() {
+    return new ResourceClaimTemplateList();
+  }
 }

@@ -76,4 +76,8 @@ public class ContainerStateTerminated {
     this.startedAt = startedAt;
     return this;
   }
+
+  public static ContainerStateTerminated containerStateTerminated() {
+    return new ContainerStateTerminated();
+  }
 }

@@ -25,4 +25,8 @@ public class TokenRequestStatus {
     this.token = token;
     return this;
   }
+
+  public static TokenRequestStatus tokenRequestStatus() {
+    return new TokenRequestStatus();
+  }
 }

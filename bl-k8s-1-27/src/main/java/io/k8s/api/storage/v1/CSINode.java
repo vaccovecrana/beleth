@@ -40,4 +40,8 @@ public class CSINode {
     this.spec = spec;
     return this;
   }
+
+  public static CSINode cSINode() {
+    return new CSINode();
+  }
 }

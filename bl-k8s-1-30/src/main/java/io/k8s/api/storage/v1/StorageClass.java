@@ -109,4 +109,8 @@ public class StorageClass {
     this.volumeBindingMode = volumeBindingMode;
     return this;
   }
+
+  public static StorageClass storageClass() {
+    return new StorageClass();
+  }
 }

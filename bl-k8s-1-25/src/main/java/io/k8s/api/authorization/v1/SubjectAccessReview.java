@@ -47,4 +47,8 @@ public class SubjectAccessReview {
     this.status = status;
     return this;
   }
+
+  public static SubjectAccessReview subjectAccessReview() {
+    return new SubjectAccessReview();
+  }
 }

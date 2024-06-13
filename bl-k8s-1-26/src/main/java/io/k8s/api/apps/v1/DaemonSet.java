@@ -47,4 +47,8 @@ public class DaemonSet {
     this.status = status;
     return this;
   }
+
+  public static DaemonSet daemonSet() {
+    return new DaemonSet();
+  }
 }

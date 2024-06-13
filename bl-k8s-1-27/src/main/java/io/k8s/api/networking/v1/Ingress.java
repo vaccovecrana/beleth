@@ -47,4 +47,8 @@ public class Ingress {
     this.status = status;
     return this;
   }
+
+  public static Ingress ingress() {
+    return new Ingress();
+  }
 }

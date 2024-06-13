@@ -44,4 +44,8 @@ public class NetworkPolicyList {
     this.metadata = metadata;
     return this;
   }
+
+  public static NetworkPolicyList networkPolicyList() {
+    return new NetworkPolicyList();
+  }
 }

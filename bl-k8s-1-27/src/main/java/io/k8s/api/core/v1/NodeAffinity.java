@@ -24,4 +24,8 @@ public class NodeAffinity {
     this.requiredDuringSchedulingIgnoredDuringExecution = requiredDuringSchedulingIgnoredDuringExecution;
     return this;
   }
+
+  public static NodeAffinity nodeAffinity() {
+    return new NodeAffinity();
+  }
 }

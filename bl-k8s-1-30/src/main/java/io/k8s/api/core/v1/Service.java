@@ -47,4 +47,8 @@ public class Service {
     this.status = status;
     return this;
   }
+
+  public static Service service() {
+    return new Service();
+  }
 }

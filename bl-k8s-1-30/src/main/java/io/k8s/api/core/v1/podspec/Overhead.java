@@ -10,4 +10,8 @@ public class Overhead extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Overhead overhead() {
+    return new Overhead();
+  }
 }

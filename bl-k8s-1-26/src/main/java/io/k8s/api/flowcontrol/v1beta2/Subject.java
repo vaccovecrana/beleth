@@ -36,4 +36,8 @@ public class Subject {
     this.user = user;
     return this;
   }
+
+  public static Subject subject() {
+    return new Subject();
+  }
 }

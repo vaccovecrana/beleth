@@ -16,4 +16,8 @@ public class PodSchedulingContextStatus {
     this.resourceClaims = resourceClaims;
     return this;
   }
+
+  public static PodSchedulingContextStatus podSchedulingContextStatus() {
+    return new PodSchedulingContextStatus();
+  }
 }

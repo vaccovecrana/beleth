@@ -23,4 +23,8 @@ public class VendorParameters {
     this.parameters = parameters;
     return this;
   }
+
+  public static VendorParameters vendorParameters() {
+    return new VendorParameters();
+  }
 }

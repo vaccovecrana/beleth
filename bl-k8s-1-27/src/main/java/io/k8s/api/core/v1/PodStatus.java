@@ -150,4 +150,8 @@ public class PodStatus {
     this.startTime = startTime;
     return this;
   }
+
+  public static PodStatus podStatus() {
+    return new PodStatus();
+  }
 }

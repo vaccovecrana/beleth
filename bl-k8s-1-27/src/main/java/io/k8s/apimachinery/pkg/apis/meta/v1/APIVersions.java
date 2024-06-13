@@ -47,4 +47,8 @@ public class APIVersions {
     this.versions = versions;
     return this;
   }
+
+  public static APIVersions aPIVersions() {
+    return new APIVersions();
+  }
 }

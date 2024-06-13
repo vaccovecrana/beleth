@@ -45,4 +45,8 @@ public class PodFailurePolicyOnExitCodesRequirement {
     this.values = values;
     return this;
   }
+
+  public static PodFailurePolicyOnExitCodesRequirement podFailurePolicyOnExitCodesRequirement() {
+    return new PodFailurePolicyOnExitCodesRequirement();
+  }
 }

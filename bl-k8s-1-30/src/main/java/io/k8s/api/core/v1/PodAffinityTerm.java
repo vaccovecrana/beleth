@@ -61,4 +61,8 @@ public class PodAffinityTerm {
     this.topologyKey = topologyKey;
     return this;
   }
+
+  public static PodAffinityTerm podAffinityTerm() {
+    return new PodAffinityTerm();
+  }
 }

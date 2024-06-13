@@ -25,4 +25,8 @@ public class NodeSelectorTerm {
     this.matchFields = matchFields;
     return this;
   }
+
+  public static NodeSelectorTerm nodeSelectorTerm() {
+    return new NodeSelectorTerm();
+  }
 }

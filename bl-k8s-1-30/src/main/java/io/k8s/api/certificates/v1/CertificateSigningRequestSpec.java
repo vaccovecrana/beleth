@@ -132,4 +132,8 @@ public class CertificateSigningRequestSpec {
     this.username = username;
     return this;
   }
+
+  public static CertificateSigningRequestSpec certificateSigningRequestSpec() {
+    return new CertificateSigningRequestSpec();
+  }
 }

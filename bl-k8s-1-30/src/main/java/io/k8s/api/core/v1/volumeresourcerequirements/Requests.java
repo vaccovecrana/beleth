@@ -10,4 +10,8 @@ public class Requests extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Requests requests() {
+    return new Requests();
+  }
 }

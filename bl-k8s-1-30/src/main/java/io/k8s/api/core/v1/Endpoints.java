@@ -56,4 +56,8 @@ public class Endpoints {
     this.subsets = subsets;
     return this;
   }
+
+  public static Endpoints endpoints() {
+    return new Endpoints();
+  }
 }

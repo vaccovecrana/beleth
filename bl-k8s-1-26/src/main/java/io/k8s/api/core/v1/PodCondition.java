@@ -65,4 +65,8 @@ public class PodCondition {
     this.type = type;
     return this;
   }
+
+  public static PodCondition podCondition() {
+    return new PodCondition();
+  }
 }

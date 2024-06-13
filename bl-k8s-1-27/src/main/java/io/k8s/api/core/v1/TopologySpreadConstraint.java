@@ -98,4 +98,8 @@ public class TopologySpreadConstraint {
     this.whenUnsatisfiable = whenUnsatisfiable;
     return this;
   }
+
+  public static TopologySpreadConstraint topologySpreadConstraint() {
+    return new TopologySpreadConstraint();
+  }
 }

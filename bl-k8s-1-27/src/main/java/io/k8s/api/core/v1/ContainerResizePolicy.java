@@ -25,4 +25,8 @@ public class ContainerResizePolicy {
     this.restartPolicy = restartPolicy;
     return this;
   }
+
+  public static ContainerResizePolicy containerResizePolicy() {
+    return new ContainerResizePolicy();
+  }
 }

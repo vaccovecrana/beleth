@@ -44,4 +44,8 @@ public class EventList {
     this.metadata = metadata;
     return this;
   }
+
+  public static EventList eventList() {
+    return new EventList();
+  }
 }

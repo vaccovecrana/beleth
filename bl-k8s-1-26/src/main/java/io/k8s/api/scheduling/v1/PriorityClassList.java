@@ -44,4 +44,8 @@ public class PriorityClassList {
     this.metadata = metadata;
     return this;
   }
+
+  public static PriorityClassList priorityClassList() {
+    return new PriorityClassList();
+  }
 }

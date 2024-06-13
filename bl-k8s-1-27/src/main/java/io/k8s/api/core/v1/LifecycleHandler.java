@@ -24,4 +24,8 @@ public class LifecycleHandler {
     this.tcpSocket = tcpSocket;
     return this;
   }
+
+  public static LifecycleHandler lifecycleHandler() {
+    return new LifecycleHandler();
+  }
 }

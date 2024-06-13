@@ -66,4 +66,8 @@ public class ReplicationControllerStatus {
     this.replicas = replicas;
     return this;
   }
+
+  public static ReplicationControllerStatus replicationControllerStatus() {
+    return new ReplicationControllerStatus();
+  }
 }

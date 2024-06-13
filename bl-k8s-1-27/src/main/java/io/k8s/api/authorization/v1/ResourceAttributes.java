@@ -75,4 +75,8 @@ public class ResourceAttributes {
     this.version = version;
     return this;
   }
+
+  public static ResourceAttributes resourceAttributes() {
+    return new ResourceAttributes();
+  }
 }

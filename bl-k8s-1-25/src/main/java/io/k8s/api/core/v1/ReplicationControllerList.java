@@ -44,4 +44,8 @@ public class ReplicationControllerList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ReplicationControllerList replicationControllerList() {
+    return new ReplicationControllerList();
+  }
 }

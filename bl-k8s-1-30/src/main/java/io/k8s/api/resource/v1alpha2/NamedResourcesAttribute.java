@@ -119,4 +119,8 @@ public class NamedResourcesAttribute {
     this.version = version;
     return this;
   }
+
+  public static NamedResourcesAttribute namedResourcesAttribute() {
+    return new NamedResourcesAttribute();
+  }
 }

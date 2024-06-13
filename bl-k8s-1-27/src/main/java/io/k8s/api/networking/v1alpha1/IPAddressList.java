@@ -44,4 +44,8 @@ public class IPAddressList {
     this.metadata = metadata;
     return this;
   }
+
+  public static IPAddressList iPAddressList() {
+    return new IPAddressList();
+  }
 }

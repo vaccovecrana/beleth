@@ -15,4 +15,8 @@ public class ScaleSpec {
     this.replicas = replicas;
     return this;
   }
+
+  public static ScaleSpec scaleSpec() {
+    return new ScaleSpec();
+  }
 }

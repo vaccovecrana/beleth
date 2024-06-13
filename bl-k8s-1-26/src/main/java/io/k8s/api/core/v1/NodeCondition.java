@@ -65,4 +65,8 @@ public class NodeCondition {
     this.type = type;
     return this;
   }
+
+  public static NodeCondition nodeCondition() {
+    return new NodeCondition();
+  }
 }

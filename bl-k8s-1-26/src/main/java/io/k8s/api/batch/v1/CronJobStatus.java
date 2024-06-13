@@ -37,4 +37,8 @@ public class CronJobStatus {
     this.lastSuccessfulTime = lastSuccessfulTime;
     return this;
   }
+
+  public static CronJobStatus cronJobStatus() {
+    return new CronJobStatus();
+  }
 }

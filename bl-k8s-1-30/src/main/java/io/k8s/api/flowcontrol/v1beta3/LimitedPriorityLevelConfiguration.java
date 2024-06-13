@@ -54,4 +54,8 @@ public class LimitedPriorityLevelConfiguration {
     this.nominalConcurrencyShares = nominalConcurrencyShares;
     return this;
   }
+
+  public static LimitedPriorityLevelConfiguration limitedPriorityLevelConfiguration() {
+    return new LimitedPriorityLevelConfiguration();
+  }
 }

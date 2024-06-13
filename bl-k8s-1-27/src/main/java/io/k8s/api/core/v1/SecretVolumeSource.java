@@ -50,4 +50,8 @@ public class SecretVolumeSource {
     this.secretName = secretName;
     return this;
   }
+
+  public static SecretVolumeSource secretVolumeSource() {
+    return new SecretVolumeSource();
+  }
 }

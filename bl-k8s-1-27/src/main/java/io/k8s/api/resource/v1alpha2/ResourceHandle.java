@@ -27,4 +27,8 @@ public class ResourceHandle {
     this.driverName = driverName;
     return this;
   }
+
+  public static ResourceHandle resourceHandle() {
+    return new ResourceHandle();
+  }
 }

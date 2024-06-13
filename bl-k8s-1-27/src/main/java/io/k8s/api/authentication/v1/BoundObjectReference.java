@@ -45,4 +45,8 @@ public class BoundObjectReference {
     this.uid = uid;
     return this;
   }
+
+  public static BoundObjectReference boundObjectReference() {
+    return new BoundObjectReference();
+  }
 }

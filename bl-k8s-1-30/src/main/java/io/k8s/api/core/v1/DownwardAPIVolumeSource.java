@@ -26,4 +26,8 @@ public class DownwardAPIVolumeSource {
     this.items = items;
     return this;
   }
+
+  public static DownwardAPIVolumeSource downwardAPIVolumeSource() {
+    return new DownwardAPIVolumeSource();
+  }
 }

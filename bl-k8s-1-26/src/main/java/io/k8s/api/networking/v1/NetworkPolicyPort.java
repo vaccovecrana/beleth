@@ -36,4 +36,8 @@ public class NetworkPolicyPort {
     this.protocol = protocol;
     return this;
   }
+
+  public static NetworkPolicyPort networkPolicyPort() {
+    return new NetworkPolicyPort();
+  }
 }

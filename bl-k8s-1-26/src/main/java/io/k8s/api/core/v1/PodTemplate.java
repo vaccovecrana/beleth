@@ -40,4 +40,8 @@ public class PodTemplate {
     this.template = template;
     return this;
   }
+
+  public static PodTemplate podTemplate() {
+    return new PodTemplate();
+  }
 }

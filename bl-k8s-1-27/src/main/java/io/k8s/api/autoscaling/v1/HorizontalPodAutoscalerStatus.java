@@ -57,4 +57,8 @@ public class HorizontalPodAutoscalerStatus {
     this.observedGeneration = observedGeneration;
     return this;
   }
+
+  public static HorizontalPodAutoscalerStatus horizontalPodAutoscalerStatus() {
+    return new HorizontalPodAutoscalerStatus();
+  }
 }

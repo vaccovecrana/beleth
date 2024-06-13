@@ -25,4 +25,8 @@ public class SecretReference {
     this.namespace = namespace;
     return this;
   }
+
+  public static SecretReference secretReference() {
+    return new SecretReference();
+  }
 }

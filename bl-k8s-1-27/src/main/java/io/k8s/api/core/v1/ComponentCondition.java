@@ -45,4 +45,8 @@ public class ComponentCondition {
     this.type = type;
     return this;
   }
+
+  public static ComponentCondition componentCondition() {
+    return new ComponentCondition();
+  }
 }

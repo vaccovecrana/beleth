@@ -1,4 +1,4 @@
-configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, false) }
+configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(false, false) }
 
 dependencies {
   implementation(project(":bl-codegen"))

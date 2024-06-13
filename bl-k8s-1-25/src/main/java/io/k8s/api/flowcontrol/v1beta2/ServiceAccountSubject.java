@@ -25,4 +25,8 @@ public class ServiceAccountSubject {
     this.namespace = namespace;
     return this;
   }
+
+  public static ServiceAccountSubject serviceAccountSubject() {
+    return new ServiceAccountSubject();
+  }
 }

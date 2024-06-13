@@ -42,4 +42,8 @@ public class TypedObjectReference {
     this.namespace = namespace;
     return this;
   }
+
+  public static TypedObjectReference typedObjectReference() {
+    return new TypedObjectReference();
+  }
 }

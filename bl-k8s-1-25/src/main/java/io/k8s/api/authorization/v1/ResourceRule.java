@@ -47,4 +47,8 @@ public class ResourceRule {
     this.verbs = verbs;
     return this;
   }
+
+  public static ResourceRule resourceRule() {
+    return new ResourceRule();
+  }
 }

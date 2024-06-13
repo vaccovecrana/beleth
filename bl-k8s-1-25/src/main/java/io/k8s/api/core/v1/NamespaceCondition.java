@@ -49,4 +49,8 @@ public class NamespaceCondition {
     this.type = type;
     return this;
   }
+
+  public static NamespaceCondition namespaceCondition() {
+    return new NamespaceCondition();
+  }
 }

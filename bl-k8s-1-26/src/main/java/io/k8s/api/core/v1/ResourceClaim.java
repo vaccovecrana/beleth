@@ -15,4 +15,8 @@ public class ResourceClaim {
     this.name = name;
     return this;
   }
+
+  public static ResourceClaim resourceClaim() {
+    return new ResourceClaim();
+  }
 }

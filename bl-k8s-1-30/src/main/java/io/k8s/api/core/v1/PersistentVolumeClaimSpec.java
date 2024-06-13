@@ -85,4 +85,8 @@ public class PersistentVolumeClaimSpec {
     this.volumeName = volumeName;
     return this;
   }
+
+  public static PersistentVolumeClaimSpec persistentVolumeClaimSpec() {
+    return new PersistentVolumeClaimSpec();
+  }
 }

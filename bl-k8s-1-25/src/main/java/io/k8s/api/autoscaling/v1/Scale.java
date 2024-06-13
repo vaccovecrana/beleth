@@ -47,4 +47,8 @@ public class Scale {
     this.status = status;
     return this;
   }
+
+  public static Scale scale() {
+    return new Scale();
+  }
 }

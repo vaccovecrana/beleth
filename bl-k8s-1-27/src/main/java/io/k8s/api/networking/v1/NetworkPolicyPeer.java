@@ -26,4 +26,8 @@ public class NetworkPolicyPeer {
     this.podSelector = podSelector;
     return this;
   }
+
+  public static NetworkPolicyPeer networkPolicyPeer() {
+    return new NetworkPolicyPeer();
+  }
 }

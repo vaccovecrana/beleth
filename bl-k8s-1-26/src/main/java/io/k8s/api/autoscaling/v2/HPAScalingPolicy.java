@@ -36,4 +36,8 @@ public class HPAScalingPolicy {
     this.value = value;
     return this;
   }
+
+  public static HPAScalingPolicy hPAScalingPolicy() {
+    return new HPAScalingPolicy();
+  }
 }

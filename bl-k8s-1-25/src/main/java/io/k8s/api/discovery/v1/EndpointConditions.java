@@ -35,4 +35,8 @@ public class EndpointConditions {
     this.terminating = terminating;
     return this;
   }
+
+  public static EndpointConditions endpointConditions() {
+    return new EndpointConditions();
+  }
 }

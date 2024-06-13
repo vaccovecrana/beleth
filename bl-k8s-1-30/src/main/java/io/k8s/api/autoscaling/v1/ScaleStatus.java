@@ -26,4 +26,8 @@ public class ScaleStatus {
     this.selector = selector;
     return this;
   }
+
+  public static ScaleStatus scaleStatus() {
+    return new ScaleStatus();
+  }
 }

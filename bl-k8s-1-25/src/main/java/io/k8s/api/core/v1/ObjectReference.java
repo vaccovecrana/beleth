@@ -75,4 +75,8 @@ public class ObjectReference {
     this.uid = uid;
     return this;
   }
+
+  public static ObjectReference objectReference() {
+    return new ObjectReference();
+  }
 }

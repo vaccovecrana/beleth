@@ -11,4 +11,8 @@ public class Extra extends LinkedHashMap<String, List<String>> {
     put(key, value);
     return this;
   }
+
+  public static Extra extra() {
+    return new Extra();
+  }
 }

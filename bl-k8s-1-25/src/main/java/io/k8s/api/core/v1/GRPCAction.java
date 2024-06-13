@@ -25,4 +25,8 @@ public class GRPCAction {
     this.service = service;
     return this;
   }
+
+  public static GRPCAction gRPCAction() {
+    return new GRPCAction();
+  }
 }

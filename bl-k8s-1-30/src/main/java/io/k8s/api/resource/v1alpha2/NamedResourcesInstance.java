@@ -26,4 +26,8 @@ public class NamedResourcesInstance {
     this.name = name;
     return this;
   }
+
+  public static NamedResourcesInstance namedResourcesInstance() {
+    return new NamedResourcesInstance();
+  }
 }

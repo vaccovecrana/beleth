@@ -44,4 +44,8 @@ public class ValidatingAdmissionPolicyBindingList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ValidatingAdmissionPolicyBindingList validatingAdmissionPolicyBindingList() {
+    return new ValidatingAdmissionPolicyBindingList();
+  }
 }

@@ -65,4 +65,8 @@ public class DeploymentCondition {
     this.type = type;
     return this;
   }
+
+  public static DeploymentCondition deploymentCondition() {
+    return new DeploymentCondition();
+  }
 }

@@ -218,4 +218,8 @@ public class Volume {
     this.vsphereVolume = vsphereVolume;
     return this;
   }
+
+  public static Volume volume() {
+    return new Volume();
+  }
 }

@@ -44,4 +44,8 @@ public class ComponentStatus {
     this.metadata = metadata;
     return this;
   }
+
+  public static ComponentStatus componentStatus() {
+    return new ComponentStatus();
+  }
 }

@@ -20,4 +20,8 @@ public class WatchEvent {
     this.type = type;
     return this;
   }
+
+  public static WatchEvent watchEvent() {
+    return new WatchEvent();
+  }
 }

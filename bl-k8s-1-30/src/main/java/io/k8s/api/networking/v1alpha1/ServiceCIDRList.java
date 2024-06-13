@@ -44,4 +44,8 @@ public class ServiceCIDRList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ServiceCIDRList serviceCIDRList() {
+    return new ServiceCIDRList();
+  }
 }

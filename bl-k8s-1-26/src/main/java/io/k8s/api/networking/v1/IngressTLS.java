@@ -26,4 +26,8 @@ public class IngressTLS {
     this.secretName = secretName;
     return this;
   }
+
+  public static IngressTLS ingressTLS() {
+    return new IngressTLS();
+  }
 }

@@ -65,4 +65,8 @@ public class JobCondition {
     this.type = type;
     return this;
   }
+
+  public static JobCondition jobCondition() {
+    return new JobCondition();
+  }
 }

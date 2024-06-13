@@ -46,4 +46,8 @@ public class AzureFilePersistentVolumeSource {
     this.shareName = shareName;
     return this;
   }
+
+  public static AzureFilePersistentVolumeSource azureFilePersistentVolumeSource() {
+    return new AzureFilePersistentVolumeSource();
+  }
 }

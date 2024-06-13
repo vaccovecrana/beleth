@@ -22,4 +22,8 @@ public class ResourceMetricStatus {
     this.name = name;
     return this;
   }
+
+  public static ResourceMetricStatus resourceMetricStatus() {
+    return new ResourceMetricStatus();
+  }
 }

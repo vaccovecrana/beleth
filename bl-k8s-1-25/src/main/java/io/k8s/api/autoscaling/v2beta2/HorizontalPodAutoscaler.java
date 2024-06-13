@@ -47,4 +47,8 @@ public class HorizontalPodAutoscaler {
     this.status = status;
     return this;
   }
+
+  public static HorizontalPodAutoscaler horizontalPodAutoscaler() {
+    return new HorizontalPodAutoscaler();
+  }
 }

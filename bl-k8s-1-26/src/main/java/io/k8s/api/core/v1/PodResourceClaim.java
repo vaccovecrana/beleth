@@ -22,4 +22,8 @@ public class PodResourceClaim {
     this.source = source;
     return this;
   }
+
+  public static PodResourceClaim podResourceClaim() {
+    return new PodResourceClaim();
+  }
 }

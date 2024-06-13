@@ -44,4 +44,8 @@ public class ReplicaSetList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ReplicaSetList replicaSetList() {
+    return new ReplicaSetList();
+  }
 }

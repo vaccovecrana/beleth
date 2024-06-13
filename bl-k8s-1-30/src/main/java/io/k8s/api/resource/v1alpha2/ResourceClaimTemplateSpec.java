@@ -19,4 +19,8 @@ public class ResourceClaimTemplateSpec {
     this.spec = spec;
     return this;
   }
+
+  public static ResourceClaimTemplateSpec resourceClaimTemplateSpec() {
+    return new ResourceClaimTemplateSpec();
+  }
 }

@@ -32,4 +32,8 @@ public class EnvVar {
     this.valueFrom = valueFrom;
     return this;
   }
+
+  public static EnvVar envVar() {
+    return new EnvVar();
+  }
 }

@@ -25,4 +25,8 @@ public class Preconditions {
     this.uid = uid;
     return this;
   }
+
+  public static Preconditions preconditions() {
+    return new Preconditions();
+  }
 }

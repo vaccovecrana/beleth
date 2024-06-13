@@ -66,4 +66,8 @@ public class ConfigMap {
     this.metadata = metadata;
     return this;
   }
+
+  public static ConfigMap configMap() {
+    return new ConfigMap();
+  }
 }

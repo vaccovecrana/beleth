@@ -42,4 +42,8 @@ public class HTTPIngressPath {
     this.pathType = pathType;
     return this;
   }
+
+  public static HTTPIngressPath hTTPIngressPath() {
+    return new HTTPIngressPath();
+  }
 }

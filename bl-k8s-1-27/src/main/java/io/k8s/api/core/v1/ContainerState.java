@@ -24,4 +24,8 @@ public class ContainerState {
     this.waiting = waiting;
     return this;
   }
+
+  public static ContainerState containerState() {
+    return new ContainerState();
+  }
 }

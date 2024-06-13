@@ -77,4 +77,8 @@ public class ValidatingAdmissionPolicySpec {
     this.validations = validations;
     return this;
   }
+
+  public static ValidatingAdmissionPolicySpec validatingAdmissionPolicySpec() {
+    return new ValidatingAdmissionPolicySpec();
+  }
 }

@@ -47,4 +47,8 @@ public class ResourceQuota {
     this.status = status;
     return this;
   }
+
+  public static ResourceQuota resourceQuota() {
+    return new ResourceQuota();
+  }
 }

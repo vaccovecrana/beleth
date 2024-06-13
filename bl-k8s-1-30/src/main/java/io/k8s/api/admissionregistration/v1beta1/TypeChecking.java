@@ -15,4 +15,8 @@ public class TypeChecking {
     this.expressionWarnings = expressionWarnings;
     return this;
   }
+
+  public static TypeChecking typeChecking() {
+    return new TypeChecking();
+  }
 }

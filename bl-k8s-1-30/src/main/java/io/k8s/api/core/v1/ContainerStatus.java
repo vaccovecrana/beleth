@@ -122,4 +122,8 @@ public class ContainerStatus {
     this.volumeMounts = volumeMounts;
     return this;
   }
+
+  public static ContainerStatus containerStatus() {
+    return new ContainerStatus();
+  }
 }

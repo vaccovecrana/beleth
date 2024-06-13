@@ -55,4 +55,8 @@ public class ConfigMapNodeConfigSource {
     this.uid = uid;
     return this;
   }
+
+  public static ConfigMapNodeConfigSource configMapNodeConfigSource() {
+    return new ConfigMapNodeConfigSource();
+  }
 }

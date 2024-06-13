@@ -20,4 +20,8 @@ public class NamedResourcesFilter {
     this.selector = selector;
     return this;
   }
+
+  public static NamedResourcesFilter namedResourcesFilter() {
+    return new NamedResourcesFilter();
+  }
 }

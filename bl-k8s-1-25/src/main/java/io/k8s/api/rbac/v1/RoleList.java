@@ -44,4 +44,8 @@ public class RoleList {
     this.metadata = metadata;
     return this;
   }
+
+  public static RoleList roleList() {
+    return new RoleList();
+  }
 }

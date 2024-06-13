@@ -44,4 +44,8 @@ public class HorizontalPodAutoscalerList {
     this.metadata = metadata;
     return this;
   }
+
+  public static HorizontalPodAutoscalerList horizontalPodAutoscalerList() {
+    return new HorizontalPodAutoscalerList();
+  }
 }

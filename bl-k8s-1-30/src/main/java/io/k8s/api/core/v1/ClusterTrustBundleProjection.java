@@ -54,4 +54,8 @@ public class ClusterTrustBundleProjection {
     this.signerName = signerName;
     return this;
   }
+
+  public static ClusterTrustBundleProjection clusterTrustBundleProjection() {
+    return new ClusterTrustBundleProjection();
+  }
 }

@@ -35,4 +35,8 @@ public class MatchCondition {
     this.name = name;
     return this;
   }
+
+  public static MatchCondition matchCondition() {
+    return new MatchCondition();
+  }
 }

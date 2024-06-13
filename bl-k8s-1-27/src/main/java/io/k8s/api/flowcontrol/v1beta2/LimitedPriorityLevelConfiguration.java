@@ -54,4 +54,8 @@ public class LimitedPriorityLevelConfiguration {
     this.limitResponse = limitResponse;
     return this;
   }
+
+  public static LimitedPriorityLevelConfiguration limitedPriorityLevelConfiguration() {
+    return new LimitedPriorityLevelConfiguration();
+  }
 }

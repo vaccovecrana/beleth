@@ -15,4 +15,8 @@ public class Overhead {
     this.podFixed = podFixed;
     return this;
   }
+
+  public static Overhead overhead() {
+    return new Overhead();
+  }
 }

@@ -107,4 +107,8 @@ public class APIResource {
     this.version = version;
     return this;
   }
+
+  public static APIResource aPIResource() {
+    return new APIResource();
+  }
 }

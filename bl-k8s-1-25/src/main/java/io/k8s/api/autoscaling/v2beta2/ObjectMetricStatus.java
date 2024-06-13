@@ -24,4 +24,8 @@ public class ObjectMetricStatus {
     this.metric = metric;
     return this;
   }
+
+  public static ObjectMetricStatus objectMetricStatus() {
+    return new ObjectMetricStatus();
+  }
 }

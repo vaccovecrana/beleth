@@ -16,4 +16,8 @@ public class NetworkPolicyStatus {
     this.conditions = conditions;
     return this;
   }
+
+  public static NetworkPolicyStatus networkPolicyStatus() {
+    return new NetworkPolicyStatus();
+  }
 }

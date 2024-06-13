@@ -25,4 +25,8 @@ public class EventSource {
     this.host = host;
     return this;
   }
+
+  public static EventSource eventSource() {
+    return new EventSource();
+  }
 }

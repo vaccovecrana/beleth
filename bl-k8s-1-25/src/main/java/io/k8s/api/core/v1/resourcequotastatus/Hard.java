@@ -10,4 +10,8 @@ public class Hard extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static Hard hard() {
+    return new Hard();
+  }
 }

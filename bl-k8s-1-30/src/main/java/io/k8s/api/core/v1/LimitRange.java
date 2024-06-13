@@ -40,4 +40,8 @@ public class LimitRange {
     this.spec = spec;
     return this;
   }
+
+  public static LimitRange limitRange() {
+    return new LimitRange();
+  }
 }

@@ -22,4 +22,8 @@ public class LimitResponse {
     this.type = type;
     return this;
   }
+
+  public static LimitResponse limitResponse() {
+    return new LimitResponse();
+  }
 }

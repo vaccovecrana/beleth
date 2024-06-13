@@ -47,4 +47,8 @@ public class APIService {
     this.status = status;
     return this;
   }
+
+  public static APIService aPIService() {
+    return new APIService();
+  }
 }

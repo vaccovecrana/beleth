@@ -17,4 +17,8 @@ public class ExternalMetricStatus {
     this.metric = metric;
     return this;
   }
+
+  public static ExternalMetricStatus externalMetricStatus() {
+    return new ExternalMetricStatus();
+  }
 }

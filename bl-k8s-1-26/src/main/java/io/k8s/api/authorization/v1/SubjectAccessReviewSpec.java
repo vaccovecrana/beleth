@@ -62,4 +62,8 @@ public class SubjectAccessReviewSpec {
     this.user = user;
     return this;
   }
+
+  public static SubjectAccessReviewSpec subjectAccessReviewSpec() {
+    return new SubjectAccessReviewSpec();
+  }
 }

@@ -75,4 +75,8 @@ public class DeleteOptions {
     this.propagationPolicy = propagationPolicy;
     return this;
   }
+
+  public static DeleteOptions deleteOptions() {
+    return new DeleteOptions();
+  }
 }

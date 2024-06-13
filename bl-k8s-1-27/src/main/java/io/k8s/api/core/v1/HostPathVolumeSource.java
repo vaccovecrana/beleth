@@ -25,4 +25,8 @@ public class HostPathVolumeSource {
     this.type = type;
     return this;
   }
+
+  public static HostPathVolumeSource hostPathVolumeSource() {
+    return new HostPathVolumeSource();
+  }
 }

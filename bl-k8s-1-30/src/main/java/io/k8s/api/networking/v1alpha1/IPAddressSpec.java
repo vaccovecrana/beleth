@@ -10,4 +10,8 @@ public class IPAddressSpec {
     this.parentRef = parentRef;
     return this;
   }
+
+  public static IPAddressSpec iPAddressSpec() {
+    return new IPAddressSpec();
+  }
 }

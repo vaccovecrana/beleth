@@ -44,4 +44,8 @@ public class ControllerRevisionList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ControllerRevisionList controllerRevisionList() {
+    return new ControllerRevisionList();
+  }
 }

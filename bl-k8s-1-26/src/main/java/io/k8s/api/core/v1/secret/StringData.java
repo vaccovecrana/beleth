@@ -10,4 +10,8 @@ public class StringData extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static StringData stringData() {
+    return new StringData();
+  }
 }

@@ -89,4 +89,8 @@ public class ValidatingAdmissionPolicySpec {
     this.variables = variables;
     return this;
   }
+
+  public static ValidatingAdmissionPolicySpec validatingAdmissionPolicySpec() {
+    return new ValidatingAdmissionPolicySpec();
+  }
 }

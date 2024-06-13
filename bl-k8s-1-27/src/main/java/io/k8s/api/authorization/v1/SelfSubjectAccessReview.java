@@ -47,4 +47,8 @@ public class SelfSubjectAccessReview {
     this.status = status;
     return this;
   }
+
+  public static SelfSubjectAccessReview selfSubjectAccessReview() {
+    return new SelfSubjectAccessReview();
+  }
 }

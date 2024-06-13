@@ -40,4 +40,8 @@ public class Binding {
     this.target = target;
     return this;
   }
+
+  public static Binding binding() {
+    return new Binding();
+  }
 }

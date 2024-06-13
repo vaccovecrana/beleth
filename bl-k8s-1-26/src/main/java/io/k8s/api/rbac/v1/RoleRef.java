@@ -35,4 +35,8 @@ public class RoleRef {
     this.name = name;
     return this;
   }
+
+  public static RoleRef roleRef() {
+    return new RoleRef();
+  }
 }

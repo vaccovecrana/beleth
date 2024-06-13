@@ -58,4 +58,8 @@ public class ValidatingAdmissionPolicyBindingSpec {
     this.validationActions = validationActions;
     return this;
   }
+
+  public static ValidatingAdmissionPolicyBindingSpec validatingAdmissionPolicyBindingSpec() {
+    return new ValidatingAdmissionPolicyBindingSpec();
+  }
 }

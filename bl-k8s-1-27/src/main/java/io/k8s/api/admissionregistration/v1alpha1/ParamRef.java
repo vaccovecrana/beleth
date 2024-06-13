@@ -25,4 +25,8 @@ public class ParamRef {
     this.namespace = namespace;
     return this;
   }
+
+  public static ParamRef paramRef() {
+    return new ParamRef();
+  }
 }

@@ -72,4 +72,8 @@ public class ManagedFieldsEntry {
     this.time = time;
     return this;
   }
+
+  public static ManagedFieldsEntry managedFieldsEntry() {
+    return new ManagedFieldsEntry();
+  }
 }

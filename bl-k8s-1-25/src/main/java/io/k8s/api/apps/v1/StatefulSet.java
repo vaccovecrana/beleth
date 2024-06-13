@@ -51,4 +51,8 @@ public class StatefulSet {
     this.status = status;
     return this;
   }
+
+  public static StatefulSet statefulSet() {
+    return new StatefulSet();
+  }
 }

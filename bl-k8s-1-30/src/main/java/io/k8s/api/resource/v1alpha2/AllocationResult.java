@@ -36,4 +36,8 @@ public class AllocationResult {
     this.shareable = shareable;
     return this;
   }
+
+  public static AllocationResult allocationResult() {
+    return new AllocationResult();
+  }
 }

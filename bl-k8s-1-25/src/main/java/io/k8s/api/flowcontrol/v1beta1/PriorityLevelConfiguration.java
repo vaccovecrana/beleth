@@ -47,4 +47,8 @@ public class PriorityLevelConfiguration {
     this.status = status;
     return this;
   }
+
+  public static PriorityLevelConfiguration priorityLevelConfiguration() {
+    return new PriorityLevelConfiguration();
+  }
 }

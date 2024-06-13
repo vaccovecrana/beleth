@@ -40,4 +40,8 @@ public class VolumeAttachmentStatus {
     this.detachError = detachError;
     return this;
   }
+
+  public static VolumeAttachmentStatus volumeAttachmentStatus() {
+    return new VolumeAttachmentStatus();
+  }
 }

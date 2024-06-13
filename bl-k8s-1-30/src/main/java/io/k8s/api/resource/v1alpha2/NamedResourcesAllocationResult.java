@@ -15,4 +15,8 @@ public class NamedResourcesAllocationResult {
     this.name = name;
     return this;
   }
+
+  public static NamedResourcesAllocationResult namedResourcesAllocationResult() {
+    return new NamedResourcesAllocationResult();
+  }
 }

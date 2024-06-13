@@ -44,4 +44,8 @@ public class ConfigMapList {
     this.metadata = metadata;
     return this;
   }
+
+  public static ConfigMapList configMapList() {
+    return new ConfigMapList();
+  }
 }

@@ -91,4 +91,8 @@ public class ContainerStatus {
     this.state = state;
     return this;
   }
+
+  public static ContainerStatus containerStatus() {
+    return new ContainerStatus();
+  }
 }

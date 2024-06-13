@@ -44,4 +44,8 @@ public class CertificateSigningRequestList {
     this.metadata = metadata;
     return this;
   }
+
+  public static CertificateSigningRequestList certificateSigningRequestList() {
+    return new CertificateSigningRequestList();
+  }
 }

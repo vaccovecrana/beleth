@@ -29,4 +29,8 @@ public class IngressRule {
     this.http = http;
     return this;
   }
+
+  public static IngressRule ingressRule() {
+    return new IngressRule();
+  }
 }

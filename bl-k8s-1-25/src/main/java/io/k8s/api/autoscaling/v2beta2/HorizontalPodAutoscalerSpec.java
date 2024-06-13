@@ -50,4 +50,8 @@ public class HorizontalPodAutoscalerSpec {
     this.scaleTargetRef = scaleTargetRef;
     return this;
   }
+
+  public static HorizontalPodAutoscalerSpec horizontalPodAutoscalerSpec() {
+    return new HorizontalPodAutoscalerSpec();
+  }
 }

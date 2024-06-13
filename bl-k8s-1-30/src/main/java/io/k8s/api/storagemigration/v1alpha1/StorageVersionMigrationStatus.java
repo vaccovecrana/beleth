@@ -26,4 +26,8 @@ public class StorageVersionMigrationStatus {
     this.resourceVersion = resourceVersion;
     return this;
   }
+
+  public static StorageVersionMigrationStatus storageVersionMigrationStatus() {
+    return new StorageVersionMigrationStatus();
+  }
 }

@@ -42,4 +42,8 @@ public class EndpointAddress {
     this.targetRef = targetRef;
     return this;
   }
+
+  public static EndpointAddress endpointAddress() {
+    return new EndpointAddress();
+  }
 }

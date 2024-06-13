@@ -55,4 +55,8 @@ public class MigrationCondition {
     this.type = type;
     return this;
   }
+
+  public static MigrationCondition migrationCondition() {
+    return new MigrationCondition();
+  }
 }

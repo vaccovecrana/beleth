@@ -46,4 +46,8 @@ public class WindowsSecurityContextOptions {
     this.runAsUserName = runAsUserName;
     return this;
   }
+
+  public static WindowsSecurityContextOptions windowsSecurityContextOptions() {
+    return new WindowsSecurityContextOptions();
+  }
 }

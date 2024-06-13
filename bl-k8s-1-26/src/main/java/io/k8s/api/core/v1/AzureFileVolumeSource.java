@@ -36,4 +36,8 @@ public class AzureFileVolumeSource {
     this.shareName = shareName;
     return this;
   }
+
+  public static AzureFileVolumeSource azureFileVolumeSource() {
+    return new AzureFileVolumeSource();
+  }
 }

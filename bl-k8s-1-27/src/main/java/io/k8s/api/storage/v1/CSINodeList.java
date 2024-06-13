@@ -44,4 +44,8 @@ public class CSINodeList {
     this.metadata = metadata;
     return this;
   }
+
+  public static CSINodeList cSINodeList() {
+    return new CSINodeList();
+  }
 }

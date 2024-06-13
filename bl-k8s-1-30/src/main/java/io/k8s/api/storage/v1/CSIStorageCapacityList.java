@@ -44,4 +44,8 @@ public class CSIStorageCapacityList {
     this.metadata = metadata;
     return this;
   }
+
+  public static CSIStorageCapacityList cSIStorageCapacityList() {
+    return new CSIStorageCapacityList();
+  }
 }

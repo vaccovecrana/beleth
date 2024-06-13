@@ -34,4 +34,8 @@ public class TokenRequestSpec {
     this.expirationSeconds = expirationSeconds;
     return this;
   }
+
+  public static TokenRequestSpec tokenRequestSpec() {
+    return new TokenRequestSpec();
+  }
 }

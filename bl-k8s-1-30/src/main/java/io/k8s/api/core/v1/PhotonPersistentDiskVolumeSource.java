@@ -25,4 +25,8 @@ public class PhotonPersistentDiskVolumeSource {
     this.pdID = pdID;
     return this;
   }
+
+  public static PhotonPersistentDiskVolumeSource photonPersistentDiskVolumeSource() {
+    return new PhotonPersistentDiskVolumeSource();
+  }
 }

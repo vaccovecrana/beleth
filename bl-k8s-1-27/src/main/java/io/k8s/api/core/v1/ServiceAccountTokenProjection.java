@@ -36,4 +36,8 @@ public class ServiceAccountTokenProjection {
     this.path = path;
     return this;
   }
+
+  public static ServiceAccountTokenProjection serviceAccountTokenProjection() {
+    return new ServiceAccountTokenProjection();
+  }
 }

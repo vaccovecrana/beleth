@@ -26,4 +26,8 @@ public class EventSeries {
     this.lastObservedTime = lastObservedTime;
     return this;
   }
+
+  public static EventSeries eventSeries() {
+    return new EventSeries();
+  }
 }

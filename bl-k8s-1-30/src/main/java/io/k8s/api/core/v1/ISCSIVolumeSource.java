@@ -115,4 +115,8 @@ public class ISCSIVolumeSource {
     this.targetPortal = targetPortal;
     return this;
   }
+
+  public static ISCSIVolumeSource iSCSIVolumeSource() {
+    return new ISCSIVolumeSource();
+  }
 }

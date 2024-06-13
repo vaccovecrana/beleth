@@ -25,4 +25,8 @@ public class Sysctl {
     this.value = value;
     return this;
   }
+
+  public static Sysctl sysctl() {
+    return new Sysctl();
+  }
 }

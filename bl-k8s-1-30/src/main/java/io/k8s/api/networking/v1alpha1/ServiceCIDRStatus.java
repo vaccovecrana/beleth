@@ -16,4 +16,8 @@ public class ServiceCIDRStatus {
     this.conditions = conditions;
     return this;
   }
+
+  public static ServiceCIDRStatus serviceCIDRStatus() {
+    return new ServiceCIDRStatus();
+  }
 }

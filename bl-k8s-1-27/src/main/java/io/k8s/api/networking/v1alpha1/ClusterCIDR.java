@@ -40,4 +40,8 @@ public class ClusterCIDR {
     this.spec = spec;
     return this;
   }
+
+  public static ClusterCIDR clusterCIDR() {
+    return new ClusterCIDR();
+  }
 }

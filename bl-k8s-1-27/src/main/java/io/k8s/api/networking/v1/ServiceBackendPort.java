@@ -26,4 +26,8 @@ public class ServiceBackendPort {
     this.number = number;
     return this;
   }
+
+  public static ServiceBackendPort serviceBackendPort() {
+    return new ServiceBackendPort();
+  }
 }

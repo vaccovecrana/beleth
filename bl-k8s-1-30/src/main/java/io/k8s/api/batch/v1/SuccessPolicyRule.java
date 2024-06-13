@@ -26,4 +26,8 @@ public class SuccessPolicyRule {
     this.succeededIndexes = succeededIndexes;
     return this;
   }
+
+  public static SuccessPolicyRule successPolicyRule() {
+    return new SuccessPolicyRule();
+  }
 }

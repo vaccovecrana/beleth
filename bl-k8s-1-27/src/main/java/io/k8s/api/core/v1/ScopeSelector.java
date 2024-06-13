@@ -15,4 +15,8 @@ public class ScopeSelector {
     this.matchExpressions = matchExpressions;
     return this;
   }
+
+  public static ScopeSelector scopeSelector() {
+    return new ScopeSelector();
+  }
 }

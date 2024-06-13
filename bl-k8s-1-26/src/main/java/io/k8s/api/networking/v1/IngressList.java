@@ -44,4 +44,8 @@ public class IngressList {
     this.metadata = metadata;
     return this;
   }
+
+  public static IngressList ingressList() {
+    return new IngressList();
+  }
 }

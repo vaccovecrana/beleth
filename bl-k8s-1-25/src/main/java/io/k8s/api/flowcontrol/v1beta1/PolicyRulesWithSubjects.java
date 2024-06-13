@@ -35,4 +35,8 @@ public class PolicyRulesWithSubjects {
     this.subjects = subjects;
     return this;
   }
+
+  public static PolicyRulesWithSubjects policyRulesWithSubjects() {
+    return new PolicyRulesWithSubjects();
+  }
 }

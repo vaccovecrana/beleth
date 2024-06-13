@@ -11,4 +11,8 @@ public class EphemeralVolumeSource {
     this.volumeClaimTemplate = volumeClaimTemplate;
     return this;
   }
+
+  public static EphemeralVolumeSource ephemeralVolumeSource() {
+    return new EphemeralVolumeSource();
+  }
 }

@@ -22,4 +22,8 @@ public class IngressServiceBackend {
     this.port = port;
     return this;
   }
+
+  public static IngressServiceBackend ingressServiceBackend() {
+    return new IngressServiceBackend();
+  }
 }

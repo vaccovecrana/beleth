@@ -44,4 +44,8 @@ public class LeaseList {
     this.metadata = metadata;
     return this;
   }
+
+  public static LeaseList leaseList() {
+    return new LeaseList();
+  }
 }

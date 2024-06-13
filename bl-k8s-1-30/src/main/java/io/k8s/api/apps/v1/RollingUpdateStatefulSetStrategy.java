@@ -26,4 +26,8 @@ public class RollingUpdateStatefulSetStrategy {
     this.partition = partition;
     return this;
   }
+
+  public static RollingUpdateStatefulSetStrategy rollingUpdateStatefulSetStrategy() {
+    return new RollingUpdateStatefulSetStrategy();
+  }
 }

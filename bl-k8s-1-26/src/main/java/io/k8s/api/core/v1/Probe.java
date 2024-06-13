@@ -93,4 +93,8 @@ public class Probe {
     this.timeoutSeconds = timeoutSeconds;
     return this;
   }
+
+  public static Probe probe() {
+    return new Probe();
+  }
 }

@@ -46,4 +46,8 @@ public class ServiceReference {
     this.port = port;
     return this;
   }
+
+  public static ServiceReference serviceReference() {
+    return new ServiceReference();
+  }
 }

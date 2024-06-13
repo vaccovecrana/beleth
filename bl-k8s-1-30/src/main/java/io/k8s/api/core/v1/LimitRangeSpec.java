@@ -15,4 +15,8 @@ public class LimitRangeSpec {
     this.limits = limits;
     return this;
   }
+
+  public static LimitRangeSpec limitRangeSpec() {
+    return new LimitRangeSpec();
+  }
 }

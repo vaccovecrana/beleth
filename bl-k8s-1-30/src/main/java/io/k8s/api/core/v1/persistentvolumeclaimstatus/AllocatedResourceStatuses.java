@@ -10,4 +10,8 @@ public class AllocatedResourceStatuses extends LinkedHashMap<String, String> {
     put(key, value);
     return this;
   }
+
+  public static AllocatedResourceStatuses allocatedResourceStatuses() {
+    return new AllocatedResourceStatuses();
+  }
 }

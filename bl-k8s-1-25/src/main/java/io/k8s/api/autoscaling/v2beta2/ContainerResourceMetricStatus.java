@@ -32,4 +32,8 @@ public class ContainerResourceMetricStatus {
     this.name = name;
     return this;
   }
+
+  public static ContainerResourceMetricStatus containerResourceMetricStatus() {
+    return new ContainerResourceMetricStatus();
+  }
 }

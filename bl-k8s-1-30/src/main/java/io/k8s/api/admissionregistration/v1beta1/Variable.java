@@ -25,4 +25,8 @@ public class Variable {
     this.name = name;
     return this;
   }
+
+  public static Variable variable() {
+    return new Variable();
+  }
 }

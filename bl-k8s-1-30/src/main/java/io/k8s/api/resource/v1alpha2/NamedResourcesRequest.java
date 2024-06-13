@@ -20,4 +20,8 @@ public class NamedResourcesRequest {
     this.selector = selector;
     return this;
   }
+
+  public static NamedResourcesRequest namedResourcesRequest() {
+    return new NamedResourcesRequest();
+  }
 }

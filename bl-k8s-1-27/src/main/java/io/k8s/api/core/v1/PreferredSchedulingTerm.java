@@ -22,4 +22,8 @@ public class PreferredSchedulingTerm {
     this.weight = weight;
     return this;
   }
+
+  public static PreferredSchedulingTerm preferredSchedulingTerm() {
+    return new PreferredSchedulingTerm();
+  }
 }

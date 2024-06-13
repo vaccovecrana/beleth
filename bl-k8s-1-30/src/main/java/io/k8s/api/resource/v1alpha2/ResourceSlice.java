@@ -62,4 +62,8 @@ public class ResourceSlice {
     this.nodeName = nodeName;
     return this;
   }
+
+  public static ResourceSlice resourceSlice() {
+    return new ResourceSlice();
+  }
 }

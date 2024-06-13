@@ -11,4 +11,8 @@ public class Patch extends LinkedHashMap<String, Object> {
     put(key, value);
     return this;
   }
+
+  public static Patch patch() {
+    return new Patch();
+  }
 }

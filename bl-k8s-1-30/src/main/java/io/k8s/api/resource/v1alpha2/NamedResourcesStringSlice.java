@@ -16,4 +16,8 @@ public class NamedResourcesStringSlice {
     this.strings = strings;
     return this;
   }
+
+  public static NamedResourcesStringSlice namedResourcesStringSlice() {
+    return new NamedResourcesStringSlice();
+  }
 }

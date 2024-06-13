@@ -119,4 +119,8 @@ public class NodeStatus {
     this.volumesInUse = volumesInUse;
     return this;
   }
+
+  public static NodeStatus nodeStatus() {
+    return new NodeStatus();
+  }
 }

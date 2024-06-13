@@ -15,4 +15,8 @@ public class PodFailurePolicy {
     this.rules = rules;
     return this;
   }
+
+  public static PodFailurePolicy podFailurePolicy() {
+    return new PodFailurePolicy();
+  }
 }

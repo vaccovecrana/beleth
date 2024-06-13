@@ -45,4 +45,8 @@ public class ResourceClaimConsumerReference {
     this.uid = uid;
     return this;
   }
+
+  public static ResourceClaimConsumerReference resourceClaimConsumerReference() {
+    return new ResourceClaimConsumerReference();
+  }
 }

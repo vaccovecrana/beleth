@@ -59,4 +59,8 @@ public class PersistentVolumeClaimCondition {
     this.type = type;
     return this;
   }
+
+  public static PersistentVolumeClaimCondition persistentVolumeClaimCondition() {
+    return new PersistentVolumeClaimCondition();
+  }
 }

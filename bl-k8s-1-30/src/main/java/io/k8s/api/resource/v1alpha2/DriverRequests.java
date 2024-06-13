@@ -34,4 +34,8 @@ public class DriverRequests {
     this.vendorParameters = vendorParameters;
     return this;
   }
+
+  public static DriverRequests driverRequests() {
+    return new DriverRequests();
+  }
 }

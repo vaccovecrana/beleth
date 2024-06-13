@@ -39,4 +39,8 @@ public class SecretProjection {
     this.optional = optional;
     return this;
   }
+
+  public static SecretProjection secretProjection() {
+    return new SecretProjection();
+  }
 }

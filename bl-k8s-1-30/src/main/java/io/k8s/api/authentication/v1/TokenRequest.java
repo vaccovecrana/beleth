@@ -47,4 +47,8 @@ public class TokenRequest {
     this.status = status;
     return this;
   }
+
+  public static TokenRequest tokenRequest() {
+    return new TokenRequest();
+  }
 }

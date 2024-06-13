@@ -24,7 +24,6 @@ Alternatively, fetch the definitions from Github: https://github.com/kubernetes/
 For CI/CD servers, a base Docker image or Runtime environment must have the following tools installed:
 
 - Gradle 7+
-- Helm
 - Kubectl
 
 As expected, a valid Kube `config` file for the tools above is also expected, since this framework relies on these

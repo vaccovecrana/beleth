@@ -41,9 +41,7 @@ public class BlKubeCtlTest {
 
     var k = new BlKubeCtl();
 
-    it("Lists all K8S resources", () -> {
-      k.listAllResources();
-    });
+    it("Lists all K8S resources", () -> BlHeadless.runOnDesktop(k::listAllResources));
 
     it("Creates a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
       // var resources = k.getApiResources();

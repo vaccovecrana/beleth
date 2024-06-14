@@ -44,15 +44,15 @@ public class BlKubeCtl {
     return out;
   }
 
-  public BlKubeRes apply(Object manifest) {
-    var tx = initTx(manifest, ctx);
+  public BlKubeRes apply(Object manifest, String packageName) {
+    var tx = initTx(manifest, ctx, packageName);
     var jsi = new ByteArrayInputStream(tx.json.getBytes());
     var pb = new ProcBuilder(kubectl, "apply", "-f", "-").withInputStream(jsi);
     return tx.withResult(runCmd(pb));
   }
 
-  public BlKubeRes diff(Object manifest) {
-    var tx = initTx(manifest, ctx);
+  public BlKubeRes diff(Object manifest, String packageName) {
+    var tx = initTx(manifest, ctx, packageName);
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
       .withInputStream(new ByteArrayInputStream(tx.json.getBytes()))
       .ignoreExitStatus();
@@ -65,17 +65,17 @@ public class BlKubeCtl {
     return tx.withResult(pr);
   }
 
-  public BlKubeRes isSynced(Object manifest) {
-    var diffTx = diff(manifest);
+  public BlKubeRes isSynced(Object manifest, String packageName) {
+    var diffTx = diff(manifest, packageName);
     return diffTx.withSynced(diffTx.result.getOutputString().trim().isEmpty());
   }
 
-  public BlKubeRes sync(Object manifest) {
-    var syncTx = isSynced(manifest);
+  public BlKubeRes sync(Object manifest, String packageName) {
+    var syncTx = isSynced(manifest, packageName);
     if (syncTx.synced) {
       return syncTx;
     }
-    return apply(manifest);
+    return apply(manifest, packageName);
   }
 
   public ProcResult delete(BlKubeRes res) {

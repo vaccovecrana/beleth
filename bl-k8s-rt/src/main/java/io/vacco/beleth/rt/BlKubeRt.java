@@ -14,19 +14,20 @@ public class BlKubeRt {
     return this;
   }
 
-  public BlKubeRt commit() {
+  public void commit(String packageName) {
     var txIdx = manifests.stream()
-      .map(ctl::sync)
+      .map(obj -> ctl.sync(obj, packageName))
       .collect(Collectors.toMap(tx -> tx.blId, Function.identity()));
     var clRes = ctl.resourceIndex(true);
     clRes.putAll(ctl.resourceIndex(false));
     clRes.keySet().removeAll(txIdx.keySet());
     for (var e : clRes.entrySet()) {
       for (var res : e.getValue()) {
-        ctl.delete(res);
+        if (res.blId.startsWith(packageName)) {
+          ctl.delete(res);
+        }
       }
     }
-    return this;
   }
 
 }

@@ -57,9 +57,41 @@ public class BlKubeUtil {
     }
   }
 
-  public static BlKubeRes initTx(Object manifest, BlDocumentContext ctx) {
+  private static boolean isValidIdentifier(String identifier) {
+    if (identifier.isEmpty()) {
+      return false;
+    }
+    var firstChar = identifier.charAt(0);
+    if (!Character.isLetter(firstChar) && firstChar != '_') {
+      return false;
+    }
+    for (int i = 1; i < identifier.length(); i++) {
+      var ch = identifier.charAt(i);
+      if (!Character.isLetterOrDigit(ch) && ch != '_') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isValidPackageName(String packageName) {
+    if (packageName == null || packageName.isEmpty()) {
+      return false;
+    }
+    for (var part : packageName.split("\\.")) {
+      if (!isValidIdentifier(part)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static BlKubeRes initTx(Object manifest, BlDocumentContext ctx, String packageName) {
+    if (!isValidPackageName(packageName)) {
+      throw new IllegalArgumentException("Invalid package name: " + packageName);
+    }
     var objCopy = ctx.fromJson(ctx.toJson(manifest), manifest.getClass());
-    var blId = Integer.toHexString(ctx.toJson(objCopy).hashCode());
+    var blId = String.format("%s.%s", packageName, Integer.toHexString(ctx.toJson(objCopy).hashCode()));
     injectMeta(objCopy, "beleth.io", "true");
     injectMeta(objCopy, "beleth.io/id", blId);
     return BlKubeRes

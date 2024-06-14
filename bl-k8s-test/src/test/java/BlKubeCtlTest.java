@@ -41,17 +41,18 @@ public class BlKubeCtlTest {
 
     var k = new BlKubeRt();
     var kc = new BlKubeCtl();
+    var pkg = "io.gopher.test";
 
     it("Creates a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      k.add(nsObj).add(ns).commit();
+      k.add(nsObj).add(ns).commit(pkg);
     }));
     it("Checks the status of a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      var diffTx = kc.isSynced(ns);
+      var diffTx = kc.isSynced(ns, pkg);
       log.info(diffTx.json);
       log.info(diffTx.result.getOutputString());
     }));
     it("Deletes a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      var syncTx = kc.sync(ns).withType("namespaces");
+      var syncTx = kc.sync(ns, pkg).withType("namespaces");
       if (syncTx.synced) {
         BlKubeUtil.pause(2500);
         var result = kc.delete(syncTx);

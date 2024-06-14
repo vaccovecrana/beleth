@@ -42,10 +42,6 @@ public class BlDocumentContext {
     return g.toJson(o);
   }
 
-  public String toYaml(Object o) {
-    return y.dump(o);
-  }
-
   public JsonObject loadTreeFromJson(URL json) {
     try {
       try (var jrd = Json.createReader(new InputStreamReader(json.openStream()))) {

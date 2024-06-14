@@ -1,3 +1,4 @@
+import io.vacco.beleth.util.BlExceptions;
 import io.vacco.beleth.xform.*;
 import io.vacco.shax.logging.ShOption;
 import j8spec.annotation.DefinedOrder;
@@ -26,6 +27,7 @@ public class BlCodeGenTest {
       cg.crdXForm(new URL(yamlUrl), outDir);
       cg.crdXForm(BlCodeGenTest.class.getResource("/crd-alertmanagerconfigs.yaml"), outDir);
       cg.jsonSchemaXForm(BlCodeGenTest.class.getResource("/k8s-swagger.json"), outDir);
+      BlExceptions.rootCauseOf(new IllegalArgumentException());
     });
     it("Emits Java sources for JSON schema allOf rules", () -> {
       var cg = new BlCodeGen();

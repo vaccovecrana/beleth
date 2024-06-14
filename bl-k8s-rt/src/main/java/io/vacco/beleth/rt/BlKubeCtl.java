@@ -1,86 +1,60 @@
 package io.vacco.beleth.rt;
 
-import io.k8s.apimachinery.pkg.apis.meta.v1.objectmeta.Labels;
 import io.vacco.beleth.xform.BlDocumentContext;
 import org.buildobjects.process.*;
-import org.slf4j.*;
 import java.io.ByteArrayInputStream;
 import java.util.*;
 
-import static io.vacco.beleth.rt.BlCmd.*;
+import static io.vacco.beleth.rt.BlKubeUtil.*;
+import static java.lang.String.format;
 
 public class BlKubeCtl {
 
-  private static final Logger log = LoggerFactory.getLogger(BlKubeCtl.class);
-
-  public static final String kubectl = "kubectl";
-
-  public static final String
-    kMetadata = "metadata",
-    kLabels = "labels";
-
   public final BlDocumentContext ctx = new BlDocumentContext();
 
-  public Set<String> listApiResourceTypes() {
-    var pb = new ProcBuilder(kubectl, "api-resources", "--verbs=list", "--namespaced", "-o", "name");
+  private Set<String> listResources(boolean nameSpaced) {
+    var pb = new ProcBuilder(kubectl, "api-resources", "--verbs=list", "--namespaced=" + nameSpaced, "-o", "name");
     var res = runCmd(pb);
-    var resNames = res.getOutputString().split(System.getProperty("line.separator"));
-    var resSet = new TreeSet<>(Arrays.asList(resNames));
-    resSet.add("namespaces");
-    return resSet;
+    return new TreeSet<>(
+      Arrays.asList(res.getOutputString().split(System.getProperty("line.separator")))
+    );
   }
 
-  // TODO this method takes a K8S resource type, and lists all resources matching the beleth managed label.
-  public void listResources(String type) {
-    // kubectl get namespaces --all-namespaces -l beleth.io=true -o json
-    var res = runCmd(new ProcBuilder(kubectl, "get", type, "--all-namespaces", "-o", "json"));
-    var out = res.getOutputString();
-    System.out.println("lol");
-  }
-
-  public void listAllResources() {
-    var resources = listApiResourceTypes();
-    for (var rt : resources) {
-      listResources(rt);
-    }
-  }
-
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public void injectMeta(Object manifest, String labelKey, String labelValue) {
-    try {
-      if (manifest instanceof Map) {
-        var m = (Map) manifest;
-        var meta = (Map) m.get(kMetadata);
-        var labels = (Map) meta.computeIfAbsent(kLabels, k -> new LinkedHashMap<>());
-        labels.put(labelKey, labelValue);
-      } else {
-        var mt = manifest.getClass().getField(kMetadata).get(manifest);
-        var lf = mt.getClass().getField(kLabels);
-        var lb = lf.get(mt);
-        if (lb == null) {
-          lb = new Labels();
-          lf.set(mt, lb);
+  public Map<String, List<BlKubeRes>> resourceIndex(boolean nameSpaced) {
+    var out = new TreeMap<String, List<BlKubeRes>>();
+    for (var resType : listResources(nameSpaced)) {
+      var args = Arrays
+        .stream(new String[] { "get", resType, nameSpaced ? "--all-namespaces" : "", "-l", kBl, "-o", "json" })
+        .filter(s -> !s.isEmpty())
+        .toArray(String[]::new);
+      var res0 = runCmd(new ProcBuilder(kubectl, args).ignoreExitStatus());
+      var idx = ctx.fromJson(res0.getOutputString(), Map.class);
+      if (idx != null) {
+        var items = (List<?>) idx.get("items");
+        if (items != null && !items.isEmpty()) {
+          for (var item : items) {
+            var blId = idOf(item);
+            if (blId != null) {
+              out.computeIfAbsent(blId, k -> new ArrayList<>()).add(BlKubeRes.of(blId, resType));
+            }
+          }
         }
-        ((Labels) lb).put(labelKey, labelValue);
       }
-    } catch (Exception e) {
-      throw new IllegalStateException(e);
     }
+    return out;
   }
 
-  public ProcResult apply(Object manifest) {
-    injectMeta(manifest, "beleth.io", "true");
-    injectMeta(manifest, "beleth.io/id", UUID.randomUUID().toString());
-    var json = ctx.toJson(manifest);
-    var jsi = new ByteArrayInputStream(json.getBytes());
+  public BlKubeRes apply(Object manifest) {
+    var tx = initTx(manifest, ctx);
+    var jsi = new ByteArrayInputStream(tx.json.getBytes());
     var pb = new ProcBuilder(kubectl, "apply", "-f", "-").withInputStream(jsi);
-    return runCmd(pb);
+    return tx.withResult(runCmd(pb));
   }
 
-  public String diff(Object manifest) {
-    var json = ctx.toJson(manifest);
+  public BlKubeRes diff(Object manifest) {
+    var tx = initTx(manifest, ctx);
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(json.getBytes()))
+      .withInputStream(new ByteArrayInputStream(tx.json.getBytes()))
       .ignoreExitStatus();
     var pr = runCmd(pb);
     int sc = pr.getExitValue();
@@ -88,31 +62,27 @@ public class BlKubeCtl {
       var msg = String.join("\n", pr.getOutputString(), pr.getErrorString());
       throw new IllegalStateException(msg);
     }
-    return pr.getOutputString();
+    return tx.withResult(pr);
   }
 
-  public boolean isSynced(Object manifest) {
-    var diff = diff(manifest);
-    return diff.trim().length() == 0;
+  public BlKubeRes isSynced(Object manifest) {
+    var diffTx = diff(manifest);
+    return diffTx.withSynced(diffTx.result.getOutputString().trim().isEmpty());
   }
 
-  public Optional<ProcResult> sync(Object manifest) {
-    if (!isSynced(manifest)) {
-      return Optional.of(apply(manifest));
+  public BlKubeRes sync(Object manifest) {
+    var syncTx = isSynced(manifest);
+    if (syncTx.synced) {
+      return syncTx;
     }
-    return Optional.empty();
+    return apply(manifest);
   }
 
-  // TODO we really need to turn this into some sort of command log
-  //   where entries are resources labeled as managed by Beleth.
-  //   But that may not be enough to keep track of Helm chart installations
-  //   though.
-
-  public ProcResult delete(Object manifest) {
-    var json = ctx.toJson(manifest);
-    var pb = new ProcBuilder(kubectl, "delete", "-f", "-")
-      .withInputStream(new ByteArrayInputStream(json.getBytes()))
-      .ignoreExitStatus();
+  public ProcResult delete(BlKubeRes res) {
+    var lbValue = format("%s=%s", kBlId, res.blId);
+    var pb = new ProcBuilder(
+      kubectl, "delete", res.type, "-l", lbValue, "--all-namespaces"
+    ).ignoreExitStatus();
     return runCmd(pb);
   }
 

@@ -1,4 +1,9 @@
-pluginManagement { repositories { mavenCentral(); gradlePluginPortal() } }
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
 
 include(
   "bl-codegen",

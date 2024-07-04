@@ -1,7 +1,6 @@
-configure<io.vacco.oss.gitflow.GsPluginProfileExtension> {
-  sharedLibrary(false, false)
-  addJ8Spec()
-}
+import io.vacco.oss.gitflow.GsPluginProfileExtension
+
+the<GsPluginProfileExtension>().addJ8Spec()
 
 dependencies {
   implementation(project(":bl-codegen"))

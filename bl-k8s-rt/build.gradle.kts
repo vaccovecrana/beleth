@@ -1,5 +1,3 @@
-configure<io.vacco.oss.gitflow.GsPluginProfileExtension> { sharedLibrary(true, false) }
-
 val api by configurations
 val k8s125 = ":bl-k8s-1-25"
 

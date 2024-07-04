@@ -70,14 +70,6 @@ public class BlKubeCtl {
     return diffTx.withSynced(diffTx.result.getOutputString().trim().isEmpty());
   }
 
-  public BlKubeRes sync(Object manifest, String packageName) {
-    var syncTx = isSynced(manifest, packageName);
-    if (syncTx.synced) {
-      return syncTx;
-    }
-    return apply(manifest, packageName);
-  }
-
   public ProcResult delete(BlKubeRes res) {
     var lbValue = format("%s=%s", kBlId, res.blId);
     var pb = new ProcBuilder(

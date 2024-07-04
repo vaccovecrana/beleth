@@ -23,7 +23,7 @@ public class BlKubeCtlTest {
   private static final Logger log = LoggerFactory.getLogger(BlKubeCtlTest.class);
 
   static {
-    var ns = obj(
+    var ns0 = obj(
       kv("apiVersion", "v1"),
       kv("kind", "Namespace"),
       kv("metadata", obj(
@@ -34,7 +34,7 @@ public class BlKubeCtlTest {
       ))
     );
 
-    var nsObj = new Namespace()
+    var ns1 = new Namespace()
       .apiVersion("v1")
       .kind("Namespace")
       .metadata(new ObjectMeta().name("gopher-infra"));
@@ -44,20 +44,16 @@ public class BlKubeCtlTest {
     var pkg = "io.gopher.test";
 
     it("Creates a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      k.add(nsObj).add(ns).commit(pkg);
+      k.add(ns1).add(ns0).commit(pkg);
     }));
     it("Checks the status of a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      var diffTx = kc.isSynced(ns, pkg);
+      var diffTx = kc.isSynced(ns0, pkg);
       log.info(diffTx.json);
       log.info(diffTx.result.getOutputString());
     }));
     it("Deletes a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      var syncTx = kc.sync(ns, pkg).withType("namespaces");
-      if (syncTx.synced) {
-        BlKubeUtil.pause(2500);
-        var result = kc.delete(syncTx);
-        log.info(result.getOutputString());
-      }
+      BlKubeUtil.pause(2500);
+      k.deleteAll(pkg);
     }));
   }
 }

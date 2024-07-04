@@ -33,7 +33,8 @@ public class BlKubeRt {
       )
     );
     delete(resourceIdx, packageName, res ->
-      !(res.type.equals("persistentvolumes") || res.type.equals("namespaces"))
+      !(res.type.equals("persistentvolumes")
+        || res.type.equals("namespaces"))
     );
     delete(resourceIdx, packageName, res ->
       !(res.type.equals("namespaces"))
@@ -45,8 +46,15 @@ public class BlKubeRt {
 
   public void commit(String packageName) {
     var txIdx = manifests.stream()
-      .map(obj -> ctl.sync(obj, packageName))
+      .map(obj -> ctl.isSynced(obj, packageName))
       .collect(Collectors.toMap(tx -> tx.blId, Function.identity()));
+
+    for (var res : txIdx.values()) {
+      if (!res.synced) {
+        ctl.apply(res.manifest, packageName);
+      }
+    }
+
     var resIdx = ctl.resourceIndex(true);
     resIdx.putAll(ctl.resourceIndex(false));
     resIdx.keySet().removeAll(txIdx.keySet());

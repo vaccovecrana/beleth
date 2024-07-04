@@ -106,6 +106,9 @@ public class BlKubeUtil {
     if (log.isDebugEnabled()) {
       log.debug("[{}] {} {}", res.getExitValue(), res.getOutputString(), res.getErrorString());
     }
+    if (res.getErrorString() != null && !res.getErrorString().trim().isEmpty()) {
+      log.warn(res.getErrorString());
+    }
     return res;
   }
 

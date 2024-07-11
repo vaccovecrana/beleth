@@ -99,9 +99,23 @@ public class BlKubeUtil {
       .withType(manifest.getClass().getSimpleName());
   }
 
-  public static ProcResult runCmd(ProcBuilder p) {
+  public static String padRight(String str, int length) {
+    if (str.length() >= length) {
+      return str;
+    }
+    var padded = new StringBuilder(str);
+    while (padded.length() < length) {
+      padded.append(' ');
+    }
+    return padded.toString();
+  }
+
+  public static ProcResult runCmd(String logLabel, ProcBuilder p) {
     p.withNoTimeout();
-    log.info("Running [{}]", p.getCommandLine());
+    log.info("{}running [{}]",
+      logLabel != null ? String.format("%s - ", padRight(logLabel, 24)) : "",
+      p.getCommandLine()
+    );
     var res = p.run();
     if (log.isDebugEnabled()) {
       log.debug("[{}] {} {}", res.getExitValue(), res.getOutputString(), res.getErrorString());

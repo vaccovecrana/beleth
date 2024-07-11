@@ -14,7 +14,7 @@ public class BlKubeCtl {
 
   private Set<String> listResources(boolean nameSpaced) {
     var pb = new ProcBuilder(kubectl, "api-resources", "--verbs=list", "--namespaced=" + nameSpaced, "-o", "name");
-    var res = runCmd(pb);
+    var res = runCmd(null, pb);
     return new TreeSet<>(
       Arrays.asList(res.getOutputString().split(System.getProperty("line.separator")))
     );
@@ -27,7 +27,7 @@ public class BlKubeCtl {
         .stream(new String[] { "get", resType, nameSpaced ? "--all-namespaces" : "", "-l", kBl, "-o", "json" })
         .filter(s -> !s.isEmpty())
         .toArray(String[]::new);
-      var res0 = runCmd(new ProcBuilder(kubectl, args).ignoreExitStatus());
+      var res0 = runCmd(null, new ProcBuilder(kubectl, args).ignoreExitStatus());
       var idx = ctx.fromJson(res0.getOutputString(), Map.class);
       if (idx != null) {
         var items = (List<?>) idx.get("items");
@@ -48,14 +48,14 @@ public class BlKubeCtl {
     var tx = initTx(manifest, ctx, packageName);
     var jsi = new ByteArrayInputStream(tx.json.getBytes());
     var pb = new ProcBuilder(kubectl, "apply", "-f", "-").withInputStream(jsi);
-    return tx.withResult(runCmd(pb));
+    return tx.withResult(runCmd(manifest.getClass().getSimpleName(), pb));
   }
 
   public BlKubeRes diff(BlKubeRes tx) {
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
       .withInputStream(new ByteArrayInputStream(tx.json.getBytes()))
       .ignoreExitStatus();
-    var pr = runCmd(pb);
+    var pr = runCmd(tx.manifest.getClass().getSimpleName(), pb);
     int sc = pr.getExitValue();
     if (sc > 1) {
       var msg = String.join("\n", pr.getOutputString(), pr.getErrorString());
@@ -74,7 +74,7 @@ public class BlKubeCtl {
     var pb = new ProcBuilder(
       kubectl, "delete", res.type, "-l", lbValue, "--all-namespaces"
     ).ignoreExitStatus();
-    return runCmd(pb);
+    return runCmd(res.blId, pb);
   }
 
 }

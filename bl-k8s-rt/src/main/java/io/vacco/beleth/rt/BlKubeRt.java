@@ -3,7 +3,6 @@ package io.vacco.beleth.rt;
 import io.k8s.api.core.v1.Namespace;
 import java.util.*;
 import java.util.function.*;
-import java.util.stream.Collectors;
 
 import static io.vacco.beleth.rt.BlKubeUtil.initTx;
 
@@ -53,16 +52,26 @@ public class BlKubeRt {
   }
 
   public void commit(String packageName) {
-    var txIdx = manifests.stream()
-      .map(obj -> initTx(obj, ctl.ctx, packageName))
-      .collect(Collectors.toMap(tx -> tx.blId, Function.identity()));
+    var txIdx = new LinkedHashMap<String, BlKubeRes>();
 
-    txIdx.values().stream()
-      .filter(res -> res.manifest instanceof Namespace)
-      .forEach(res -> commit(res, packageName));
-    txIdx.values().stream()
-      .filter(res -> !(res.manifest instanceof Namespace))
-      .forEach(res -> commit(res, packageName));
+    for (Object manifest : manifests) {
+      var tx = initTx(manifest, ctl.ctx, packageName);
+      if (txIdx.containsKey(tx.blId)) {
+        throw new IllegalStateException("Duplicate resource definition - " + tx);
+      } else {
+        txIdx.put(tx.blId, tx);
+      }
+    }
+    for (var res : txIdx.values()) {
+      if (res.manifest instanceof Namespace) {
+        commit(res, packageName);
+      }
+    }
+    for (var res : txIdx.values()) {
+      if (!(res.manifest instanceof Namespace)) {
+        commit(res, packageName);
+      }
+    }
 
     var resIdx = ctl.resourceIndex(true);
     resIdx.putAll(ctl.resourceIndex(false));

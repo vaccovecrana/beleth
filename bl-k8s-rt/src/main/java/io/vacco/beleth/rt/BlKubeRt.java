@@ -1,9 +1,11 @@
 package io.vacco.beleth.rt;
 
+import io.k8s.api.core.v1.Namespace;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
+
+import static io.vacco.beleth.rt.BlKubeUtil.initTx;
 
 public class BlKubeRt {
 
@@ -44,16 +46,23 @@ public class BlKubeRt {
     );
   }
 
+  private void commit(BlKubeRes res, String packageName) {
+    if (!ctl.check(res).synced) {
+      ctl.apply(res.manifest, packageName);
+    }
+  }
+
   public void commit(String packageName) {
     var txIdx = manifests.stream()
-      .map(obj -> ctl.isSynced(obj, packageName))
+      .map(obj -> initTx(obj, ctl.ctx, packageName))
       .collect(Collectors.toMap(tx -> tx.blId, Function.identity()));
 
-    for (var res : txIdx.values()) {
-      if (!res.synced) {
-        ctl.apply(res.manifest, packageName);
-      }
-    }
+    txIdx.values().stream()
+      .filter(res -> res.manifest instanceof Namespace)
+      .forEach(res -> commit(res, packageName));
+    txIdx.values().stream()
+      .filter(res -> !(res.manifest instanceof Namespace))
+      .forEach(res -> commit(res, packageName));
 
     var resIdx = ctl.resourceIndex(true);
     resIdx.putAll(ctl.resourceIndex(false));

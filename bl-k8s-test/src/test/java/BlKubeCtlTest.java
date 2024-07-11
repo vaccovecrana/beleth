@@ -8,6 +8,7 @@ import j8spec.junit.J8SpecRunner;
 import org.junit.runner.RunWith;
 import org.slf4j.*;
 
+import static io.vacco.beleth.rt.BlKubeUtil.initTx;
 import static io.vacco.beleth.util.BlMaps.*;
 import static j8spec.J8Spec.*;
 
@@ -47,7 +48,8 @@ public class BlKubeCtlTest {
       k.add(ns1).add(ns0).commit(pkg);
     }));
     it("Checks the status of a K8S resource", () -> BlHeadless.runOnDesktop(() -> {
-      var diffTx = kc.isSynced(ns0, pkg);
+      var tx = initTx(ns0, kc.ctx, pkg);
+      var diffTx = kc.check(tx);
       log.info(diffTx.json);
       log.info(diffTx.result.getOutputString());
     }));

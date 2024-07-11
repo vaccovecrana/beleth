@@ -51,8 +51,7 @@ public class BlKubeCtl {
     return tx.withResult(runCmd(pb));
   }
 
-  public BlKubeRes diff(Object manifest, String packageName) {
-    var tx = initTx(manifest, ctx, packageName);
+  public BlKubeRes diff(BlKubeRes tx) {
     var pb = new ProcBuilder(kubectl, "diff", "-f", "-")
       .withInputStream(new ByteArrayInputStream(tx.json.getBytes()))
       .ignoreExitStatus();
@@ -65,8 +64,8 @@ public class BlKubeCtl {
     return tx.withResult(pr);
   }
 
-  public BlKubeRes isSynced(Object manifest, String packageName) {
-    var diffTx = diff(manifest, packageName);
+  public BlKubeRes check(BlKubeRes tx) {
+    var diffTx = diff(tx);
     return diffTx.withSynced(diffTx.result.getOutputString().trim().isEmpty());
   }
 

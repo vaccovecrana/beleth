@@ -19,7 +19,7 @@ public class BlK8sCodeGenTest {
     it("Emits Java sources for K8S core definitions", () -> {
       var cg = new BlCodeGen();
       var k8sVersions = new String[] {
-        "k8s-1-25", "k8s-1-26", "k8s-1-27", "k8s-1-30"
+        "k8s125", "k8s126", "k8s127", "k8s130"
       };
       for (var k8sVer : k8sVersions) {
         var swagger = String.format("/%s-swagger.json", k8sVer);

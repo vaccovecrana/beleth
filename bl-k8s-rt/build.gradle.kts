@@ -1,5 +1,5 @@
 val api by configurations
-val k8s125 = ":bl-k8s-1-25"
+val k8s125 = ":bl-k8s125"
 
 dependencies {
   api("org.buildobjects:jproc:2.8.2")

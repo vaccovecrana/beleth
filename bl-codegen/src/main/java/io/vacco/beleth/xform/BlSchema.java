@@ -5,14 +5,19 @@ import java.util.*;
 public class BlSchema extends BlType {
 
   public Map<String, BlType> propTypes = new TreeMap<>();
+  public Map<String, String> serializedNames = new TreeMap<>();
   public BlType additionalPropType;
   public BlType primitiveType;
 
   public boolean isOpen = false;
   public boolean isEnum = false;
 
-  public void addPropType(String property, BlType type) {
-    propTypes.put(property, type);
+  public void addPropType(String name, BlType type) {
+    propTypes.put(name, type);
+  }
+
+  public void addSerializedProperty(String name, String serializedName) {
+    serializedNames.put(name, serializedName);
   }
 
   public BlSchema withOpen(boolean isOpen) {

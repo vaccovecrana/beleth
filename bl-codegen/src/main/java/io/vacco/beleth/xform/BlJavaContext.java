@@ -56,15 +56,20 @@ public class BlJavaContext {
       .build();
   }
 
-  private void mapFieldDeclaration(TypeSpec.Builder jcb, String field, String alias, BlType fieldType) {
+  private void mapFieldDeclaration(TypeSpec.Builder jcb,
+                                   String field, String alias, String serializedName,
+                                   BlType fieldType) {
     var fld = FieldSpec.builder(fieldType.name, alias == null ? field : alias, PUBLIC);
     if (alias != null) {
       fld.addAnnotation(serializedName(field));
+    } else if (serializedName != null) {
+      fld.addAnnotation(serializedName(serializedName));
     }
     jcb.addField(fld.build());
   }
 
-  private void mapFieldChainMethod(BlSchema schema, TypeSpec.Builder jcb, String field, String alias, BlType fieldType) {
+  private void mapFieldChainMethod(BlSchema schema, TypeSpec.Builder jcb,
+                                   String field, String alias, BlType fieldType) {
     var fldName = alias == null ? field : alias;
     var fldChain = methodBuilder(fldName)
       .addModifiers(PUBLIC)
@@ -78,20 +83,10 @@ public class BlJavaContext {
 
   public void mapField(BlSchema schema, TypeSpec.Builder jcb, String field, BlType fieldType) {
     var ft = swapPrimitive(fieldType);
-    if (!SourceVersion.isName(field)) {
-      if (log.isDebugEnabled()) {
-        log.debug(
-          "Field [{}] of schema {} cannot be mapped verbatim. Serialization will work, but name will be mangled.",
-          field, schema
-        );
-      }
-      var fieldAlias = format("v%s", BlType.upperCaseFirst(field));
-      mapFieldDeclaration(jcb, field, fieldAlias, ft);
-      mapFieldChainMethod(schema, jcb, field, fieldAlias, ft);
-    } else {
-      mapFieldDeclaration(jcb, field, null, ft);
-      mapFieldChainMethod(schema, jcb, field, null, ft);
-    }
+    var alias = SourceVersion.isName(field) ? null : format("v%s", BlType.upperCaseFirst(field));
+    var serialized = schema.serializedNames.get(field);
+    mapFieldDeclaration(jcb, field, alias, serialized, ft);
+    mapFieldChainMethod(schema, jcb, field, alias, ft);
   }
 
   private BlJavaType mapEnum(BlSchema schema) {

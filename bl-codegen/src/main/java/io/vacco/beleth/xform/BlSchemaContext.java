@@ -102,6 +102,7 @@ public class BlSchemaContext {
         var property = sanitizeIdentifier(ep.getKey());
         if (!property.equals(ep.getKey())) {
           log.warn("Schema {} contains invalid property name [{}], replacing with [{}]", schema, ep.getKey(), property);
+          schema.addSerializedProperty(property, ep.getKey());
         }
         build(property, ep.getValue().asJsonObject(), schema)
           .ifPresent(type -> schema.addPropType(property, type));

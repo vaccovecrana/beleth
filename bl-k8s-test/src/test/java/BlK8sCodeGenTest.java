@@ -13,6 +13,7 @@ public class BlK8sCodeGenTest {
 
   static {
     ShOption.setSysProp(ShOption.IO_VACCO_SHAX_DEVMODE, "true");
+    ShOption.setSysProp(ShOption.IO_VACCO_SHAX_LOGLEVEL, "debug");
   }
 
   static {

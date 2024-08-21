@@ -5,7 +5,7 @@ the<GsPluginProfileExtension>().addJ8Spec()
 dependencies {
   implementation(project(":bl-codegen"))
   implementation(project(":bl-k8s-rt"))
-  implementation(project(":bl-k8s125"))
+  implementation(project(":bl-k8s129"))
   implementation("io.vacco.shax:shax:2.0.6.0.1.0")
 }
 

@@ -1,3 +1,3 @@
-version = "1.30.4"
+version = "1.31.0"
 
 dependencies { compileOnly(project(":bl-codegen")) }

@@ -7,10 +7,9 @@ pluginManagement {
 
 include(
   "bl-codegen",
-  "bl-k8s125",
-  "bl-k8s126",
-  "bl-k8s127",
+  "bl-k8s131",
   "bl-k8s130",
+  "bl-k8s129",
   "bl-k8s-rt",
   "bl-k8s-test",
   "bl-gradle-plugin",

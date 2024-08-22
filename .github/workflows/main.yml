@@ -1,14 +1,65 @@
 name: Gradle Build
-on: {push: {tags: null}}
+on:
+  push:
+    tags: null
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: vaccovecrana/gitflow-oss-java-slim@1.0.1
-        with:
-          orgConfig: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with: { distribution: 'temurin', java-version: '21' }
+      - name: Setup Gradle 8.2
+        uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: 8.2 }
+      - name: Determine modified projects
+        id: determine-modifications
+        run: |
+          echo "Checking for modified files..."
+          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD)
+          echo "Modified files: $MODIFIED_FILES"
+          if echo "$MODIFIED_FILES" | grep -q -e '^bl-codegen/' -e '^bl-gradle-plugin/' -e '^bl-k8s-rt/'; then
+            echo "BL_COMMON_PROJECTS_MODIFIED=true" >> $GITHUB_ENV
+          fi
+          if echo "$MODIFIED_FILES" | grep -q -e '^bl-k8s129/'; then
+            echo "BL_K8S129_MODIFIED=true" >> $GITHUB_ENV
+          fi
+          if echo "$MODIFIED_FILES" | grep -q -e '^bl-k8s130/'; then
+            echo "BL_K8S130_MODIFIED=true" >> $GITHUB_ENV
+          fi
+          if echo "$MODIFIED_FILES" | grep -q -e '^bl-k8s131/'; then
+            echo "BL_K8S131_MODIFIED=true" >> $GITHUB_ENV
+          fi
+      - name: Build bl-k8s-rt
+        if: env.BL_COMMON_PROJECTS_MODIFIED == 'true'
+        run: gradle :bl-k8s-rt:build :bl-k8s-rt:publish
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
           MAVEN_SIGNING_PRV: ${{secrets.MAVEN_SIGNING_PRV}}
+          PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
+      - name: Build bl-k8s129
+        if: env.BL_K8S129_MODIFIED == 'true'
+        run: gradle :bl-k8s129:publish
+        env:
+          SONATYPE_USER: ${{secrets.SONATYPE_USER}}
+          SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
+          MAVEN_SIGNING_PRV: ${{secrets.MAVEN_SIGNING_PRV}}
+          PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
+      - name: Build bl-k8s130
+        if: env.BL_K8S130_MODIFIED == 'true'
+        run: gradle :bl-k8s130:publish
+        env:
+          SONATYPE_USER: ${{secrets.SONATYPE_USER}}
+          SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
+          MAVEN_SIGNING_PRV: ${{secrets.MAVEN_SIGNING_PRV}}
+          PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
+      - name: Build bl-k8s131
+        if: env.BL_K8S131_MODIFIED == 'true'
+        run: gradle :bl-k8s129:publish
+        env:
+          SONATYPE_USER: ${{secrets.SONATYPE_USER}}
+          SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
+          MAVEN_SIGNING_PRV: ${{secrets.MAVEN_SIGNING_PRV}}
+          PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json

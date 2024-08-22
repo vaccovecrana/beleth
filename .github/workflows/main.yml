@@ -4,6 +4,7 @@ on:
     tags: null
 jobs:
   build:
+    # OMG such a kludge. Need to split these projects apart asap!
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +38,7 @@ jobs:
           fi
       - name: Build bl-k8s-rt
         if: env.BL_COMMON_PROJECTS_MODIFIED == 'true'
-        run: gradle :bl-k8s-rt:build :bl-k8s-rt:publish
+        run: gradle :bl-k8s-rt:build
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
@@ -45,7 +46,7 @@ jobs:
           PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
       - name: Build bl-k8s129
         if: env.BL_K8S129_MODIFIED == 'true'
-        run: gradle :bl-k8s129:publish
+        run: gradle :bl-k8s129:build
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
@@ -53,7 +54,7 @@ jobs:
           PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
       - name: Build bl-k8s130
         if: env.BL_K8S130_MODIFIED == 'true'
-        run: gradle :bl-k8s130:publish
+        run: gradle :bl-k8s130:build
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
@@ -61,7 +62,7 @@ jobs:
           PLUGIN_ORGCONFIG: https://vacco-oss.s3.us-east-2.amazonaws.com/vacco-oss.json
       - name: Build bl-k8s131
         if: env.BL_K8S131_MODIFIED == 'true'
-        run: gradle :bl-k8s129:publish
+        run: gradle :bl-k8s131:build
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}

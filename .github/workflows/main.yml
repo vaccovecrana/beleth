@@ -17,7 +17,11 @@ jobs:
         id: determine-modifications
         run: |
           echo "Checking for modified files..."
-          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD)
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD)
+          else
+            MODIFIED_FILES=$(git diff --name-only HEAD)
+          fi      
           echo "Modified files: $MODIFIED_FILES"
           if echo "$MODIFIED_FILES" | grep -q -e '^bl-codegen/' -e '^bl-gradle-plugin/' -e '^bl-k8s-rt/'; then
             echo "BL_COMMON_PROJECTS_MODIFIED=true" >> $GITHUB_ENV

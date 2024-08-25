@@ -4,9 +4,9 @@ Programmatic resource management for Kubernetes.
 
 Inspired by [pulumi](https://www.pulumi.com/), but smaller...
 
-Schema objects are generated for the latest three [Patch Releases](https://kubernetes.io/releases/patch-releases/). 
+Schema objects are generated for the latest three [Patch Releases](https://kubernetes.io/releases/patch-releases/).
 
-`kubectl` must be available in `PATH` in order to interact with a live K8S cluster.
+You'll need a service account token capable of managing resources in the cluster.
 
 ## Development Notes
 
@@ -24,7 +24,3 @@ Alternatively, fetch the definitions from Github: https://github.com/kubernetes/
 For CI/CD servers, a base Docker image or Runtime environment must have the following tools installed:
 
 - Gradle 7+
-- Kubectl
-
-As expected, a valid Kube `config` file for the tools above is also expected, since this framework relies on these
-tools for access into the cluster.

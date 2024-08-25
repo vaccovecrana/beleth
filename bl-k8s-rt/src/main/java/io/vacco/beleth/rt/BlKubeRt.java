@@ -77,7 +77,7 @@ public class BlKubeRt {
         .map(Object::toString)
         .collect(toList());
       if (!d.isEmpty()) {
-        log.info("Skipping cluster managed resource {} derived from\n{}", res, join("\n", d));
+        log.info("Skipping cluster managed resource {}, derived from\n{}", res, join("\n", d));
       } else {
         kubeApi.delete(res);
       }

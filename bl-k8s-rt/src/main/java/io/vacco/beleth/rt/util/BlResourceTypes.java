@@ -12,6 +12,7 @@ public class BlResourceTypes {
   private static final Map<String, Integer> priorityMap = new HashMap<>();
 
   static {
+    // Types internal to the cluster. No need to manage these.
     internalTypes.add("localsubjectaccessreviews");
     internalTypes.add("selfsubjectreviews");
     internalTypes.add("bindings");

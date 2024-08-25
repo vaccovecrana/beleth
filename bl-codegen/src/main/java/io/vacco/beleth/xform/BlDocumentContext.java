@@ -1,6 +1,7 @@
 package io.vacco.beleth.xform;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import jakarta.json.*;
 import org.slf4j.*;
 import org.yaml.snakeyaml.*;
@@ -40,6 +41,10 @@ public class BlDocumentContext {
 
   public String toJson(Object o) {
     return g.toJson(o);
+  }
+
+  public JsonElement toJsonElement(Object o) {
+    return g.toJsonTree(o);
   }
 
   public JsonObject loadTreeFromJson(URL json) {

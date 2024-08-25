@@ -8,11 +8,7 @@ public class BlHeadless {
 
   private static final Logger log = LoggerFactory.getLogger(BlHeadless.class);
 
-  public interface BlUnsafe {
-    void run() throws Exception;
-  }
-
-  public static void runOnDesktop(BlUnsafe block) {
+  public static void runLocal(Runnable block) {
     if (!GraphicsEnvironment.isHeadless()) {
       try {
         block.run();

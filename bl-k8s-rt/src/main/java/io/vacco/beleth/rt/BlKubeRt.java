@@ -13,6 +13,9 @@ import static io.vacco.beleth.rt.util.BlIo.pointerOnObject;
 import static io.vacco.beleth.rt.util.BlResources.*;
 import static io.vacco.beleth.rt.util.BlResourceTypes.*;
 
+/**
+ * Core resource management class.
+ */
 public class BlKubeRt {
 
   private static final Logger log = LoggerFactory.getLogger(BlKubeRt.class);

@@ -26,9 +26,7 @@ public class BlKubeRtTest {
       if (add) {
         rt
           .add(BlTestManifests.nameSpace)
-          .add(BlTestManifests.serviceAccount)
-          .add(BlTestManifests.clusterRoleAggregatedMetricsReader)
-          .add(BlTestManifests.clusterRoleMetricsServer);
+          .add(BlTestManifests.serviceAccount);
       }
 
       var pkg = "io.gopher.test";

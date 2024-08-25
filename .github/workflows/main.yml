@@ -35,7 +35,7 @@ jobs:
           fi
       - name: Build bl-k8s-rt
         if: env.BL_COMMON_PROJECTS_MODIFIED == 'true'
-        run: gradle :bl-k8s-rt:build
+        run: gradle :bl-codegen:build :bl-k8s-rt:build :io.vacco.beleth.gradle.plugin:build
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}

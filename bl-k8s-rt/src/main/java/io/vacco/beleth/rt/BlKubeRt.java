@@ -77,12 +77,12 @@ public class BlKubeRt {
       var d = cluster.stream()
         .filter(r -> !r.id().equals(res.id()))
         .filter(r -> r.getContentHash().equals(res.getContentHash()))
-        .map(Object::toString)
         .collect(toList());
-      if (!d.isEmpty()) {
-        log.info("Skipping cluster managed resource {}, derived from\n{}", res, join("\n", d));
-      } else {
+      var delete = d.isEmpty() || d.stream().filter(local::contains).findFirst().isEmpty();
+      if (delete) {
         kubeApi.delete(res);
+      } else {
+        log.info("Skipping cluster managed resource {}, derived from\n{}", res, d);
       }
     }
   }

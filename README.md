@@ -24,3 +24,9 @@ Alternatively, fetch the definitions from Github: https://github.com/kubernetes/
 For CI/CD servers, a base Docker image or Runtime environment must have the following tools installed:
 
 - Gradle 7+
+
+## Similar Projects:
+
+- https://cdk8s.io/
+- https://tanka.dev/
+- https://www.pulumi.com/registry/packages/kubernetes/installation-configuration/
